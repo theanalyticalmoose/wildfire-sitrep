@@ -1,281 +1,891 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wildfire Situation Report – April 23, 2026</title>
-  <style>
-    :root {
-      --fire-red: #c0392b; --fire-orange: #e67e22; --fire-yellow: #f1c40f;
-      --dark-bg: #1a1a1a; --card-bg: #242424; --border: #3a3a3a;
-      --text: #e8e8e8; --muted: #999;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--dark-bg); color: var(--text); line-height: 1.6; font-size: 15px; }
-    .page-wrapper { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
-    .report-header { border-left: 5px solid var(--fire-orange); padding: 16px 20px; background: var(--card-bg); border-radius: 0 8px 8px 0; margin-bottom: 24px; }
-    .report-header h1 { font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: 0.02em; }
-    .report-header .meta { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
-    .pl-banner { background: linear-gradient(135deg, #7f3a00 0%, #b35400 100%); border-radius: 8px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
-    .pl-badge { font-size: 1.8rem; font-weight: 900; color: var(--fire-yellow); min-width: 60px; text-align: center; line-height: 1; }
-    .pl-banner p { font-size: 0.95rem; color: #fde8cb; }
-    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 28px; }
-    .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; text-align: center; }
-    .stat-card .number { font-size: 2rem; font-weight: 800; color: var(--fire-orange); line-height: 1; }
-    .stat-card .label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .section { margin-bottom: 28px; }
-    .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fire-orange); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 14px; }
-    .fire-list { display: flex; flex-direction: column; gap: 10px; }
-    .fire-entry { background: var(--card-bg); border: 1px solid var(--border); border-left: 4px solid var(--fire-orange); border-radius: 0 6px 6px 0; padding: 12px 16px; }
-    .fire-entry.contained { border-left-color: #27ae60; }
-    .fire-name { font-weight: 700; font-size: 1rem; color: #fff; }
-    .fire-name .state-tag { display: inline-block; background: rgba(255,255,255,0.1); font-size: 0.72rem; font-weight: 600; padding: 2px 7px; border-radius: 12px; margin-left: 6px; vertical-align: middle; color: var(--muted); }
-    .fire-entry.contained .fire-name .state-tag { background: rgba(39,174,96,0.2); color: #2ecc71; }
-    .fire-detail { font-size: 0.875rem; color: #c8c8c8; margin-top: 4px; }
-    .contained-badge { display: inline-block; background: rgba(39,174,96,0.2); color: #2ecc71; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; margin-left: 8px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.05em; }
-    .weather-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; font-size: 0.9rem; color: #d0d0d0; line-height: 1.75; }
-    .weather-block p + p { margin-top: 10px; }
-    .alert-grid { display: flex; flex-direction: column; gap: 8px; }
-    .alert-entry { border-radius: 6px; padding: 10px 14px; display: flex; gap: 12px; align-items: flex-start; }
-    .alert-entry.rfw { background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.4); }
-    .alert-entry.fww { background: rgba(230,126,34,0.12); border: 1px solid rgba(230,126,34,0.35); }
-    .alert-entry.spc-critical { background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.4); }
-    .alert-entry.spc-elevated { background: rgba(243,156,18,0.12); border: 1px solid rgba(243,156,18,0.35); }
-    .alert-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; padding: 2px 8px; border-radius: 10px; margin-top: 1px; }
-    .rfw .alert-type { background: rgba(192,57,43,0.4); color: #ff9999; }
-    .fww .alert-type { background: rgba(230,126,34,0.35); color: #ffcc88; }
-    .spc-critical .alert-type { background: rgba(192,57,43,0.4); color: #ff9999; }
-    .spc-elevated .alert-type { background: rgba(243,156,18,0.35); color: #ffcc44; }
-    .alert-body strong { display: block; font-size: 0.88rem; color: #f0f0f0; margin-bottom: 2px; }
-    .alert-body span { font-size: 0.8rem; color: #aaa; }
-    footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; font-size: 0.78rem; color: var(--muted); }
-    footer a { color: var(--fire-orange); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    footer .sources { margin-top: 6px; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wildfire Aware Situation Report — April 23, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a1a;
+    color: #e8e8e8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 24px 16px 48px;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* Header */
+  .site-header {
+    text-align: center;
+    padding: 32px 0 24px;
+    border-bottom: 2px solid #ff6b1a;
+    margin-bottom: 28px;
+  }
+  .site-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ff6b1a;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .site-header .dateline {
+    color: #aaa;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .flame-icon { margin-right: 8px; }
+
+  /* Preparedness banner */
+  .prep-banner {
+    background: linear-gradient(135deg, #2a1800 0%, #3d2000 100%);
+    border: 1px solid #ff6b1a;
+    border-left: 5px solid #ff6b1a;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .prep-level {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff6b1a;
+    white-space: nowrap;
+  }
+  .prep-desc {
+    color: #ddd;
+    font-size: 0.95rem;
+  }
+  .prep-desc strong { color: #ffaa55; }
+
+  /* Stat cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  @media (min-width: 560px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .stat-card {
+    background: #242424;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 18px 14px;
+    text-align: center;
+  }
+  .stat-card .number {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-card .label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+  }
+  .stat-uncontained .number { color: #ff4444; }
+  .stat-new .number { color: #ff6b1a; }
+  .stat-contained .number { color: #44cc88; }
+  .stat-suppression .number { color: #aaaaff; }
+
+  /* Section titles */
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ff6b1a;
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Fire cards */
+  .fire-card {
+    background: #242424;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .fire-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .fire-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffcc88;
+  }
+  .fire-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .badge {
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .badge-state { background: #2a3a5a; color: #88aaff; border: 1px solid #44668a; }
+  .badge-new { background: #3a1e00; color: #ff8833; border: 1px solid #994400; }
+  .badge-contained { background: #0a2e1a; color: #44cc88; border: 1px solid #226644; }
+  .badge-critical { background: #3a0000; color: #ff5555; border: 1px solid #882222; }
+
+  .fire-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    font-size: 0.88rem;
+    color: #bbb;
+  }
+  @media (min-width: 560px) {
+    .fire-meta { grid-template-columns: repeat(3, 1fr); }
+  }
+  .fire-meta-item strong { color: #e8e8e8; display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; color: #888; margin-bottom: 1px; }
+  .fire-threats {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    font-size: 0.88rem;
+    color: #ffaaaa;
+  }
+  .fire-threats strong { color: #ff7777; }
+
+  /* Containment bar */
+  .containment-wrap { margin-top: 4px; }
+  .containment-bar {
+    height: 5px;
+    background: #333;
+    border-radius: 3px;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+  .containment-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #ff6b1a, #44cc88);
+  }
+
+  /* Discussion block */
+  .discussion-box {
+    background: #1e1e2e;
+    border: 1px solid #334;
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 14px;
+  }
+
+  /* Alert cards */
+  .alert-card {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-left: 5px solid;
+  }
+  .alert-rfw {
+    background: #2a0a0a;
+    border-color: #cc3333;
+    border: 1px solid #553333;
+    border-left: 5px solid #cc3333;
+  }
+  .alert-fww {
+    background: #2a1500;
+    border-color: #cc7700;
+    border: 1px solid #553311;
+    border-left: 5px solid #cc7700;
+  }
+  .alert-eds {
+    background: #1a0000;
+    border-color: #880000;
+    border: 1px solid #440000;
+    border-left: 5px solid #880000;
+  }
+  .alert-type-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .rfw-label { color: #ff5555; }
+  .fww-label { color: #ff9944; }
+  .alert-area {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #e8e8e8;
+    margin-bottom: 6px;
+  }
+  .alert-conditions {
+    font-size: 0.85rem;
+    color: #bbb;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .alert-valid {
+    font-size: 0.78rem;
+    color: #888;
+    margin-top: 5px;
+  }
+  .cond-chip {
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+
+  /* SPC cards */
+  .spc-critical {
+    background: #2a0808;
+    border: 1px solid #661111;
+    border-left: 5px solid #cc2222;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+  }
+  .spc-elevated {
+    background: #2a1800;
+    border: 1px solid #664411;
+    border-left: 5px solid #cc8822;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+  }
+  .spc-risk-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .spc-critical .spc-risk-label { color: #ff5555; }
+  .spc-elevated .spc-risk-label { color: #ffaa44; }
+  .spc-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e8e8e8;
+    margin-bottom: 6px;
+  }
+  .spc-detail {
+    font-size: 0.87rem;
+    color: #bbb;
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+  }
+  .footer a { color: #ff6b1a; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .footer-sources { margin-top: 8px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+  .no-data { color: #777; font-style: italic; padding: 14px; }
+  .alert-count-badge {
+    background: #333;
+    color: #aaa;
+    border-radius: 99px;
+    padding: 1px 9px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+</style>
 </head>
 <body>
-<div class="page-wrapper">
+<div class="container">
 
-  <header class="report-header">
+  <!-- Header -->
+  <div class="site-header">
     <h1>🔥 Wildfire Aware Situation Report</h1>
-    <p class="meta">Thursday, April 23, 2026 &nbsp;·&nbsp; 0730 MDT &nbsp;·&nbsp; National Interagency Fire Center</p>
-  </header>
-
-  <div class="pl-banner">
-    <div class="pl-badge">PL&nbsp;2</div>
-    <p>The United States remains at <strong>National Preparedness Level 2</strong>. Initial attack activity is <strong>Light</strong> with 157 new fires reported yesterday. <strong>2 Complex Incident Management Teams (CIMTs)</strong> are committed nationally.</p>
+    <div class="dateline">Thursday, April 23, 2026 &nbsp;·&nbsp; 0730 MDT &nbsp;·&nbsp; National Interagency Fire Center</div>
   </div>
 
-  <div class="stat-grid">
-    <div class="stat-card"><div class="number">24</div><div class="label">Uncontained Large Fires</div></div>
-    <div class="stat-card"><div class="number">5</div><div class="label">New Large Fires</div></div>
-    <div class="stat-card"><div class="number">3</div><div class="label">Large Fires Contained</div></div>
-    <div class="stat-card"><div class="number">0</div><div class="label">Fires Not Under Full Suppression</div></div>
+  <!-- Preparedness Level Banner -->
+  <div class="prep-banner">
+    <div class="prep-level">PL 2</div>
+    <div class="prep-desc">
+      <strong>National Preparedness Level 2</strong> — Moderate national fire activity. Initial attack is <strong>Light</strong> (157 fires reported yesterday).
+      <strong>2 CIMTs committed</strong> nationally. Southern Area remains the primary area of concern at <strong>PL 4</strong>, driven by extreme fire behavior in Florida and Georgia.
+    </div>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="stats-grid">
+    <div class="stat-card stat-uncontained">
+      <div class="number">24</div>
+      <div class="label">Uncontained Large Fires</div>
+    </div>
+    <div class="stat-card stat-new">
+      <div class="number">5</div>
+      <div class="label">New Large Incidents</div>
+    </div>
+    <div class="stat-card stat-contained">
+      <div class="number">3</div>
+      <div class="label">Large Fires Contained</div>
+    </div>
+    <div class="stat-card stat-suppression">
+      <div class="number">0</div>
+      <div class="label">Not Under Full Suppression</div>
+    </div>
   </div>
 
   <!-- New Large Fires -->
-  <div class="section">
-    <div class="section-title">New Large Fires — 5 reported in FL, TN, NE &amp; UT</div>
-    <div class="fire-list">
+  <div class="section-title">🆕 New Large Fires <span class="alert-count-badge">5</span></div>
 
-      <div class="fire-entry">
-        <div class="fire-name">Sand Drain <span class="state-tag">FL</span></div>
-        <div class="fire-detail">National Forests in Florida, USFS — managed alongside Gun Range and Griffis by SA CIMT (Team 3). Eighteen miles northeast of Olustee, FL. Southern rough. Minimal fire behavior with creeping and smoldering. 56 acres — 75% contained. Area, road and trail closures in effect.</div>
+  <!-- Pressey -->
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">Pressey</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Nebraska</span>
+        <span class="badge badge-new">New Large Fire</span>
+        <span class="badge badge-critical">Extreme Behavior</span>
       </div>
-
-      <div class="fire-entry">
-        <div class="fire-name">Griffis <span class="state-tag">FL</span></div>
-        <div class="fire-detail">National Forests in Florida, USFS — managed alongside Gun Range and Sand Drain by SA CIMT (Team 3). Three miles northeast of Olustee, FL. Southern rough. Minimal fire behavior. 3 acres — 99% contained. Area, road and trail closures in effect.</div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>Nebraska Forest Service</div>
+      <div class="fire-meta-item"><strong>Location</strong>4 miles NE of Oconto, NE</div>
+      <div class="fire-meta-item"><strong>Fuel Type</strong>Grass</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>1,000 acres</div>
+      <div class="fire-meta-item"><strong>Containment</strong>
+        <div class="containment-wrap">
+          0%
+          <div class="containment-bar"><div class="containment-fill" style="width:0%"></div></div>
+        </div>
       </div>
-
-      <div class="fire-entry">
-        <div class="fire-name">White Scotts Gulf <span class="state-tag">TN</span></div>
-        <div class="fire-detail">Tennessee Department of Forestry. 355 acres — 100% contained upon entry to this report. Estimated cost-to-date $1,000.</div>
-      </div>
-
-      <div class="fire-entry">
-        <div class="fire-name">Pressey <span class="state-tag">NE</span></div>
-        <div class="fire-detail">Nebraska Forest Service. Four miles northeast of Oconto, NE. Grass. <strong>Extreme fire behavior</strong> with wind-driven runs and running. 1,000 acres — 0% contained. Rocky Mountain Area.</div>
-      </div>
-
-      <div class="fire-entry">
-        <div class="fire-name">Goshen Canyon <span class="state-tag">UT</span></div>
-        <div class="fire-detail">Northwest Area, Utah Department of Forestry. Four miles south of Goshen, UT. Brush. Minimal fire behavior. 408 acres — 50% contained. Great Basin Area.</div>
-      </div>
-
+      <div class="fire-meta-item"><strong>Fire Behavior</strong>Extreme — wind-driven runs and running</div>
+    </div>
+    <div class="fire-threats">
+      <strong>⚠ Threats:</strong> No structures or evacuations reported. Est. containment date: 4/25.
     </div>
   </div>
 
-  <!-- Contained Fires -->
-  <div class="section">
-    <div class="section-title">Recently Contained Large Fires — 3 reported</div>
-    <div class="fire-list">
-
-      <div class="fire-entry contained">
-        <div class="fire-name">Georgia 46 <span class="state-tag">GA</span> <span class="contained-badge">Contained</span></div>
-        <div class="fire-detail">Georgia Forestry Commission. Five miles east of Soperton, GA. Southern rough. 485 acres — 100% contained. Estimated cost-to-date $20,000.</div>
+  <!-- Goshen Canyon -->
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">Goshen Canyon</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Utah</span>
+        <span class="badge badge-new">New Large Fire</span>
       </div>
-
-      <div class="fire-entry contained">
-        <div class="fire-name">Ciba Road <span class="state-tag">AL</span> <span class="contained-badge">Contained</span></div>
-        <div class="fire-detail">Alabama Forestry Commission. Thirty-one miles east of McIntosh, AL. Brush. 807 acres — 100% contained. Estimated cost-to-date $2,000.</div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>Utah DOF (Northwest Area)</div>
+      <div class="fire-meta-item"><strong>Location</strong>4 miles south of Goshun, UT</div>
+      <div class="fire-meta-item"><strong>Fuel Type</strong>Brush</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>408 acres</div>
+      <div class="fire-meta-item"><strong>Containment</strong>
+        <div class="containment-wrap">
+          50%
+          <div class="containment-bar"><div class="containment-fill" style="width:50%"></div></div>
+        </div>
       </div>
-
-      <div class="fire-entry contained">
-        <div class="fire-name">White Scotts Gulf <span class="state-tag">TN</span> <span class="contained-badge">Contained</span></div>
-        <div class="fire-detail">Tennessee Department of Forestry. 355 acres — 100% contained upon entry to this reporting period. Estimated cost-to-date $1,000.</div>
-      </div>
-
+      <div class="fire-meta-item"><strong>Fire Behavior</strong>Minimal</div>
     </div>
   </div>
 
-  <!-- Weather Discussion -->
-  <div class="section">
-    <div class="section-title">Weather Discussion — Predictive Services, NIFC</div>
-    <div class="weather-block">
-      <p>Widespread elevated to critical conditions due to west to southwesterly winds of 15–30 mph with gusts 30–50 mph will develop across the Southwest into the central and southern High Plains, with the strongest winds expected in northeast New Mexico into the Texas Panhandle. Strong northwest winds gusting to 60 mph are expected across the northern Plains today, but relative humidity will remain elevated except across portions of Nebraska and South Dakota, where relative humidity will drop to 20–30% creating elevated conditions.</p>
-      <p>Breezy conditions are expected across much of the Great Lakes as well, but will be accompanied by elevated relative humidity and areas of precipitation. Very dry conditions will persist in the Southeast with minimum relative humidity of 20–30%, but winds will remain light outside of sea breezes that develop off the Gulf and Atlantic coasts. Scattered showers will continue in the northern Rockies today, with snow falling above 5,000–6,000 feet.</p>
-      <p>Isolated showers and thunderstorms will develop in portions of Louisiana, with a couple of isolated thunderstorms possible as far east as the Florida Panhandle. A warming trend is expected in Alaska with temperatures rising to near normal, while breezy trade winds and drier conditions return to Hawai'i.</p>
+  <!-- Sand Drain -->
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">Sand Drain</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Florida</span>
+        <span class="badge badge-new">New Large Fire</span>
+      </div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>National Forests in Florida (USFS)</div>
+      <div class="fire-meta-item"><strong>Location</strong>18 miles NE of Olustee, FL</div>
+      <div class="fire-meta-item"><strong>Fuel Type</strong>Southern rough</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>56 acres</div>
+      <div class="fire-meta-item"><strong>Containment</strong>
+        <div class="containment-wrap">
+          75%
+          <div class="containment-bar"><div class="containment-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+      <div class="fire-meta-item"><strong>Fire Behavior</strong>Minimal — creeping and smoldering</div>
+    </div>
+    <div class="fire-threats">
+      <strong>⚠ Threats:</strong> Area, road and trail closures in effect. Managed by CIMT SA Team 3 (co-managing with Gun Range and Griffis). Est. cost to date: $265K.
     </div>
   </div>
 
-  <!-- NWS Alerts -->
-  <div class="section">
-    <div class="section-title">NWS Fire Weather Watches &amp; Red Flag Warnings — Active April 23, 2026</div>
-    <div class="alert-grid">
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>New Mexico — Rio Grande Valley, Northeast Plains, West Central Basin, Sangre de Cristo &amp; Central Highlands</strong>
-          <span>W/NW winds 20–35 mph gusting to 40–55 mph · RH 6–15% · Valid April 23, 9 AM – 8 PM MDT</span>
+  <!-- Griffis -->
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">Griffis</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Florida</span>
+        <span class="badge badge-new">New Large Fire</span>
+      </div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>National Forests in Florida (USFS)</div>
+      <div class="fire-meta-item"><strong>Location</strong>3 miles NE of Olustee, FL</div>
+      <div class="fire-meta-item"><strong>Fuel Type</strong>Southern rough</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>3 acres</div>
+      <div class="fire-meta-item"><strong>Containment</strong>
+        <div class="containment-wrap">
+          99%
+          <div class="containment-bar"><div class="containment-fill" style="width:99%"></div></div>
         </div>
       </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>New Mexico — Southwest &amp; South Central (Southwest Mountains, Deserts, Lowlands, Capitan &amp; Sacramento Mountains)</strong>
-          <span>W winds 20–25 mph gusting to 35–40 mph · RH 7–15% · Valid April 23, 10 AM – 8 PM MDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>New Mexico / Texas — Southeast (Lea, Gaines, Loving, Reeves County Plains, Chaves &amp; Eddy Plains)</strong>
-          <span>W winds 20–30 mph gusting to 35–50 mph · RH as low as 5% · Valid April 23, 10 AM – midnight CDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>Texas &amp; Oklahoma Panhandles (Cimarron, Texas, Beaver, Dallam, Sherman, Hansford, Ochiltree, Lipscomb and adjacent counties)</strong>
-          <span>W winds 20–30 mph gusting to 40 mph · RH to 7% · Temps 80s–low 90s · Valid April 23, 12 PM – 10 PM CDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>Colorado — Front Range, Palmer Divide &amp; Plains (Jefferson, Douglas, Gilpin, Clear Creek, Park, Larimer, Weld, Boulder, Broomfield, Denver, Adams, Arapahoe, Elbert, Washington)</strong>
-          <span>W winds 15–25 mph gusting to 40 mph · RH as low as 10% · Valid April 23, 11 AM – 7 PM MDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>Colorado — Northeast Plains (Logan, Sedgwick, Phillips)</strong>
-          <span>NW winds 20–30 mph gusting to 40 mph · RH to 13% · Valid April 23, 11 AM – 7 PM MDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>Colorado — South Park &amp; Lincoln County</strong>
-          <span>W winds 15–25 mph gusting to 40 mph · RH as low as 7% · Valid April 23, 11 AM – 7 PM MDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>Nebraska / Wyoming Panhandles (Box Butte, Sioux, Niobrara River, North Platte Basin, Goshen, Lodgepole Creek)</strong>
-          <span>W/NW winds gusting 40–60 mph · RH 12–20% · Valid April 23, 9 AM – 8 PM MDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry rfw">
-        <span class="alert-type">Red Flag Warning</span>
-        <div class="alert-body">
-          <strong>Nebraska / Kansas — South Central (Phillips, Valley, Greeley, Sherman, Howard, Dawson, Buffalo, Hall, Gosper, Phelps, Kearney, Furnas, Harlan, Franklin)</strong>
-          <span>NW winds 15–20 mph gusting to 30 mph · RH to 10% · Valid April 23, 10 AM – 8 PM CDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry fww">
-        <span class="alert-type">Fire Weather Watch</span>
-        <div class="alert-body">
-          <strong>Colorado — Multiple Zones including Front Range, Foothills, South Park &amp; Lincoln County (valid tomorrow)</strong>
-          <span>W winds 15–25 mph gusting to 35–40 mph · RH 7–12% · Valid April 24, morning – evening MDT</span>
-        </div>
-      </div>
-
-      <div class="alert-entry fww">
-        <span class="alert-type">Fire Weather Watch</span>
-        <div class="alert-body">
-          <strong>Nebraska / Wyoming / Kansas (Lodgepole Creek, Southern Nebraska Panhandle, Laramie Foothills &amp; High Plains)</strong>
-          <span>SW winds gusting to 30–35 mph · RH 15–20% · Valid April 24, afternoon – evening</span>
-        </div>
-      </div>
-
-      <div class="alert-entry fww">
-        <span class="alert-type">Fire Weather Watch</span>
-        <div class="alert-body">
-          <strong>Texas — Far West (Sacramento Foothills, Guadalupe Mountains, Davis Mountains, Marfa Plateau)</strong>
-          <span>W winds 10–30 mph gusting to 30–50 mph · RH 5–8% · Valid April 24, afternoon – evening CDT</span>
-        </div>
-      </div>
-
+      <div class="fire-meta-item"><strong>Fire Behavior</strong>Minimal</div>
+    </div>
+    <div class="fire-threats">
+      <strong>⚠ Threats:</strong> Area, road and trail closures in effect. Managed by CIMT SA Team 3. Est. cost to date: $134K.
     </div>
   </div>
 
-  <!-- SPC Outlook -->
-  <div class="section">
-    <div class="section-title">SPC Day 1 Fire Weather Outlook — Valid April 23–24, 2026</div>
-    <div class="alert-grid">
-
-      <div class="alert-entry spc-critical">
-        <span class="alert-type">Critical</span>
-        <div class="alert-body">
-          <strong>Central &amp; Southern High Plains — Eastern New Mexico, Texas Panhandle, Northeast Colorado, Southwest Nebraska</strong>
-          <span>Affected population: ~3.87 million across 168,749 sq mi. Major centers include El Paso, Lubbock, Amarillo, Pueblo, and Midland. Sustained W winds 20–25 mph with RH dropping to 10% or less in western areas. Isolated pockets of Extremely Critical conditions possible in terrain-influenced areas with winds near 30 mph and single-digit RH. Exceptionally dry fuels combine with robust vertical mixing. Intense SW winds will shift to NW following frontal passage.</span>
+  <!-- White Scotts Gulf -->
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">White Scotts Gulf</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Tennessee</span>
+        <span class="badge badge-new">New Large Fire</span>
+        <span class="badge badge-contained">Contained</span>
+      </div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>Tennessee DOF</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>355 acres</div>
+      <div class="fire-meta-item"><strong>Containment</strong>
+        <div class="containment-wrap">
+          100%
+          <div class="containment-bar"><div class="containment-fill" style="width:100%"></div></div>
         </div>
       </div>
-
-      <div class="alert-entry spc-elevated">
-        <span class="alert-type">Elevated</span>
-        <div class="alert-body">
-          <strong>Central Plains — Eastern Colorado, Western Kansas, Nebraska &amp; portions of the High Plains</strong>
-          <span>Dry post-frontal NW winds with downslope enhancement. Risk that existing wildfires or dormant lightning activity may intensify under continued dry, windy conditions. Post-frontal dry airmass advancing into the region.</span>
-        </div>
-      </div>
-
+      <div class="fire-meta-item"><strong>Est. Cost to Date</strong>$1K</div>
     </div>
   </div>
 
-  <footer>
-    <p>Wildfire Aware Situation Report &nbsp;·&nbsp; Generated April 23, 2026</p>
-    <div class="sources">
-      <a href="https://www.nifc.gov/nicc-files/sitreprt.pdf" target="_blank">NIFC Incident Management Sit Report</a>
-      <a href="https://www.weather.gov/fire/" target="_blank">NWS Fire Weather</a>
-      <a href="https://www.spc.noaa.gov/products/fire_wx/" target="_blank">SPC Fire Weather Outlook</a>
+  <!-- Recently Contained Fires -->
+  <div class="section-title">✅ Recently Contained Fires <span class="alert-count-badge">3</span></div>
+
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">Georgia 46</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Georgia</span>
+        <span class="badge badge-contained">100% Contained</span>
+      </div>
     </div>
-  </footer>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>Georgia Forestry Commission</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>485 acres</div>
+      <div class="fire-meta-item"><strong>Est. Cost to Date</strong>$20K</div>
+    </div>
+  </div>
+
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">Ciba Road</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Alabama</span>
+        <span class="badge badge-contained">100% Contained</span>
+      </div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>Alabama Forestry Commission</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>807 acres</div>
+      <div class="fire-meta-item"><strong>Est. Cost to Date</strong>$2K</div>
+    </div>
+  </div>
+
+  <div class="fire-card">
+    <div class="fire-card-header">
+      <div class="fire-name">White Scotts Gulf</div>
+      <div class="fire-badges">
+        <span class="badge badge-state">Tennessee</span>
+        <span class="badge badge-contained">100% Contained</span>
+      </div>
+    </div>
+    <div class="fire-meta">
+      <div class="fire-meta-item"><strong>Managing Unit</strong>Tennessee DOF</div>
+      <div class="fire-meta-item"><strong>Acreage</strong>355 acres</div>
+      <div class="fire-meta-item"><strong>Est. Cost to Date</strong>$1K</div>
+    </div>
+  </div>
+
+  <!-- Predictive Services Discussion -->
+  <div class="section-title">📋 Predictive Services Discussion</div>
+  <div class="discussion-box">
+    Widespread elevated to critical conditions due to west to southwesterly winds 15–30 mph with gusts 30–50 mph will develop across the Southwest into the central and southern High Plains, with the strongest winds expected in northeast New Mexico into the Texas Panhandle. Strong northwest winds gusting to 60 mph are expected across the northern Plains today, but relative humidity will remain elevated except across portions of Nebraska and South Dakota, where relative humidity will drop to 20–30% creating elevated conditions. Breezy conditions are expected across much of the Great Lakes, as well, but will be accompanied by elevated relative humidity and areas of precipitation. Very dry conditions will persist in the Southeast with minimum relative humidity of 20–30% but winds will remain light outside of sea breezes that develop off the Gulf and Atlantic coasts. Scattered showers will continue in the northern Rockies today, with snow falling above 5,000 to 6,000 feet. Isolated showers and thunderstorms will develop in portions of Louisiana, with a couple isolated thunderstorms possible as far east as the Florida Panhandle. A warming trend is expected in Alaska with temperatures rising to near normal, while breezy trade winds and drier conditions return to Hawai'i.
+  </div>
+
+  <!-- NWS Fire Weather Alerts -->
+  <div class="section-title">🚨 NWS Active Fire Weather Alerts <span class="alert-count-badge">30 active</span></div>
+
+  <!-- Red Flag Warnings -->
+  <div style="font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#ff5555; margin-bottom:10px;">Red Flag Warnings — In Effect Today</div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">New Mexico — Northeast Plains, Middle/Upper Rio Grande Valley, Sangre de Cristo Mtns, Central Highlands</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W/NW gusts 40–55 mph</span>
+      <span class="cond-chip">RH 6–15%</span>
+      <span class="cond-chip">Strongest in Central Highlands</span>
+    </div>
+    <div class="alert-valid">Valid: Today through 2000 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">New Mexico / West Texas — Sacramento Foothills, Guadalupe Mtns, Chaves/Eddy Plains, Van Horn Corridor, Eastern Culberson</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 20–30 mph, gusts to 50 mph</span>
+      <span class="cond-chip">RH as low as 5%</span>
+    </div>
+    <div class="alert-valid">Valid: Today through midnight CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">New Mexico — SW Mountains, SW Deserts, South Central Lowlands, Capitan and Sacramento Mtns</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts 35–40 mph</span>
+      <span class="cond-chip">RH 7–12%</span>
+    </div>
+    <div class="alert-valid">Valid: Today through 2000 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">New Mexico / Texas — Lea County, Gaines, Loving, Reeves County Plains</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 35 mph</span>
+      <span class="cond-chip">RH as low as 5%</span>
+    </div>
+    <div class="alert-valid">Valid: Today through midnight CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Texas Panhandle — Cimarron, Texas, Beaver (OK), Dallam, Sherman, Hansford, Ochiltree, Lipscomb, Hartley, Moore, Hutchinson, Roberts, Hemphill, Oldham, Potter, Carson, Gray, Wheeler, Deaf Smith, Randall, Armstrong, Donley counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 20–30 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 7%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1200–2200 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Texas South Plains — Parmer, Castro, Swisher, Briscoe, Hall, Childress, Bailey, Lamb, Hale, Floyd, Motley, Cottle, Cochran, Hockley, Lubbock, Crosby, Yoakum, Terry, Lynn counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 20–25 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 6%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1200–2000 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Oklahoma — Harper, Woods, Ellis, Woodward, Roger Mills, Beckham, Harmon counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">SW 15–25 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 6%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1200–2100 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Kansas — Hamilton, Stanton, Grant, Haskell, Morton, Stevens, Seward, Meade, Clark, Comanche counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">N 10–15 mph, gusts to 30 mph</span>
+      <span class="cond-chip">RH as low as 11%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1200–2100 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Colorado — Jefferson/West Douglas/Gilpin/Clear Creek/NE Park/Larimer/NW Weld/Boulder/Elbert-area foothills and plains</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 10%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1100–1900 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Colorado — Upper Arkansas River Valley, Teller County/Rampart Range, Fremont County/Canon City</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 45 mph</span>
+      <span class="cond-chip">RH as low as 7%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1100–2100 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Colorado — Central/SE Park County, SE Elbert County, South Lincoln County</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 7%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1100–1900 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Colorado — Logan, Sedgwick, Phillips counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">NW 20–30 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 13%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1100–1900 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Colorado — Yuma, Kit Carson; Kansas — Cheyenne; Nebraska — Cheyenne, Rawlins, Decatur, Norton, Sherman, Wallace, Dundy, Hitchcock, Red Willow counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">NW 10–20 mph, gusts to 35 mph</span>
+      <span class="cond-chip">RH as low as 11%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 0900–1900 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Wyoming / Nebraska Panhandle — Lodgepole Creek, Southern NE Panhandle, Laramie Foothills, Laramie East High Plains</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W/NW gusts 40–60 mph</span>
+      <span class="cond-chip">RH 12–20%</span>
+      <span class="cond-chip">Overnight gusts 40–60 mph with poor humidity recovery</span>
+    </div>
+    <div class="alert-valid">Valid: Today 0900–2000 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Nebraska — Box Butte, South Sioux, Niobrara River, Lower N. Platte River Basin, Goshen/Middle-Lower N. Platte</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W/NW gusts 40–60 mph</span>
+      <span class="cond-chip">RH 12–20%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 0900–2000 MDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Nebraska — Phillips, Valley, Greeley, Sherman, Howard, Dawson, Buffalo, Hall, Gosper, Phelps, Kearney, Furnas, Harlan, Franklin counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">NW 15–20 mph, gusts to 30 mph</span>
+      <span class="cond-chip">RH as low as 10%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1000–2000 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Nebraska — Eastern Panhandle/Crescent Lake NWR, Sandhills/Valentine NWR, Niobrara Valley/Fort Niobrara, Loup Rivers Basin, Frenchman Basin, Loess Plains</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W/NW 20–30 mph, gusts to 45 mph</span>
+      <span class="cond-chip">RH 10–15%</span>
+      <span class="cond-chip">Erratic winds with thunderstorms possible</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1000–2000 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">South Dakota — Beadle, Gregory, Jerauld, Sanborn, Brule, Aurora, Davison, Charles Mix, Douglas counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 25–35 mph, gusts to 45 mph</span>
+      <span class="cond-chip">RH as low as 12%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1100–1700 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">South Dakota — Lincoln, Lyon, Pipestone, Kingsbury, Brookings, Miner, Lake, Moody, Hanson, McCook, Minnehaha, Hutchinson, Turner, Lincoln, Bon Homme, Yankton counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 20–30 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 11%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1300–2000 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">South Dakota — Traverse, Big Stone, Marshall, Roberts, Day, Clark, Codington, Grant, Hamlin, Deuel counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 20–30 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 19%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1300–1900 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">North Dakota — Stutsman, Logan, La Moure, McIntosh, Dickey counties</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W ~30 mph, gusts to 50 mph</span>
+      <span class="cond-chip">RH as low as 23%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1100–1900 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Minnesota — West Polk, Norman, Clay, Kittson, Roseau, Marshall, Pennington, Red Lake, Clearwater, Mahnomen, Becker, Wilkin, Otter Tail and surrounding counties (NW Minnesota)</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">SW 20–30 mph, gusts to 45 mph</span>
+      <span class="cond-chip">RH as low as 22%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1300–1900 CDT</div>
+  </div>
+
+  <div class="alert-card alert-rfw">
+    <div class="alert-type-label rfw-label">Red Flag Warning</div>
+    <div class="alert-area">Minnesota — Douglas, Stevens, Pope, Lac Qui Parle, Swift, Chippewa, Kandiyohi, Yellow Medicine, Renville, Redwood counties (SW Minnesota)</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">SW 15–20 mph, gusts to 35 mph</span>
+      <span class="cond-chip">RH around 20%</span>
+    </div>
+    <div class="alert-valid">Valid: Today 1300–1900 CDT</div>
+  </div>
+
+  <!-- Fire Weather Watches -->
+  <div style="font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#ff9944; margin: 20px 0 10px;">Fire Weather Watches — Valid Friday, April 24</div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">New Mexico / West Texas — Sacramento Foothills, Guadalupe Mtns, Chaves/Eddy Plains, Van Horn Corridor, Eastern Culberson, Delaware Mtns</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 20–30 mph, gusts to 50 mph</span>
+      <span class="cond-chip">RH as low as 5%</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1200 CDT – midnight CDT</div>
+  </div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">Texas — Marfa Plateau</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 10–20 mph, gusts to 30 mph</span>
+      <span class="cond-chip">RH as low as 8%</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1200 CDT – midnight CDT</div>
+  </div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">Colorado — Jefferson/West Douglas/Gilpin/Clear Creek/NE Park/Larimer/NW Weld/Boulder/Elbert-area foothills (continued from today)</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 7%</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1100–2100 MDT</div>
+  </div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">Colorado — Larimer and Boulder Counties between 6,000–9,000 ft</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 40 mph</span>
+      <span class="cond-chip">RH as low as 12%</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1100–2100 MDT</div>
+  </div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">Colorado — Central/SE Park County, SE Elbert County, South Lincoln County</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 35 mph</span>
+      <span class="cond-chip">RH as low as 7%</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1100–2100 MDT</div>
+  </div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">Colorado — Upper Arkansas River Valley, Teller County/Rampart Range, Fremont County/Canon City</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">W 15–25 mph, gusts to 45 mph</span>
+      <span class="cond-chip">RH as low as 7%</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1100–2100 MDT</div>
+  </div>
+
+  <div class="alert-card alert-fww">
+    <div class="alert-type-label fww-label">Fire Weather Watch</div>
+    <div class="alert-area">Wyoming / Nebraska — Lodgepole Creek/Southern NE Panhandle, Laramie Foothills, Laramie East High Plains</div>
+    <div class="alert-conditions">
+      <span class="cond-chip">SW gusts 30–35 mph</span>
+      <span class="cond-chip">Low humidity</span>
+    </div>
+    <div class="alert-valid">Valid: Friday 1200–2000 MDT</div>
+  </div>
+
+  <!-- SPC Fire Weather Outlook -->
+  <div class="section-title">🌡 SPC Day 1 Fire Weather Outlook</div>
+
+  <div class="spc-critical">
+    <div class="spc-risk-label">Critical Fire Weather Area</div>
+    <div class="spc-title">Southwest &amp; Southern/Central Plains — TX Panhandle, E. New Mexico, SW Nebraska, NE Colorado</div>
+    <div class="spc-detail">
+      Wind speeds intensifying from eastern NM into the TX Panhandle by afternoon, driven by surface cyclogenesis over southern KS and northwest OK. With only minimal upper-level clouds and lackluster moisture recovery, RHs will drop to 10% or less with sustained westerly winds of 20–25 mph. The Critical area includes portions of northeast CO and southwest NE, where at least a few hours of Critical conditions are possible before higher RHs arrive late in the day. <strong>Isolated pockets of Extremely Critical conditions remain possible</strong> in gap-flow corridors of SE Colorado and terrain-influenced areas from eastern CO into the western TX Panhandle — sustained winds of 30 mph may overlap with single-digit RHs in these locales.
+    </div>
+  </div>
+
+  <div class="spc-elevated">
+    <div class="spc-risk-label">Elevated Fire Weather Area</div>
+    <div class="spc-title">Central Plains — Remainder of E. Colorado, W. Kansas, Most of Nebraska, Portions of High Plains</div>
+    <div class="spc-detail">
+      An Elevated fire weather threat will persist across the central Plains as dry, post-frontal northwesterly winds benefit from downslope enhancement. This threat encompasses portions of the High Plains where the arrival of dry post-frontal air may cause existing wildfires or dormant lightning holdovers from Wednesday to flare up under the sustained dry and breezy regime. Precipitation accumulation overnight will continue to be closely monitored over portions of eastern South Dakota, where elevated wind and RH conditions are likely but fuels are currently expected to become unreceptive.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>Wildfire Aware Situation Report — Generated automatically from official federal data sources.</div>
+    <div class="footer-sources">
+      <a href="https://www.nifc.gov/nicc-files/sitreprt.pdf" target="_blank">NIFC Situation Report PDF</a>
+      <a href="https://api.weather.gov/alerts/active?event=Fire%20Weather%20Watch,Red%20Flag%20Warning,Extremely%20Dangerous%20Situation" target="_blank">NWS Active Fire Weather Alerts</a>
+      <a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html" target="_blank">SPC Day 1 Fire Weather Outlook</a>
+    </div>
+    <div style="margin-top:10px;">Data sourced from NIFC, NWS, and NOAA SPC. This report is for informational purposes only.</div>
+  </div>
 
 </div>
 </body>
