@@ -3,29 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wildfire Aware Situation Report — May 13, 2026</title>
+<title>Wildfire Aware Situation Report — May 14, 2026</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #1a1a1a; color: #e8e8e8; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-size: 15px; line-height: 1.6; }
-.container { max-width: 860px; margin: 0 auto; padding: 0 16px 40px; }
-a { color: #e67e22; text-decoration: none; }
-a:hover { text-decoration: underline; }
-h2 { font-size: 18px; color: #e8e8e8; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #3a3a3a; }
-.section { margin-bottom: 36px; }
-.nav-bar { background: #242424; border-bottom: 1px solid #3a3a3a; position: sticky; top: 0; z-index: 100; padding: 10px 16px; display: flex; gap: 8px; flex-wrap: wrap; max-width: 100%; }
-.nav-bar a { background: rgba(230,126,34,0.12); border: 1px solid #e67e22; color: #e67e22; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
-.nav-bar a:hover { background: rgba(230,126,34,0.25); text-decoration: none; }
-.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 12px; margin-bottom: 8px; }
-.stat-card { background: #242424; border: 1px solid #3a3a3a; border-radius: 8px; padding: 16px 14px; text-align: center; }
-.stat-num { font-size: 28px; font-weight: 800; color: #e67e22; line-height: 1.1; }
-.stat-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .08em; margin-top: 4px; }
-.gacc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#e8e8e8;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6}
+.container{max-width:860px;margin:0 auto;padding:0 16px 48px}
+a{color:#e67e22;text-decoration:none}
+a:hover{text-decoration:underline}
+h2{font-size:18px;color:#e8e8e8;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #3a3a3a}
+.section{margin-bottom:36px}
+nav{background:#242424;border-bottom:1px solid #3a3a3a;position:sticky;top:0;z-index:100;padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap}
+nav a{background:rgba(230,126,34,.12);border:1px solid #e67e22;color:#e67e22;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;white-space:nowrap}
+nav a:hover{background:rgba(230,126,34,.28);text-decoration:none}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:32px}
+.stat-card{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:16px 14px;text-align:center}
+.stat-num{font-size:28px;font-weight:800;color:#e67e22;line-height:1.1}
+.stat-label{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.gacc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 </style>
 </head>
 <body>
-
-<!-- NAV BAR -->
-<nav class="nav-bar">
+<nav>
   <a href="#gacc-levels">GACC Levels</a>
   <a href="#new-fires">New Large Fires</a>
   <a href="#contained-fires">Contained Fires</a>
@@ -34,125 +32,134 @@ h2 { font-size: 18px; color: #e8e8e8; margin-bottom: 14px; padding-bottom: 8px; 
   <a href="#nws">NWS Alerts</a>
   <a href="#large-fires">Large Fires</a>
 </nav>
-
 <div class="container">
 
 <!-- HEADER -->
-<div style="border-left:4px solid #e67e22;padding:20px 20px 20px 20px;margin:24px 0 20px;background:#242424;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #e67e22;padding:20px;margin:24px 0 20px;background:#242424;border-radius:0 8px 8px 0;">
   <div style="font-size:24px;font-weight:800;color:#e8e8e8;">🔥 Wildfire Aware Situation Report</div>
-  <div style="color:#888;font-size:13px;margin-top:4px;">Wednesday, May 13, 2026 &nbsp;·&nbsp; 0730 MDT &nbsp;·&nbsp; National Interagency Fire Center</div>
+  <div style="color:#777;font-size:13px;margin-top:4px;">Thursday, May 14, 2026 &nbsp;·&nbsp; 0730 MDT &nbsp;·&nbsp; National Interagency Fire Center</div>
 </div>
 
 <!-- PL BANNER -->
 <div style="background:linear-gradient(135deg,#2c1a08,#3a2010);border:1px solid #e67e22;border-radius:10px;padding:20px 24px;margin-bottom:24px;text-align:center;">
   <div style="font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#e67e22;font-weight:600;margin-bottom:4px;">National Preparedness Level</div>
   <div style="font-size:52px;font-weight:900;color:#f1c40f;line-height:1;">2</div>
-  <div style="color:#ccc;font-size:14px;margin-top:8px;">Initial attack activity: <strong>Light</strong> — 86 fires nationally · 0 new large incidents today</div>
+  <div style="color:#ccc;font-size:14px;margin-top:8px;">Initial attack: <strong>Light</strong> — 65 fires nationally &nbsp;·&nbsp; <strong style="color:#f1c40f;">4 new large incidents</strong> today</div>
 </div>
 
 <!-- STAT CARDS -->
-<div class="stat-grid" style="margin-bottom:32px;">
-  <div class="stat-card">
-    <div class="stat-num">12</div>
-    <div class="stat-label">Uncontained Large Fires</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">0</div>
-    <div class="stat-label">New Large Fires</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">1</div>
-    <div class="stat-label">Large Fires Contained</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">0</div>
-    <div class="stat-label">CIMTs Committed</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num" style="font-size:20px;">102,598</div>
-    <div class="stat-label">Total Active Acres</div>
-  </div>
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-num">13</div><div class="stat-label">Uncontained Large Fires</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:#f1c40f;">4</div><div class="stat-label">New Large Fires</div></div>
+  <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">Large Fires Contained</div></div>
+  <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">CIMTs Committed</div></div>
+  <div class="stat-card"><div class="stat-num" style="font-size:20px;">97,858</div><div class="stat-label">Total Active Acres</div></div>
 </div>
 
 <!-- GACC LEVELS -->
 <div class="section" id="gacc-levels">
   <h2>GACC Preparedness Levels</h2>
-  <div class="gacc-grid">
-    <div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
+  <div class="gacc-grid"><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">AICC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Alaska</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Alaska</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
   
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">NWCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Northwest</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
-  <div style='font-size:11px;color:#aaa;margin-top:6px;'>3 incidents · 5,762 ac</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Northwest</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>3 incidents · 5,762 ac</div>
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">ONCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Northern CA</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Northern CA</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
   
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">OSCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Southern CA</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
-  <div style='font-size:11px;color:#aaa;margin-top:6px;'>1 incident · 2,943 ac</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Southern CA</div>
+  <div style="display:inline-block;background:rgba(241,196,15,.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>2 incidents · 4,139 ac</div>
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">NRCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Northern Rockies</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
-  <div style='font-size:11px;color:#aaa;margin-top:6px;'>1 incident · 1,219 ac</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Northern Rockies</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>1 incident · 1,219 ac</div>
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">GBCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Great Basin</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
-  
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Great Basin</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>3 incidents · 2,600 ac</div>
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">SWCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Southwest</div>
-  <div style="display:inline-block;background:rgba(241,196,15,0.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</div>
-  <div style='font-size:11px;color:#aaa;margin-top:6px;'>3 incidents · 7,212 ac</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Southwest</div>
+  <div style="display:inline-block;background:rgba(241,196,15,.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>3 incidents · 7,212 ac</div>
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">RMCC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Rocky Mountain</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Rocky Mountain</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
   
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">EACC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Eastern Area</div>
-  <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
-  <div style='font-size:11px;color:#aaa;margin-top:6px;'>2 incidents · 314 ac</div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Eastern Area</div>
+  <div style="display:inline-block;background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>2 incidents · 314 ac</div>
 </div><div style="background:#2a2a2a;border:1px solid #3a3a3a;border-radius:8px;padding:14px;text-align:center;">
   <div style="font-weight:700;font-size:15px;color:#e8e8e8;">SACC</div>
-  <div style="font-size:11px;color:#888;margin-bottom:8px;">Southern Area</div>
-  <div style="display:inline-block;background:rgba(241,196,15,0.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</div>
-  <div style='font-size:11px;color:#aaa;margin-top:6px;'>20 incidents · 86,367 ac</div>
-</div>
-  </div>
+  <div style="font-size:11px;color:#777;margin-bottom:7px;">Southern Area</div>
+  <div style="display:inline-block;background:rgba(241,196,15,.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</div>
+  <div style='font-size:11px;color:#999;margin-top:6px;'>18 incidents · 77,831 ac</div>
+</div></div>
 </div>
 
 <!-- NEW LARGE FIRES -->
 <div class="section" id="new-fires">
-  <h2>New Large Fires — 0 new large incidents reported today</h2>
-  <div style="background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:20px;color:#888;font-size:14px;text-align:center;">
-    No new large incidents (100+ acres) were reported in today's NIFC situation report.
+  <h2>New Large Fires — 4 active new incidents in WY, ID, UT, CA</h2>
+  <p style='color:#888;font-size:13px;margin-bottom:14px;'>4 new large incidents — Great Basin (3) · Southern California (1) — all uncontained</p><div style="background:rgba(192,57,43,0.06);border:1px solid #e74c3c;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Spread Creek <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">WY</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Bridger-Teton NF, USFS. Twenty-nine miles northeast of Jackson, WY. Timber. <strong style='color:#e74c3c;'>Active fire behavior with group torching, spotting and short crown runs.</strong> <strong style='color:#f1c40f;'>Residences threatened.</strong></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">300</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">0%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">3</strong> crews</span><span>🚒 <strong style="color:#ccc;">4</strong> eng</span><span>🚁 <strong style="color:#ccc;">1</strong> heli</span><span>👷 <strong style="color:#ccc;">93</strong> ppl</span><span>💰 <strong style="color:#ccc;">$75K</strong></span>
   </div>
+</div><div style="background:rgba(192,57,43,0.06);border:1px solid #e74c3c;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Pasadena Valley <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">ID</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Twin Falls District, BLM. Five miles east of Glenns Ferry, ID. Grass and brush. <strong style='color:#e74c3c;'>Active fire behavior with running.</strong> <strong style='color:#f1c40f;'>Residences and energy infrastructure threatened.</strong></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">1,200</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">0%</strong> contained</span>
+    <span>🚒 <strong style="color:#ccc;">5</strong> eng</span><span>👷 <strong style="color:#ccc;">21</strong> ppl</span><span style="color:#e74c3c;font-weight:700;">⚠️ 3 structures lost</span><span>💰 <strong style="color:#ccc;">$25K</strong></span>
+  </div>
+</div><div style="background:#1e1e1e;border:1px solid #e67e22;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Wild Horse <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">UT</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Fishlake NF, USFS. Thirty miles southwest of Nephi, UT. Grass. Active fire behavior with short-range spotting.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">1,100</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">5%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">1</strong> crews</span><span>🚒 <strong style="color:#ccc;">8</strong> eng</span><span>👷 <strong style="color:#ccc;">65</strong> ppl</span><span>💰 <strong style="color:#ccc;">$150K</strong></span>
+  </div>
+</div><div style="background:#1e1e1e;border:1px solid #e67e22;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Neuralia <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">CA</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">California Desert District, BLM. Five miles north of California City, CA. Grass and brush. <strong style='color:#e74c3c;'>Active fire behavior with flanking, short-range spotting and wind-driven runs.</strong></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">1,196</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">10%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">2</strong> crews</span><span>🚒 <strong style="color:#ccc;">2</strong> eng</span><span>🚁 <strong style="color:#ccc;">4</strong> heli</span><span>👷 <strong style="color:#ccc;">86</strong> ppl</span><span>💰 <strong style="color:#ccc;">$200K</strong></span>
+  </div>
+</div>
 </div>
 
 <!-- CONTAINED FIRES -->
 <div class="section" id="contained-fires">
   <h2>Contained Fires — 1 fire reached 100% containment</h2>
-  <div style="border-left:4px solid #2ecc71;background:rgba(39,174,96,0.08);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;">
-    Pelham 2 <span style="background:rgba(46,204,113,0.15);color:#2ecc71;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">NC</span>
-    <span style="background:rgba(39,174,96,0.2);color:#2ecc71;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;">✓ Contained</span>
-  </div>
+  <div style="border-left:4px solid #2ecc71;background:rgba(39,174,96,.08);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;">Max Road 06 <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span><span style="background:rgba(39,174,96,.2);color:#2ecc71;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:5px;">✓ Contained</span></div>
+  <div style="color:#888;font-size:13px;margin-top:4px;">Florida Forest Service. Ten miles northwest of Miami, FL. Brush.</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#2ecc71;">102</strong> acres</span>
+    <span>🔥 <strong style="color:#2ecc71;">11,446</strong> acres</span>
     <span>📊 <strong style="color:#2ecc71;">100%</strong> contained</span>
     <span>📍 GACC: <strong style="color:#ccc;">SACC</strong></span>
-    <span>💰 <strong style="color:#ccc;">$3K</strong></span>
   </div>
 </div>
 </div>
@@ -160,332 +167,326 @@ h2 { font-size: 18px; color: #e8e8e8; margin-bottom: 14px; padding-bottom: 8px; 
 <!-- WEATHER DISCUSSION -->
 <div class="section" id="weather">
   <h2>Predictive Services Discussion</h2>
-  <div style="background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:20px;">
-    <p style="color:#aaa;line-height:1.8;font-size:13px;">The Predictive Services Discussion section in today's NIFC IMSR (May 13, 2026) contained links to external products rather than a written narrative. Please consult the following sources directly for the full weather discussion:</p>
-<ul style="color:#aaa;font-size:13px;line-height:2;">
-  <li><a href="https://www.spc.noaa.gov/products/fire_wx/" style="color:#e67e22;">SPC Fire Weather Outlook Map and Discussion</a></li>
-  <li><a href="https://www.weather.gov/fire/" style="color:#e67e22;">NWS Fire Weather Hazards Map</a></li>
-  <li><a href="https://www.wpc.ncep.noaa.gov/" style="color:#e67e22;">NWS/WPC National Forecast Chart and Short Range Discussion</a></li>
-  <li><a href="https://www.predictiveservices.nifc.gov/" style="color:#e67e22;">National Predictive Services Outlook</a></li>
-</ul>
+  <div style="background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:20px;color:#ccc;font-size:13px;line-height:1.8;">
+    <p style='margin-bottom:12px;'>Very strong west winds 30–45 mph with gusts up to 70 mph will occur across Montana and Wyoming near and east of the Continental Divide into the western Dakotas today, amid relative humidity of 10–30%, lowest in southern Montana, Wyoming, and western South Dakota. Widespread elevated to critical conditions are expected as a result.</p><p style='margin-bottom:12px;'>Breezy south and west winds are expected ahead of and behind a cold front, respectively, across the eastern Dakotas, Minnesota, and Iowa amid relative humidity below 30% creating areas of elevated conditions. Isolated showers and thunderstorms are expected along the front, as well, but any rainfall will be light.</p><p style='margin-bottom:12px;'>Breezy and dry west winds 10–25 mph with gusts 35 mph amid relative humidity of 5–15% will develop across the Greater Four Corners into the southern High Plains. Dry conditions will persist across California and Nevada, while scattered showers are expected in western Washington.</p><p style='margin-bottom:12px;'>Widespread wetting rain is expected across New England, while drier conditions develop across much of the Southeast behind a cold front. Mild and dry conditions are expected across the Alaska Interior today, while isolated showers develop over south-central Alaska and the Alaska Range.</p>
   </div>
 </div>
 
 <!-- SPC OUTLOOK -->
 <div class="section" id="spc">
   <h2>SPC Day 1 Fire Weather Outlook</h2>
-  <p style='color:#999;font-size:13px;margin-bottom:16px;'>Valid: Thu May 14 12Z – Fri May 15 12Z · Source: NOAA Storm Prediction Center</p><p style='color:#aaa;font-size:13px;margin-bottom:16px;'>No <span style='color:#e74c3c;font-weight:700;'>Critical</span> fire weather areas in today's Day 1 outlook. Elevated and Isolated Dry Thunderstorm areas in effect.</p><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Northern/Central Plains — Dakotas</div>
-  <div style="color:#ccc;font-size:13px;margin-bottom:6px;">Strong post-frontal westerly winds of 15–25 mph and RH of 20–30% amid dry fuels. Dry cold front pushing through with widespread fire weather concerns.</div>
-  <div style="font-size:12px;color:#888;">Nearby cities: Bismarck ND, Pierre SD, Rapid City SD</div>
-</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Central and Eastern Montana</div>
-  <div style="color:#ccc;font-size:13px;margin-bottom:6px;">Pronounced deep-layer westerly flow yielding sustained west winds of 30–45 mph during peak afternoon heating. Green-up and recent precipitation provide some mitigation.</div>
-  <div style="font-size:12px;color:#888;">Nearby cities: Billings MT, Miles City MT, Glendive MT</div>
-</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Northwestern Iowa into Western Minnesota</div>
-  <div style="color:#ccc;font-size:13px;margin-bottom:6px;">Strong southerly winds of 20–25 mph (gusts up to 40 mph) ahead of approaching cold front. Mixed fuelscape of partial green-up and sporadic dry fuels with RH 25–35%.</div>
-  <div style="font-size:12px;color:#888;">Nearby cities: Sioux City IA, Worthington MN, Willmar MN</div>
-</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Southeast Arizona / Southeast New Mexico / Southern High Plains</div>
-  <div style="color:#ccc;font-size:13px;margin-bottom:6px;">Westerly downslope flow of 15–20 mph amid RH of 15–20%. Delayed green-up leaves fuels receptive. Extends into Southern Plains where dry conditions persist.</div>
-  <div style="font-size:12px;color:#888;">Nearby cities: Roswell NM, Las Cruces NM, Tucson AZ</div>
-</div><div style="border-left:4px solid #f1c40f;background:rgba(241,196,15,0.1);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
+  <p style='color:#888;font-size:13px;margin-bottom:14px;'>Valid: Thu May 14 12Z – Fri May 15 12Z · NOAA Storm Prediction Center · No <span style='color:#e74c3c;font-weight:700;'>Critical</span> risk areas in today's outlook.</p><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Montana / Wyoming / Western Dakotas</div>
+  <div style="color:#ccc;font-size:13px;margin-bottom:5px;">Strong westerly flow with sustained winds 30–45 mph and gusts to 70 mph near and east of the Continental Divide. RH 10–30%, lowest in southern MT/WY/western SD. Widespread elevated to critical conditions expected.</div>
+  <div style="font-size:12px;color:#777;">Nearby: Billings MT, Casper WY, Rapid City SD</div>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Eastern Dakotas / Minnesota / Iowa</div>
+  <div style="color:#ccc;font-size:13px;margin-bottom:5px;">Breezy south and west winds ahead of and behind a cold front with RH below 30%. Isolated showers/thunderstorms expected along the front — rainfall will be light.</div>
+  <div style="font-size:12px;color:#777;">Nearby: Sioux Falls SD, Fargo ND, Sioux City IA</div>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:4px;">⚡ Elevated — Greater Four Corners / Southern High Plains</div>
+  <div style="color:#ccc;font-size:13px;margin-bottom:5px;">Breezy and dry west winds 10–25 mph (gusts 35 mph) with RH of 5–15%. Persistently dry conditions with receptive fuels.</div>
+  <div style="font-size:12px;color:#777;">Nearby: Flagstaff AZ, Gallup NM, Amarillo TX</div>
+</div><div style="border-left:4px solid #f1c40f;background:rgba(241,196,15,.10);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
   <div style="font-weight:700;color:#f1c40f;margin-bottom:4px;">⛈️ Isolated Dry Thunderstorm — OK/TX Panhandles and Adjacent CO/KS</div>
-  <div style="color:#ccc;font-size:13px;margin-bottom:6px;">Instability with arriving mid-level perturbation and afternoon heating. PWATs 0.6–0.8" with prominent dry sub-cloud layer — lightning ignitions possible in existing dry fuels.</div>
-  <div style="font-size:12px;color:#888;">Nearby cities: Amarillo TX, Liberal KS, Guymon OK</div>
+  <div style="color:#ccc;font-size:13px;margin-bottom:5px;">Arrival of mid-level perturbation with afternoon instability. Dry sub-cloud layer limits appreciable surface rainfall — lightning ignitions possible in existing dry fuels.</div>
+  <div style="font-size:12px;color:#777;">Nearby: Amarillo TX, Liberal KS, Guymon OK</div>
 </div>
 </div>
 
 <!-- NWS ALERTS -->
 <div class="section" id="nws">
   <h2>NWS Fire Weather Alerts</h2>
-  <p style='color:#999;font-size:13px;margin-bottom:16px;'>Active as of report time — 23 Red Flag Warnings · 12 Fire Weather Watches</p><h3 style='color:#e74c3c;font-size:14px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;'>🚨 Red Flag Warnings</h3><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Knox; Cedar; Thurston; Antelope; Pierce; Wayne; Boone; Madison; Stanton; Cuming</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 23 to 33 mph with peak gusts up to</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 10:00 AM UTC-05:00 → Thu May 14 07:00 PM UTC-05:00</span>
+  <p style='color:#888;font-size:13px;margin-bottom:14px;'>23 Red Flag Warnings · 12 Fire Weather Watches active as of report time</p><h3 style='color:#e74c3c;font-size:14px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;'>🚨 Red Flag Warnings</h3><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Traverse; Big Stone; Corson; Campbell; McPherson; Brown; Marshall … +8 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 09:10 → 2026-05-14 17:15</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Fall River County Area;  Northern Foot Hills;  Eastern Foot Hills;  Custer County Plains;  Pine Ridge Area;  Butte County Area ... +5 more</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 05:19 AM UTC-06:00 → Thu May 14 01:30 PM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Spink; Clark; Codington; Hamlin; Deuel; Stanley; Sully … +6 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 09:10 → 2026-05-14 17:15</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Upper Arkansas River Valley Including Lake County and Chaffee County;  Fremont County Including Canon City/Howard/Texas Creek;  Southern Front Range Including Sangre De Cristo Mountains/Wet Mountains/La Veta Pass</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 11:00 AM UTC-06:00 → Thu May 14 07:00 PM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Divide; Burke; Renville; Bottineau; Rolette; Williams; Mountrail … +29 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 35 to 45 mph with gusts to 65 mph
+are expected over northwes</span>
+    
+    <span>🕐 2026-05-14 10:00 → 2026-05-14 21:15</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Fort Peck Reservation and Daniels/Roosevelt/Sheridan Counties;  Dawson/McCone/Prairie/Richland/Wibaux Counties;  Northern Valley and Northern Phillips Counties;  The Little Rockies;  The Lower Missouri River Breaks including the Charles M Russell National Wildlife Refuge;  Southern Petroleum and Southern Garfield Counties</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 04:28 AM UTC-06:00 → Thu May 14 04:00 PM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Knox; Cedar; Thurston; Antelope; Pierce; Wayne; Boone … +3 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 23 to 33 mph with peak gusts up to 45 mph,
+Relative Humidity</span>
+    
+    <span>🕐 2026-05-14 10:00 → 2026-05-14 19:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Larimer County Below 6000 Feet/Northwest Weld County; Northeast Weld County; Logan County; Sedgwick County; Phillips County</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 11:00 AM UTC-06:00 → Thu May 14 02:30 PM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Fall River County Area; Northern Foot Hills; Eastern Foot Hills; Custer County Plains; Pine Ridge Area; Butte County Area; West Central Plains … +4 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 20 to
+35 mph and gusts up to 50 mph</span>
+    
+    <span>🕐 2026-05-14 05:19 → 2026-05-14 13:30</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Southwest Mountains</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:00 PM UTC-06:00 → Thu May 14 11:30 AM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Upper Arkansas River Valley Including Lake County and Chaffee County; Fremont County Including Canon City/Howard/Texas Creek; Southern Front Range Including Sangre De Cristo Mountains/Wet Mountains/La Veta Pass</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 11:00 → 2026-05-14 19:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Southwest Deserts and Lowlands; South Central Lowlands And Southern Rio Grande Valley; Capitan And Sacramento Mountains</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:00 PM UTC-06:00 → Thu May 14 11:30 AM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Fort Peck Reservation and Daniels/Roosevelt/Sheridan Counties; Dawson/McCone/Prairie/Richland/Wibaux Counties; Northern Valley and Northern Phillips Counties; The Little Rockies; The Lower Missouri River Breaks including the Charles M Russell National Wildlife Refuge; Southern Petroleum and Southern Garfield Counties</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 04:28 → 2026-05-14 16:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Lyon;  Osceola;  Dickinson;  Sioux;  O'Brien;  Clay ... +21 more</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 10:00 AM UTC-05:00 → Thu May 14 12:15 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Larimer County Below 6000 Feet/Northwest Weld County; Northeast Weld County; Logan County; Sedgwick County; Phillips County</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 11:00 → 2026-05-14 14:30</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Lincoln; Lyon; Murray; Pipestone; Kingsbury; Brookings; Miner; Lake; Moody</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 10:00 AM UTC-05:00 → Thu May 14 12:15 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Southwest Deserts and Lowlands; South Central Lowlands And Southern Rio Grande Valley; Capitan And Sacramento Mountains</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 18 to 25 mph with gusts 30 to 35 mph</span>
+    
+    <span>🕐 2026-05-14 12:00 → 2026-05-14 11:30</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">West Polk;  Norman;  Clay;  Kittson;  Roseau;  West Marshall ... +31 more</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 09:00 AM UTC-05:00 → Fri May 15 09:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Southwest Mountains</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 18 to 25 mph with gusts 30 to 35 mph</span>
+    
+    <span>🕐 2026-05-14 12:00 → 2026-05-14 11:30</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Divide;  Burke;  Renville;  Bottineau;  Rolette;  Williams ... +30 more</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 10:00 AM UTC-05:00 → Thu May 14 03:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Lincoln; Lyon; Murray; Pipestone; Kingsbury; Brookings; Miner … +2 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 10:00 → 2026-05-14 12:15</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Brown; Watonwan; Martin</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 40 to 45 mph are expected tomorrow
-ahead of an approaching front</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 10:00 AM UTC-05:00 → Thu May 14 02:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Lyon; Osceola; Dickinson; Sioux; O'Brien; Clay; Plymouth … +20 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 10:00 → 2026-05-14 12:15</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Douglas; Stevens; Pope; Lac Qui Parle; Swift; Chippewa; Kandiyohi; Yellow Medicine; Renville; Redwood</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 40 to 45 mph are expected tomorrow
-ahead of an approaching front</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 10:00 AM UTC-05:00 → Thu May 14 02:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">West Polk; Norman; Clay; Kittson; Roseau; West Marshall; East Marshall … +30 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 30 to 40 mph with gusts up to 55
+mph today turning southwest</span>
+    
+    <span>🕐 2026-05-14 09:00 → 2026-05-15 21:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Pine Ridge/Nebraska National Forest; Box Butte/South Sioux/Niobrara River; Lower North Platte River Basin/Scottsbluff National Monument; Lodgepole Creek/Southern Nebraska Panhandle</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:33 AM UTC-06:00 → Thu May 14 06:00 PM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Douglas; Stevens; Pope; Lac Qui Parle; Swift; Chippewa; Kandiyohi … +3 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 40 to 45 mph are expected tomorrow
+ahead of an approaching f</span>
+    
+    <span>🕐 2026-05-14 10:00 → 2026-05-14 14:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Harper; Woods; Ellis; Woodward; Roger Mills; Dewey; Beckham; Harmon; Greer; Jackson; Hardeman</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:00 PM UTC-05:00 → Thu May 14 10:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Brown; Watonwan; Martin</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 40 to 45 mph are expected tomorrow
+ahead of an approaching f</span>
+    
+    <span>🕐 2026-05-14 10:00 → 2026-05-14 14:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Spink; Clark; Codington; Hamlin; Deuel; Stanley; Sully; Hughes; Hyde; Hand; Jones; Lyman; Buffalo</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 07:00 AM UTC-05:00 → Thu May 14 09:15 AM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Pine Ridge/Nebraska National Forest; Box Butte/South Sioux/Niobrara River; Lower North Platte River Basin/Scottsbluff National Monument; Lodgepole Creek/Southern Nebraska Panhandle</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 00:33 → 2026-05-14 18:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Traverse; Big Stone; Corson; Campbell; McPherson; Brown; Marshall; Roberts; Walworth; Edmunds; Day; Dewey; Potter; Faulk; Grant</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 07:00 AM UTC-05:00 → Thu May 14 09:15 AM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Harper; Woods; Ellis; Woodward; Roger Mills; Dewey; Beckham … +4 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 12:00 → 2026-05-14 22:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Eastern Panhandle/Crescent Lake NWR; Sandhills/Valentine NWR/Nebraska National Forest; Frenchman Basin</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:51 AM UTC-05:00 → Thu May 14 09:00 AM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Eastern Panhandle/Crescent Lake NWR; Sandhills/Valentine NWR/Nebraska National Forest; Frenchman Basin</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 00:51 → 2026-05-14 09:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Loup Rivers Basin; Loess Plains</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:51 AM UTC-05:00 → Thu May 14 09:00 AM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Loup Rivers Basin; Loess Plains</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 00:51 → 2026-05-14 09:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Texas; Beaver; Hansford; Ochiltree; Lipscomb; Roberts; Hemphill; Gray; Wheeler; Donley; Collingsworth</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 01:00 PM UTC-05:00 → Thu May 14 01:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Texas; Beaver; Hansford; Ochiltree; Lipscomb; Roberts; Hemphill … +4 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 13:00 → 2026-05-14 13:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Grant; Haskell; Gray; Ford</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 01:00 PM UTC-05:00 → Thu May 14 09:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Grant; Haskell; Gray; Ford</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 13:00 → 2026-05-14 21:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Morton; Stevens; Seward; Meade; Clark; Comanche</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 01:00 PM UTC-05:00 → Thu May 14 09:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Morton; Stevens; Seward; Meade; Clark; Comanche</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 13:00 → 2026-05-14 21:00</span>
   </div>
-</div><div class="alert-card rfw" style="border-left:4px solid #c0392b;background:rgba(192,57,43,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#c0392b;margin-bottom:6px;">🚨 Red Flag Warning</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Gunnison Basin</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 12:00 PM UTC-06:00 → Thu May 14 02:00 PM UTC-06:00</span>
+</div><div style="border-left:4px solid #c0392b;background:rgba(192,57,43,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#c0392b;margin-bottom:5px;">🚨 Red Flag Warning</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Gunnison Basin</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 12:00 → 2026-05-14 14:00</span>
   </div>
-</div><h3 style='color:#e67e22;font-size:14px;margin:16px 0 10px;text-transform:uppercase;letter-spacing:.05em;'>⚠️ Fire Weather Watches</h3><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Lincoln; Lyon; Murray; Pipestone; Kingsbury; Brookings; Miner; Lake; Moody</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 09:00 AM UTC-05:00 → Thu May 14 12:15 PM UTC-05:00</span>
+</div><h3 style='color:#e67e22;font-size:14px;margin:16px 0 10px;text-transform:uppercase;letter-spacing:.05em;'>⚠️ Fire Weather Watches</h3><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Beadle; Jerauld; Sanborn</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-15 09:00 → 2026-05-14 12:15</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Beadle; Jerauld; Sanborn</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 09:00 AM UTC-05:00 → Thu May 14 12:15 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Lincoln; Lyon; Murray; Pipestone; Kingsbury; Brookings; Miner … +2 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-15 09:00 → 2026-05-14 12:15</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Lake Of The Woods; North Beltrami; South Beltrami; Hubbard; Wadena</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 09:00 AM UTC-05:00 → Fri May 15 09:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">West Polk; Norman; Clay; Kittson; Roseau; West Marshall; East Marshall … +30 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 30 to 40 mph with gusts up to 55
+mph today turning southwest</span>
+    
+    <span>🕐 2026-05-15 09:00 → 2026-05-15 21:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">West Polk;  Norman;  Clay;  Kittson;  Roseau;  West Marshall ... +31 more</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 09:00 AM UTC-05:00 → Fri May 15 09:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Lake Of The Woods; North Beltrami; South Beltrami; Hubbard; Wadena</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-15 09:00 → 2026-05-15 21:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Vilas</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 20 to 30 mph, low relative humidity, and
-warm temperatures may lead to critical fire weather conditions
-Friday afternoo</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 12:00 PM UTC-05:00 → Thu May 14 11:00 AM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Vilas</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 20 to 30 mph, low relative humidity, and
+warm temperatures m</span>
+    
+    <span>🕐 2026-05-15 12:00 → 2026-05-14 11:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Polk; Barron; Rusk</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 40 to 45 mph are expected tomorrow
-ahead of an approaching front</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 12:00 PM UTC-05:00 → Thu May 14 02:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Polk; Barron; Rusk</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 40 to 45 mph are expected tomorrow
+ahead of an approaching f</span>
+    
+    <span>🕐 2026-05-15 12:00 → 2026-05-14 14:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Douglas; Stevens; Pope; Lac Qui Parle; Swift; Chippewa; Kandiyohi; Yellow Medicine; Renville; Redwood</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 40 to 45 mph are expected tomorrow
-ahead of an approaching front</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 11:00 AM UTC-05:00 → Thu May 14 02:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Douglas; Stevens; Pope; Lac Qui Parle; Swift; Chippewa; Kandiyohi … +3 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 40 to 45 mph are expected tomorrow
+ahead of an approaching f</span>
+    
+    <span>🕐 2026-05-15 11:00 → 2026-05-14 14:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Todd; Morrison; Mille Lacs; Kanabec; Stearns; Benton; Sherburne; Isanti; Chisago; Meeker; Wright; McLeod</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> 40 to 45 mph are expected tomorrow
-ahead of an approaching front</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 11:00 AM UTC-05:00 → Thu May 14 02:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Todd; Morrison; Mille Lacs; Kanabec; Stearns; Benton; Sherburne … +5 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    <span>💨 <strong style='color:#bbb;'>Wind:</strong> 40 to 45 mph are expected tomorrow
+ahead of an approaching f</span>
+    
+    <span>🕐 2026-05-15 11:00 → 2026-05-14 14:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Koochiching; North Itasca; Central St. Louis; North Cass; South Itasca; South Cass; Crow Wing; Northern Aitkin; South Aitkin; Carlton/South St. Louis; Pine</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 12:00 PM UTC-05:00 → Thu May 14 04:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Koochiching; North Itasca; Central St. Louis; North Cass; South Itasca; South Cass; Crow Wing … +4 more</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-15 12:00 → 2026-05-14 16:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">North St. Louis</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 12:00 PM UTC-05:00 → Thu May 14 04:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">North St. Louis</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-15 12:00 → 2026-05-14 16:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Douglas; Bayfield; Ashland; Iron; Burnett; Washburn; Sawyer</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Fri May 15 12:00 PM UTC-05:00 → Thu May 14 04:00 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Douglas; Bayfield; Ashland; Iron; Burnett; Washburn; Sawyer</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-15 12:00 → 2026-05-14 16:00</span>
   </div>
-</div><div class="alert-card fww" style="border-left:4px solid #e67e22;background:rgba(230,126,34,0.12);padding:14px 16px;margin-bottom:10px;border-radius:6px;">
-  <div style="font-weight:700;color:#e67e22;margin-bottom:6px;">⚠️ Fire Weather Watch</div>
-  <div style="color:#e8e8e8;font-size:13px;margin-bottom:8px;">Texas; Hansford</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#aaa;">
-    <span>💨 <strong style="color:#ccc;">Wind:</strong> See alert</span>
-    <span>💧 <strong style="color:#ccc;">RH:</strong> See alert</span>
-    <span>🕐 <strong style="color:#ccc;">Valid:</strong> Thu May 14 01:00 PM UTC-05:00 → Wed May 13 02:15 PM UTC-05:00</span>
+</div><div style="border-left:4px solid #e67e22;background:rgba(230,126,34,.12);padding:13px 16px;margin-bottom:8px;border-radius:6px;">
+  <div style="font-weight:700;color:#e67e22;margin-bottom:5px;">⚠️ Fire Weather Watch</div>
+  <div style="color:#ddd;font-size:13px;margin-bottom:7px;">Texas; Hansford</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#999;">
+    
+    
+    <span>🕐 2026-05-14 13:00 → 2026-05-13 14:15</span>
   </div>
 </div>
 </div>
@@ -493,275 +494,205 @@ ahead of an approaching front</span>
 <!-- LARGE FIRES BY GACC -->
 <div class="section" id="large-fires">
   <h2>Large Fires — Grouped by GACC</h2>
-  <div style="background:#242424;border-left:5px solid #e67e22;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
+  <div style="background:#242424;border-left:5px solid #e67e22;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div style="font-weight:700;font-size:17px;color:#e8e8e8;">Southern Area</div>
-    <div style="font-size:13px;color:#888;">(SACC)</div>
-    <span style="background:rgba(241,196,15,0.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</span>
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Southern Area</span>
+    <span style="font-size:13px;color:#777;">(SACC)</span>
+    <span style="background:rgba(241,196,15,.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</span>
   </div>
-  <div style="color:#aaa;font-size:13px;margin-top:6px;">20 total incidents · 86,367 cumulative acres</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#888;">
-    <span>New fires: <strong style="color:#e8e8e8;">6</strong></span>
+  <div style="color:#888;font-size:13px;margin-top:5px;">18 incidents · 77,831 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
+    <span>New fires: <strong style="color:#e8e8e8;">8</strong></span>
     <span>New large: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>Uncontained: <strong style="color:#f1c40f;">7</strong></span>
+    <span>Uncontained: <strong style="color:#e74c3c;">4</strong></span>
   </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Pineland Rd <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">GA</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Georgia Forestry Commission. Started on private land 13 miles northwest of Fargo, GA. Southern rough. Minimal fire behavior with smoldering. <strong style='color:#f1c40f;'>Structures and critical infrastructure threatened.</strong> Area and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+</div><div style="background:#1e1e1e;border:1px solid #e67e22;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Pineland Rd <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">GA</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Georgia Forestry Commission. 13 miles northwest of Fargo, GA. Southern rough. Minimal fire behavior with smoldering. <strong style='color:#f1c40f;'>Structures threatened.</strong> Area and trail closures in effect.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
     <span>🔥 <strong style="color:#e67e22;">32,575</strong> acres</span>
     <span>📊 <strong style="color:#e67e22;">90%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>23</strong> engines</span>
-    <span>🚁 <strong style='color:#ccc;'>1</strong> heli</span>
-    <span>👷 <strong style='color:#ccc;'>144</strong> personnel</span>
-    <span style="color:#e74c3c;font-weight:700;">⚠️ 35 lost</span>
-    <span>💰 <strong style="color:#ccc;">$13.4M</strong></span>
+    <span>🚒 <strong style="color:#ccc;">16</strong> eng</span><span>🚁 <strong style="color:#ccc;">1</strong> heli</span><span>👷 <strong style="color:#ccc;">129</strong> ppl</span><span style="color:#e74c3c;font-weight:700;">⚠️ 35 structures lost</span><span>💰 <strong style="color:#ccc;">$14.2M</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Max Road 06 <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Florida Forest Service. Ten miles northwest of Miami, FL. Brush. <strong style='color:#e67e22;'>Moderate fire behavior with flanking.</strong> Area closures in effect.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#e67e22;">11,443</strong> <span style="color:#e67e22;font-size:11px;">(+353)</span> acres</span>
-    <span>📊 <strong style="color:#e67e22;">80%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>2</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>24</strong> personnel</span>
-    
-    
-  </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    South Canal <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Florida Forest Service. Twelve miles south of Mayo, FL. Southern rough and timber. Minimal fire behavior with smoldering. Precipitation occurred over the fire area yesterday. Last report unless significant activity occurs.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#e67e22;">2,200</strong> acres</span>
-    <span>📊 <strong style="color:#e67e22;">93%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>9</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>72</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$3.9M</strong></span>
-  </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Sargent <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">National Forests in Florida, USFS. One mile south of Sargent, FL. Southern rough. Minimal fire behavior with smoldering. <strong style='color:#f1c40f;'>Railroad infrastructure threatened.</strong> Precipitation occurred over the fire area yesterday. Last report unless significant activity occurs.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#e67e22;">2,523</strong> acres</span>
-    <span>📊 <strong style="color:#e67e22;">90%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>8</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>24</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$800K</strong></span>
-  </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Cow Creek <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Florida Forest Service. Ten miles south of Bronson, FL. Timber and southern rough. Minimal fire behavior with creeping, smoldering and backing. <strong style='color:#f1c40f;'>Structures threatened.</strong> Trail closures in effect.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Cow Creek <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Florida Forest Service. 10 miles south of Bronson, FL. Timber and southern rough. Minimal fire behavior with creeping, smoldering and backing. <strong style='color:#f1c40f;'>Structures threatened.</strong> Trail closures in effect.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
     <span>🔥 <strong style="color:#e67e22;">2,364</strong> acres</span>
-    <span>📊 <strong style="color:#e67e22;">75%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>11</strong> engines</span>
-    <span>🚁 <strong style='color:#ccc;'>3</strong> heli</span>
-    <span>👷 <strong style='color:#ccc;'>93</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$500K</strong></span>
+    <span>📊 <strong style="color:#f1c40f;">74%</strong> contained</span>
+    <span>🚒 <strong style="color:#ccc;">11</strong> eng</span><span>🚁 <strong style="color:#ccc;">3</strong> heli</span><span>👷 <strong style="color:#ccc;">93</strong> ppl</span><span>💰 <strong style="color:#ccc;">$500K</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Lochloosa West <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Florida Forest Service. Eleven miles southeast of Gainesville, FL. Timber and southern rough. Minimal fire behavior with smoldering and creeping.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Lochloosa West <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Florida Forest Service. 11 miles southeast of Gainesville, FL. Timber and southern rough. Minimal fire behavior with smoldering and creeping. Precipitation occurred over the fire area yesterday.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
     <span>🔥 <strong style="color:#e67e22;">956</strong> acres</span>
     <span>📊 <strong style="color:#e67e22;">85%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>8</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>60</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$150K</strong></span>
+    <span>🚒 <strong style="color:#ccc;">8</strong> eng</span><span>👷 <strong style="color:#ccc;">60</strong> ppl</span><span>💰 <strong style="color:#ccc;">$150K</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    172 Ave <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Florida Forest Service. One mile southeast of Florida City, FL. Brush. Minimal fire behavior with creeping.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#e67e22;">315</strong> <span style="color:#e67e22;font-size:11px;">(+15)</span> acres</span>
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">172 Ave <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">FL</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Florida Forest Service. 1 mile southeast of Florida City, FL. Brush. No new information.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">315</strong> acres</span>
     <span>📊 <strong style="color:#f1c40f;">65%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>2</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>19</strong> personnel</span>
-    
-    
+    <span>🚒 <strong style="color:#ccc;">2</strong> eng</span><span>👷 <strong style="color:#ccc;">19</strong> ppl</span>
   </div>
-</div><div style="background:#242424;border-left:5px solid #e67e22;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
+</div><div style="background:#242424;border-left:5px solid #444;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div style="font-weight:700;font-size:17px;color:#e8e8e8;">Southwest Area</div>
-    <div style="font-size:13px;color:#888;">(SWCC)</div>
-    <span style="background:rgba(241,196,15,0.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</span>
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Great Basin Area</span>
+    <span style="font-size:13px;color:#777;">(GBCC)</span>
+    <span style="background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
   </div>
-  <div style="color:#aaa;font-size:13px;margin-top:6px;">3 total incidents · 7,212 cumulative acres</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#888;">
-    <span>New fires: <strong style="color:#e8e8e8;">4</strong></span>
+  <div style="color:#888;font-size:13px;margin-top:5px;">3 incidents · 2,600 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
+    <span>New fires: <strong style="color:#e8e8e8;">14</strong></span>
+    <span>New large: <strong style="color:#f1c40f;">3</strong></span>
+    <span>Uncontained: <strong style="color:#e74c3c;">3</strong></span>
+  </div>
+</div><div style="background:rgba(192,57,43,0.06);border:1px solid #e74c3c;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Spread Creek <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">WY</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Bridger-Teton NF, USFS. 29 miles northeast of Jackson, WY. Timber. <strong style='color:#e74c3c;'>Active fire behavior with group torching, spotting and short crown runs.</strong> <strong style='color:#f1c40f;'>Residences threatened.</strong></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">300</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">0%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">3</strong> crews</span><span>🚒 <strong style="color:#ccc;">4</strong> eng</span><span>🚁 <strong style="color:#ccc;">1</strong> heli</span><span>👷 <strong style="color:#ccc;">93</strong> ppl</span><span>💰 <strong style="color:#ccc;">$75K</strong></span>
+  </div>
+</div><div style="background:rgba(192,57,43,0.06);border:1px solid #e74c3c;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Pasadena Valley <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">ID</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Twin Falls District, BLM. 5 miles east of Glenns Ferry, ID. Grass and brush. <strong style='color:#e74c3c;'>Active fire behavior with running.</strong> <strong style='color:#f1c40f;'>Residences and energy infrastructure threatened.</strong></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">1,200</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">0%</strong> contained</span>
+    <span>🚒 <strong style="color:#ccc;">5</strong> eng</span><span>👷 <strong style="color:#ccc;">21</strong> ppl</span><span style="color:#e74c3c;font-weight:700;">⚠️ 3 structures lost</span><span>💰 <strong style="color:#ccc;">$25K</strong></span>
+  </div>
+</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Wild Horse <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">UT</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Fishlake NF, USFS. 30 miles southwest of Nephi, UT. Grass. Active fire behavior with short-range spotting.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">1,100</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">5%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">1</strong> crews</span><span>🚒 <strong style="color:#ccc;">8</strong> eng</span><span>👷 <strong style="color:#ccc;">65</strong> ppl</span><span>💰 <strong style="color:#ccc;">$150K</strong></span>
+  </div>
+</div><div style="background:#242424;border-left:5px solid #e67e22;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Southwest Area</span>
+    <span style="font-size:13px;color:#777;">(SWCC)</span>
+    <span style="background:rgba(241,196,15,.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</span>
+  </div>
+  <div style="color:#888;font-size:13px;margin-top:5px;">3 incidents · 7,212 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
+    <span>New fires: <strong style="color:#e8e8e8;">5</strong></span>
     <span>New large: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>Uncontained: <strong style="color:#f1c40f;">3</strong></span>
+    <span>Uncontained: <strong style="color:#e74c3c;">3</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Hummingbird <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">NM</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Gila NF, USFS. Fifteen miles east of Glenwood, NM. Timber and medium slash. Minimal fire behavior with creeping, backing and flanking. Area closures in effect.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#e67e22;">5,680</strong> <span style="color:#e67e22;font-size:11px;">(+10)</span> acres</span>
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Hummingbird <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">NM</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Gila NF, USFS. 15 miles east of Glenwood, NM. Timber and medium slash. No new information.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">5,680</strong> acres</span>
     <span>📊 <strong style="color:#e67e22;">76%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>3</strong> engines</span>
-    <span>🚁 <strong style='color:#ccc;'>1</strong> heli</span>
-    <span>👷 <strong style='color:#ccc;'>23</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$5.8M</strong></span>
+    <span>🚒 <strong style="color:#ccc;">3</strong> eng</span><span>🚁 <strong style="color:#ccc;">1</strong> heli</span><span>👷 <strong style="color:#ccc;">23</strong> ppl</span><span>💰 <strong style="color:#ccc;">$5.8M</strong></span>
+  </div>
+</div><div style="background:#1e1e1e;border:1px solid #e67e22;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Six Mile <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">NM</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Cibola NF, USFS. 12 miles southeast of Magdalena, NM. Brush and light slash. Minimal fire behavior with creeping and smoldering. <strong style='color:#f1c40f;'>Structures threatened.</strong> Road and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">341</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">24%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">7</strong> crews</span><span>🚒 <strong style="color:#ccc;">5</strong> eng</span><span>🚁 <strong style="color:#ccc;">5</strong> heli</span><span>👷 <strong style="color:#ccc;">296</strong> ppl</span><span>💰 <strong style="color:#ccc;">$2M</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    AFM Hazen <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">AZ</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Central District, Arizona DOF. One mile south of Buckeye, AZ. Brush, grass and timber. No new information.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">AFM Hazen <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">AZ</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Central District, Arizona DOF. 1 mile south of Buckeye, AZ. Brush, grass and timber. No new information. Last narrative report unless new information is received.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
     <span>🔥 <strong style="color:#e67e22;">1,191</strong> acres</span>
     <span>📊 <strong style="color:#e67e22;">87%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>2</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>14</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$1.1M</strong></span>
+    <span>🚒 <strong style="color:#ccc;">2</strong> eng</span><span>👷 <strong style="color:#ccc;">14</strong> ppl</span><span>💰 <strong style="color:#ccc;">$1.1M</strong></span>
   </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Six Mile <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">NM</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Cibola NF, USFS. Twelve miles southeast of Magdalena, NM. Brush and light slash. <strong style='color:#e67e22;'>Moderate fire behavior with creeping and smoldering.</strong> <strong style='color:#f1c40f;'>Structures threatened.</strong> Trail closures in effect. Reduction in acreage due to more accurate mapping.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
-    <span>🔥 <strong style="color:#e67e22;">341</strong> <span style="color:#2ecc71;font-size:11px;">(-55)</span> acres</span>
-    <span>📊 <strong style="color:#e74c3c;">0%</strong> contained</span>
-    
-    
-    
-    <span>👷 <strong style='color:#ccc;'>249</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$1.6M</strong></span>
-  </div>
-</div><div style="background:#242424;border-left:5px solid #3a3a3a;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
+</div><div style="background:#242424;border-left:5px solid #e67e22;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div style="font-weight:700;font-size:17px;color:#e8e8e8;">Northwest Area</div>
-    <div style="font-size:13px;color:#888;">(NWCC)</div>
-    <span style="background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Southern California Area</span>
+    <span style="font-size:13px;color:#777;">(OSCC)</span>
+    <span style="background:rgba(241,196,15,.15);border:1px solid #f1c40f;color:#f1c40f;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 2</span>
   </div>
-  <div style="color:#aaa;font-size:13px;margin-top:6px;">3 total incidents · 5,762 cumulative acres</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#888;">
-    <span>New fires: <strong style="color:#e8e8e8;">1</strong></span>
+  <div style="color:#888;font-size:13px;margin-top:5px;">2 incidents · 4,139 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
+    <span>New fires: <strong style="color:#e8e8e8;">13</strong></span>
+    <span>New large: <strong style="color:#f1c40f;">1</strong></span>
+    <span>Uncontained: <strong style="color:#e74c3c;">1</strong></span>
+  </div>
+</div><div style="background:#1e1e1e;border:1px solid #e67e22;border-radius:8px;padding:16px;margin-bottom:10px;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Neuralia <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">CA</span><span style="background:rgba(241,196,15,.25);border:1px solid rgba(241,196,15,.35);color:#f1c40f;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;">NEW</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">California Desert District, BLM. 5 miles north of California City, CA. Grass and brush. <strong style='color:#e74c3c;'>Active fire behavior with flanking, short-range spotting and wind-driven runs.</strong></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+    <span>🔥 <strong style="color:#e67e22;">1,196</strong> acres</span>
+    <span>📊 <strong style="color:#e74c3c;">10%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">2</strong> crews</span><span>🚒 <strong style="color:#ccc;">2</strong> eng</span><span>🚁 <strong style="color:#ccc;">4</strong> heli</span><span>👷 <strong style="color:#ccc;">86</strong> ppl</span><span>💰 <strong style="color:#ccc;">$200K</strong></span>
+  </div>
+</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:12px 16px;margin-bottom:10px;color:#777;font-size:13px;font-style:italic;">1 incident (2,943 cumulative acres) — no narrative details provided in this report cycle.</div><div style="background:#242424;border-left:5px solid #444;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Northwest Area</span>
+    <span style="font-size:13px;color:#777;">(NWCC)</span>
+    <span style="background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
+  </div>
+  <div style="color:#888;font-size:13px;margin-top:5px;">3 incidents · 5,762 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
+    <span>New fires: <strong style="color:#e8e8e8;">0</strong></span>
     <span>New large: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>Uncontained: <strong style="color:#f1c40f;">1</strong></span>
+    <span>Uncontained: <strong style="color:#e74c3c;">1</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    Nike <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">WA</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Mid Columbia NWR Complex, FWS. Twenty miles west of Othello, WA. Brush and grass. Minimal fire behavior with backing, creeping and smoldering.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">Nike <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">WA</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Mid Columbia NWR, FWS. 20 miles west of Othello, WA. Brush and grass. Minimal fire behavior with smoldering.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
     <span>🔥 <strong style="color:#e67e22;">3,067</strong> acres</span>
-    <span>📊 <strong style="color:#f1c40f;">40%</strong> contained</span>
-    <span>🪓 <strong style='color:#ccc;'>1</strong> crews</span>
-    <span>🚒 <strong style='color:#ccc;'>5</strong> engines</span>
-    <span>🚁 <strong style='color:#ccc;'>1</strong> heli</span>
-    <span>👷 <strong style='color:#ccc;'>45</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$75K</strong></span>
+    <span>📊 <strong style="color:#f1c40f;">70%</strong> contained</span>
+    <span>🪓 <strong style="color:#ccc;">1</strong> crews</span><span>🚒 <strong style="color:#ccc;">3</strong> eng</span><span>👷 <strong style="color:#ccc;">33</strong> ppl</span><span>💰 <strong style="color:#ccc;">$75K</strong></span>
   </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:12px 16px;margin-bottom:10px;color:#888;font-size:13px;font-style:italic;">
-  2 additional Northwest Area incidents (total 5,762 cumulative acres) — no narrative details in this report cycle.
-</div><div style="background:#242424;border-left:5px solid #3a3a3a;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
+</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:12px 16px;margin-bottom:10px;color:#777;font-size:13px;font-style:italic;">2 incidents (2,695 cumulative acres) — no narrative details provided in this report cycle.</div><div style="background:#242424;border-left:5px solid #444;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div style="font-weight:700;font-size:17px;color:#e8e8e8;">Northern Rockies Area</div>
-    <div style="font-size:13px;color:#888;">(NRCC)</div>
-    <span style="background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Northern Rockies Area</span>
+    <span style="font-size:13px;color:#777;">(NRCC)</span>
+    <span style="background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
   </div>
-  <div style="color:#aaa;font-size:13px;margin-top:6px;">1 total incident · 1,219 cumulative acres</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#888;">
-    <span>New fires: <strong style="color:#e8e8e8;">12</strong></span>
+  <div style="color:#888;font-size:13px;margin-top:5px;">1 incident · 1,219 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
+    <span>New fires: <strong style="color:#e8e8e8;">4</strong></span>
     <span>New large: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>Uncontained: <strong style="color:#f1c40f;">1</strong></span>
+    <span>Uncontained: <strong style="color:#e74c3c;">1</strong></span>
   </div>
 </div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:10px;">
-  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">
-    East Side <span style="background:rgba(230,126,34,0.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">MT</span>
-  </div>
-  <div style="color:#ccc;font-size:13px;line-height:1.6;">Custer Gallatin NF, USFS. Five miles south of Red Lodge, MT. Timber and grass. No new information.</div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
+  <div style="font-weight:700;font-size:15px;color:#e8e8e8;margin-bottom:8px;">East Side <span style="background:rgba(230,126,34,.15);color:#e67e22;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">MT</span></div>
+  <div style="color:#ccc;font-size:13px;line-height:1.65;">Custer Gallatin NF, USFS. 5 miles south of Red Lodge, MT. Timber and grass. No new information. Last narrative report unless new information is received.</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:#aaa;">
     <span>🔥 <strong style="color:#e67e22;">1,219</strong> acres</span>
     <span>📊 <strong style="color:#f1c40f;">70%</strong> contained</span>
-    
-    <span>🚒 <strong style='color:#ccc;'>1</strong> engines</span>
-    
-    <span>👷 <strong style='color:#ccc;'>19</strong> personnel</span>
-    
-    <span>💰 <strong style="color:#ccc;">$2.2M</strong></span>
+    <span>🚒 <strong style="color:#ccc;">1</strong> eng</span><span>👷 <strong style="color:#ccc;">19</strong> ppl</span><span>💰 <strong style="color:#ccc;">$2.2M</strong></span>
   </div>
-</div><div style="background:#242424;border-left:5px solid #3a3a3a;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
+</div><div style="background:#242424;border-left:5px solid #444;border-radius:8px;padding:15px 18px;margin-bottom:10px;margin-top:18px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div style="font-weight:700;font-size:17px;color:#e8e8e8;">Southern California Area</div>
-    <div style="font-size:13px;color:#888;">(OSCC)</div>
-    <span style="background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
+    <span style="font-weight:700;font-size:17px;color:#e8e8e8;">Eastern Area</span>
+    <span style="font-size:13px;color:#777;">(EACC)</span>
+    <span style="background:rgba(46,204,113,.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
   </div>
-  <div style="color:#aaa;font-size:13px;margin-top:6px;">1 total incident · 2,943 cumulative acres</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#888;">
+  <div style="color:#888;font-size:13px;margin-top:5px;">2 incidents · 314 cumulative acres</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#777;">
     <span>New fires: <strong style="color:#e8e8e8;">0</strong></span>
     <span>New large: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>Uncontained: <strong style="color:#f1c40f;">0</strong></span>
+    <span>Uncontained: <strong style="color:#e8e8e8;">0</strong></span>
   </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:12px 16px;margin-bottom:10px;color:#888;font-size:13px;font-style:italic;">
-  1 active incident (2,943 cumulative acres) — no narrative details provided in this report cycle.
-</div><div style="background:#242424;border-left:5px solid #3a3a3a;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div style="font-weight:700;font-size:17px;color:#e8e8e8;">Eastern Area</div>
-    <div style="font-size:13px;color:#888;">(EACC)</div>
-    <span style="background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:700;font-size:12px;padding:3px 10px;border-radius:12px;">PL 1</span>
-  </div>
-  <div style="color:#aaa;font-size:13px;margin-top:6px;">2 total incidents · 314 cumulative acres</div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:#888;">
-    <span>New fires: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>New large: <strong style="color:#e8e8e8;">0</strong></span>
-    <span>Uncontained: <strong style="color:#f1c40f;">0</strong></span>
-  </div>
-</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:12px 16px;margin-bottom:10px;color:#888;font-size:13px;font-style:italic;">
-  2 active incidents (314 cumulative acres) — no narrative details provided in this report cycle.
-</div>
+</div><div style="background:#1e1e1e;border:1px solid #333;border-radius:8px;padding:12px 16px;margin-bottom:10px;color:#777;font-size:13px;font-style:italic;">2 incidents (314 cumulative acres) — no narrative details provided in this report cycle.</div>
 </div>
 
 <!-- FOOTER -->
-<div style="border-top:1px solid #3a3a3a;padding-top:20px;color:#666;font-size:12px;text-align:center;">
-  <div style="margin-bottom:8px;font-weight:600;color:#888;">Wildfire Aware Situation Report</div>
-  <div style="margin-bottom:10px;">Generated: 2026-05-14 15:07 UTC</div>
+<div style="border-top:1px solid #3a3a3a;padding-top:20px;color:#555;font-size:12px;text-align:center;">
+  <div style="margin-bottom:6px;font-weight:600;color:#777;">Wildfire Aware Situation Report</div>
+  <div style="margin-bottom:10px;">Generated: 2026-05-14 15:12 UTC</div>
   <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-    <a href="https://www.nifc.gov/nicc-files/sitreprt.pdf" style="color:#e67e22;">NIFC Incident Management Sit Report</a>
-    <a href="https://www.weather.gov/fire/" style="color:#e67e22;">NWS Fire Weather</a>
-    <a href="https://www.spc.noaa.gov/products/fire_wx/" style="color:#e67e22;">SPC Fire Weather Outlook</a>
+    <a href="https://www.nifc.gov/nicc-files/sitreprt.pdf">NIFC Incident Management Sit Report</a>
+    <a href="https://www.weather.gov/fire/">NWS Fire Weather</a>
+    <a href="https://www.spc.noaa.gov/products/fire_wx/">SPC Fire Weather Outlook</a>
   </div>
 </div>
 
