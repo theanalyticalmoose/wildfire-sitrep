@@ -3,297 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wildfire Aware Situation Report – Tuesday, June 2, 2026</title>
+<title>Wildfire Aware Situation Report — June 3, 2026</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #1a1a1a;
-    color: #e8e8e8;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  .container { max-width: 860px; margin: 0 auto; padding: 0 16px 48px; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#e8e8e8;font-family:"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.6}
+a{color:#e67e22;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:860px;margin:0 auto;padding:0 16px 48px}
 
-  /* NAV */
-  .nav {
-    background: #242424;
-    border-bottom: 1px solid #3a3a3a;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-inner {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .nav a {
-    background: rgba(230,126,34,0.12);
-    border: 1px solid #e67e22;
-    color: #e67e22;
-    border-radius: 20px;
-    padding: 4px 14px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    transition: background 0.15s;
-  }
-  .nav a:hover { background: rgba(230,126,34,0.28); }
+/* NAV */
+.nav{background:#242424;border-bottom:1px solid #3a3a3a;padding:10px 16px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px}
+.nav a{background:rgba(230,126,34,0.12);border:1px solid #e67e22;color:#e67e22;padding:4px 12px;border-radius:20px;font-size:13px;white-space:nowrap}
+.nav a:hover{background:rgba(230,126,34,0.25);text-decoration:none}
 
-  /* HEADER */
-  .header {
-    border-left: 4px solid #e67e22;
-    padding: 24px 20px;
-    margin: 24px 0 20px;
-    background: #242424;
-    border-radius: 0 8px 8px 0;
-  }
-  .header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
-  .header .sub { color: #999; font-size: 13px; }
+/* HEADER */
+.header{border-left:4px solid #e67e22;padding:20px 20px 20px 24px;margin:24px 0 20px;background:#242424;border-radius:0 8px 8px 0}
+.header h1{font-size:26px;font-weight:700;letter-spacing:-0.5px}
+.header .sub{color:#999;font-size:13px;margin-top:4px}
 
-  /* PL BANNER */
-  .pl-banner {
-    background: linear-gradient(135deg, #e67e22 0%, #c0392b 100%);
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-  .pl-number { font-size: 2.8rem; font-weight: 900; color: #fff; line-height: 1; }
-  .pl-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.8); }
-  .pl-desc { color: rgba(255,255,255,0.95); font-size: 0.95rem; }
+/* PL BANNER */
+.pl-banner{background:linear-gradient(135deg,#b94a00 0%,#e67e22 100%);border-radius:8px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:20px}
+.pl-number{font-size:56px;font-weight:900;line-height:1;color:#fff}
+.pl-label{color:rgba(255,255,255,0.85)}
+.pl-label strong{font-size:18px;display:block;color:#fff}
+.pl-label span{font-size:14px}
 
-  /* STAT CARDS */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  @media (max-width: 600px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
-  .stat-card {
-    background: #242424;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 14px 12px;
-    text-align: center;
-  }
-  .stat-num { font-size: 1.9rem; font-weight: 800; color: #e67e22; line-height: 1; margin-bottom: 6px; }
-  .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; color: #999; font-weight: 600; }
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:640px){.stat-grid{grid-template-columns:repeat(3,1fr)}}
+.stat-card{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:14px 12px;text-align:center}
+.stat-number{font-size:28px;font-weight:700;color:#e67e22;line-height:1.1}
+.stat-label{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px}
 
-  /* SECTION HEADERS */
-  .section-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #e8e8e8;
-    border-bottom: 1px solid #3a3a3a;
-    padding-bottom: 8px;
-    margin: 28px 0 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-title .count {
-    background: rgba(230,126,34,0.15);
-    color: #e67e22;
-    border-radius: 12px;
-    padding: 1px 10px;
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
+/* SECTION HEADERS */
+.section{margin-bottom:28px}
+.section-title{font-size:17px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #3a3a3a;color:#e8e8e8}
 
-  /* GACC GRID */
-  .gacc-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-  @media (max-width: 600px) { .gacc-grid { grid-template-columns: repeat(2, 1fr); } }
-  .gacc-cell {
-    background: #242424;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-  }
-  .gacc-code { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
-  .gacc-name { font-size: 0.68rem; color: #999; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .pl-badge {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #1a1a1a;
-  }
-  .pl1 { background: #2ecc71; }
-  .pl2 { background: #f1c40f; }
-  .pl3 { background: #e67e22; color: #fff; }
-  .pl4 { background: #e74c3c; color: #fff; }
-  .pl5 { background: #ff4444; color: #fff; }
+/* GACC GRID */
+.gacc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:580px){.gacc-grid{grid-template-columns:repeat(3,1fr)}}
+.gacc-cell{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:12px;text-align:center}
+.gacc-code{font-weight:700;font-size:15px}
+.gacc-name{font-size:10px;color:#999;margin:3px 0 6px}
+.pl-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.pl1{background:rgba(46,204,113,0.18);color:#2ecc71;border:1px solid rgba(46,204,113,0.4)}
+.pl2{background:rgba(241,196,15,0.18);color:#f1c40f;border:1px solid rgba(241,196,15,0.4)}
+.pl3{background:rgba(230,126,34,0.18);color:#e67e22;border:1px solid rgba(230,126,34,0.4)}
+.pl4{background:rgba(231,76,60,0.18);color:#e74c3c;border:1px solid rgba(231,76,60,0.4)}
+.pl5{background:rgba(255,68,68,0.25);color:#ff4444;border:1px solid rgba(255,68,68,0.5)}
 
-  /* FIRE CARDS */
-  .fire-card {
-    background: #242424;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-  }
-  .fire-card.new-fire { border-left: 3px solid #f1c40f; }
-  .fire-card.contained { border-left: 3px solid #2ecc71; }
-  .fire-header {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .fire-name { font-size: 1rem; font-weight: 700; }
-  .state-tag {
-    background: rgba(255,255,255,0.1);
-    border-radius: 4px;
-    padding: 1px 7px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #ccc;
-  }
-  .new-badge {
-    background: rgba(241,196,15,0.25);
-    border: 1px solid rgba(241,196,15,0.35);
-    color: #f1c40f;
-    border-radius: 4px;
-    padding: 1px 8px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .contained-badge {
-    background: rgba(39,174,96,0.2);
-    color: #2ecc71;
-    border-radius: 4px;
-    padding: 1px 8px;
-    font-size: 0.72rem;
-    font-weight: 700;
-  }
-  .fire-narrative { color: #ccc; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.5; }
-  .fire-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    font-size: 0.82rem;
-  }
-  .fire-stat { display: flex; flex-direction: column; }
-  .fire-stat-val { font-weight: 700; color: #e8e8e8; }
-  .fire-stat-key { color: #777; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
-  .acre-change { color: #e67e22; font-size: 0.8rem; margin-left: 4px; }
+/* FIRE CARDS */
+.fire-card{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:16px;margin-bottom:12px}
+.fire-card.contained{border-left:4px solid #2ecc71}
+.fire-card.new-fire{border-left:4px solid #f1c40f}
+.fire-header{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px}
+.fire-name{font-size:16px;font-weight:600}
+.state-tag{background:#3a3a3a;color:#ccc;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600}
+.new-badge{background:rgba(241,196,15,0.25);color:#f1c40f;border:1px solid rgba(241,196,15,0.35);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700}
+.contained-badge{background:rgba(39,174,96,0.2);color:#2ecc71;border:1px solid rgba(39,174,96,0.35);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700}
+.fire-narrative{color:#ccc;margin-bottom:10px;line-height:1.55}
+.fire-stats{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#aaa}
+.fire-stats span strong{color:#e8e8e8}
 
-  /* GACC SECTION HEADERS */
-  .gacc-header {
-    background: #242424;
-    border-left: 4px solid #e67e22;
-    border-radius: 0 8px 8px 0;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-  }
-  .gacc-header.high { border-left-color: #e74c3c; }
-  .gacc-header-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-  .gacc-header h3 { font-size: 1rem; font-weight: 700; }
-  .gacc-meta { color: #999; font-size: 0.82rem; }
-  .gacc-stats-row {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 6px;
-    font-size: 0.82rem;
-    color: #aaa;
-  }
-  .gacc-stats-row span { color: #e8e8e8; }
+/* GACC SECTION */
+.gacc-section{margin-bottom:20px}
+.gacc-header{background:#242424;border:1px solid #3a3a3a;border-left:4px solid #e67e22;border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:8px}
+.gacc-header.high{border-left-color:#e74c3c}
+.gacc-header h3{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.gacc-meta{font-size:13px;color:#999;margin-top:4px}
+.gacc-stats-row{display:flex;gap:16px;margin-top:8px;font-size:13px;color:#aaa}
+.gacc-stats-row span strong{color:#e67e22}
 
-  /* WEATHER / TEXT SECTIONS */
-  .text-card {
-    background: #242424;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 20px;
-    line-height: 1.75;
-    color: #ccc;
-    font-size: 0.92rem;
-    white-space: pre-wrap;
-  }
+/* WEATHER / SPC */
+.weather-card{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:20px;line-height:1.7;color:#ccc;white-space:pre-wrap;font-family:"Segoe UI",system-ui,sans-serif;font-size:14px}
+.alert-card{border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.alert-card.rfw{background:rgba(192,57,43,0.18);border:1px solid rgba(192,57,43,0.45)}
+.alert-card.fww{background:rgba(230,126,34,0.15);border:1px solid rgba(230,126,34,0.4)}
+.alert-card.spc-elevated{background:rgba(230,126,34,0.12);border:1px solid rgba(230,126,34,0.4)}
+.alert-card.spc-critical{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.4)}
+.alert-type{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.rfw .alert-type{color:#e74c3c}
+.fww .alert-type{color:#e67e22}
+.spc-critical .alert-type{color:#e74c3c}
+.spc-elevated .alert-type{color:#e67e22}
+.alert-area{font-weight:600;font-size:15px;margin-bottom:6px}
+.alert-body{font-size:13px;color:#bbb;line-height:1.55}
 
-  /* ALERTS */
-  .alert-entry {
-    background: #242424;
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .alert-entry.rfw { border-left: 4px solid #c0392b; }
-  .alert-entry.fww { border-left: 4px solid #e67e22; }
-  .alert-entry.spc-critical { border-left: 4px solid #c0392b; }
-  .alert-entry.spc-elevated { border-left: 4px solid #e67e22; }
-  .alert-entry.spc-idrt { border-left: 4px solid #3498db; }
-  .alert-type {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    padding: 3px 10px;
-    border-radius: 4px;
-    white-space: nowrap;
-    margin-top: 2px;
-  }
-  .rfw .alert-type { background: rgba(192,57,43,0.25); color: #e74c3c; }
-  .fww .alert-type { background: rgba(230,126,34,0.2); color: #e67e22; }
-  .spc-critical .alert-type { background: rgba(192,57,43,0.25); color: #e74c3c; }
-  .spc-elevated .alert-type { background: rgba(230,126,34,0.2); color: #e67e22; }
-  .spc-idrt .alert-type { background: rgba(52,152,219,0.2); color: #3498db; }
-  .alert-body { flex: 1; }
-  .alert-area { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
-  .alert-desc { color: #aaa; font-size: 0.85rem; line-height: 1.5; }
-  .alert-meta { color: #777; font-size: 0.78rem; margin-top: 4px; }
-
-  .no-alerts {
-    background: #242424;
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 16px;
-    color: #777;
-    font-style: italic;
-    text-align: center;
-    font-size: 0.9rem;
-  }
-
-  /* FOOTER */
-  .footer {
-    margin-top: 40px;
-    border-top: 1px solid #3a3a3a;
-    padding-top: 16px;
-    color: #666;
-    font-size: 0.8rem;
-    line-height: 1.8;
-  }
-  .footer a { color: #e67e22; text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
+/* FOOTER */
+.footer{margin-top:40px;padding-top:20px;border-top:1px solid #3a3a3a;font-size:12px;color:#666;text-align:center;line-height:1.8}
+.footer a{color:#999}
 </style>
 </head>
 <body>
@@ -316,350 +115,367 @@
 <!-- HEADER -->
 <div class="header">
   <h1>🔥 Wildfire Aware Situation Report</h1>
-  <div class="sub">Tuesday, June 2, 2026 &nbsp;·&nbsp; 0730 MDT &nbsp;·&nbsp; National Interagency Fire Center</div>
+  <div class="sub">Wednesday, June 3, 2026 &nbsp;·&nbsp; 0730 MDT &nbsp;·&nbsp; National Interagency Fire Center</div>
 </div>
 
 <!-- PL BANNER -->
 <div class="pl-banner">
-  <div>
-    <div class="pl-label">National Preparedness</div>
-    <div class="pl-number">PL 2</div>
-  </div>
-  <div class="pl-desc">
-    Initial attack activity is <strong>Light</strong> with 69 fires reported yesterday. No new large incidents declared.
-    6 large fires remain uncontained nationally, with 1 CIMT committed.
+  <div class="pl-number">2</div>
+  <div class="pl-label">
+    <strong>National Preparedness Level 2</strong>
+    <span>Light initial attack activity with 75 new fires nationally. 1 new large incident, 6 uncontained large fires active across the country.</span>
   </div>
 </div>
 
 <!-- STAT CARDS -->
 <div class="stat-grid">
   <div class="stat-card">
-    <div class="stat-num">6</div>
+    <div class="stat-number">6</div>
     <div class="stat-label">Uncontained Large Fires</div>
   </div>
   <div class="stat-card">
-    <div class="stat-num">0</div>
+    <div class="stat-number">1</div>
     <div class="stat-label">New Large Fires</div>
   </div>
   <div class="stat-card">
-    <div class="stat-num">2</div>
+    <div class="stat-number">1</div>
     <div class="stat-label">Large Fires Contained</div>
   </div>
   <div class="stat-card">
-    <div class="stat-num">1</div>
+    <div class="stat-number">1</div>
     <div class="stat-label">CIMTs Committed</div>
   </div>
   <div class="stat-card">
-    <div class="stat-num">162K</div>
+    <div class="stat-number">154,486</div>
     <div class="stat-label">Total Active Acres</div>
   </div>
 </div>
 
 <!-- GACC LEVELS -->
-<div id="gacc-levels" class="section-title">GACC Preparedness Levels</div>
-<div class="gacc-grid">
-  <div class="gacc-cell">
-    <div class="gacc-code">AICC</div>
-    <div class="gacc-name">Alaska</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">NWCC</div>
-    <div class="gacc-name">Northwest</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">ONCC</div>
-    <div class="gacc-name">Northern CA</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">OSCC</div>
-    <div class="gacc-name">Southern CA</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">NRCC</div>
-    <div class="gacc-name">Northern Rockies</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">GBCC</div>
-    <div class="gacc-name">Great Basin</div>
-    <span class="pl-badge pl2">PL 2</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">SWCC</div>
-    <div class="gacc-name">Southwest</div>
-    <span class="pl-badge pl3">PL 3</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">RMCC</div>
-    <div class="gacc-name">Rocky Mountain</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">EACC</div>
-    <div class="gacc-name">Eastern Area</div>
-    <span class="pl-badge pl1">PL 1</span>
-  </div>
-  <div class="gacc-cell">
-    <div class="gacc-code">SACC</div>
-    <div class="gacc-name">Southern Area</div>
-    <span class="pl-badge pl1">PL 1</span>
+<div class="section" id="gacc-levels">
+  <div class="section-title">GACC Preparedness Levels</div>
+  <div class="gacc-grid">
+    <div class="gacc-cell">
+      <div class="gacc-code">AICC</div>
+      <div class="gacc-name">Alaska</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">NWCC</div>
+      <div class="gacc-name">Northwest</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">ONCC</div>
+      <div class="gacc-name">Northern CA</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">OSCC</div>
+      <div class="gacc-name">Southern CA</div>
+      <span class="pl-badge pl2">PL 2</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">NRCC</div>
+      <div class="gacc-name">Northern Rockies</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">GBCC</div>
+      <div class="gacc-name">Great Basin</div>
+      <span class="pl-badge pl2">PL 2</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">SWCC</div>
+      <div class="gacc-name">Southwest</div>
+      <span class="pl-badge pl3">PL 3</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">RMCC</div>
+      <div class="gacc-name">Rocky Mountain</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">EACC</div>
+      <div class="gacc-name">Eastern Area</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
+    <div class="gacc-cell">
+      <div class="gacc-code">SACC</div>
+      <div class="gacc-name">Southern Area</div>
+      <span class="pl-badge pl1">PL 1</span>
+    </div>
   </div>
 </div>
 
 <!-- NEW LARGE FIRES -->
-<div id="new-fires" class="section-title">
-  New Large Fires <span class="count">0 active new incidents</span>
+<div class="section" id="new-fires">
+  <div class="section-title">New Large Fires — 1 active new incident in CA</div>
+
+  <div class="fire-card new-fire">
+    <div class="fire-header">
+      <span class="fire-name">Border 6</span>
+      <span class="state-tag">CA</span>
+      <span class="new-badge">NEW</span>
+    </div>
+    <div class="fire-narrative">San Diego Unit, Cal Fire. One mile east of Marron Valley, CA. Grass. Moderate fire behavior with creeping. Evacuations, road and trail closures in effect.</div>
+    <div class="fire-stats">
+      <span><strong>700</strong> acres</span>
+      <span><strong>0%</strong> contained</span>
+      <span><strong>OSCC</strong> · Southern CA</span>
+      <span><strong>178</strong> personnel</span>
+      <span><strong>$1M</strong> cost-to-date</span>
+    </div>
+  </div>
 </div>
-<div class="no-alerts">No new large fire incidents declared in today's report.</div>
 
 <!-- CONTAINED FIRES -->
-<div id="contained-fires" class="section-title">
-  Contained Fires <span class="count">2</span>
-</div>
+<div class="section" id="contained-fires">
+  <div class="section-title">Contained Fires — 1 incident reached 100% containment</div>
 
-<div class="fire-card contained">
-  <div class="fire-header">
-    <span class="fire-name">Brantley 2</span>
-    <span class="state-tag">NM</span>
-    <span class="contained-badge">✓ Contained</span>
-  </div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">712</span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">100%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">SWCC</span><span class="fire-stat-key">GACC</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">NM-CAD (BLM)</span><span class="fire-stat-key">Unit</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$800K</span><span class="fire-stat-key">Cost-to-Date</span></div>
-  </div>
-</div>
-
-<div class="fire-card contained">
-  <div class="fire-header">
-    <span class="fire-name">Anticline</span>
-    <span class="state-tag">MT</span>
-    <span class="contained-badge">✓ Contained</span>
-  </div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">1,000</span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">100%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">NRCC</span><span class="fire-stat-key">GACC</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">MT-MCD (BLM)</span><span class="fire-stat-key">Unit</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$700K</span><span class="fire-stat-key">Cost-to-Date</span></div>
+  <div class="fire-card contained">
+    <div class="fire-header">
+      <span class="fire-name">0231 Zen</span>
+      <span class="state-tag">OR</span>
+      <span class="contained-badge">Contained</span>
+    </div>
+    <div class="fire-narrative">Prineville District BLM (OR-PRD). Northwest Area.</div>
+    <div class="fire-stats">
+      <span><strong>1,634</strong> acres</span>
+      <span><strong>100%</strong> contained</span>
+      <span><strong>NWCC</strong> · Northwest</span>
+      <span><strong>$500K</strong> cost-to-date</span>
+    </div>
   </div>
 </div>
 
 <!-- WEATHER DISCUSSION -->
-<div id="weather" class="section-title">Predictive Services Weather Discussion</div>
-<div class="text-card">Above normal temperatures and low relative humidity will persist across the Upper Great Lakes today, but winds will be lighter today and generally less than 10 mph. Above normal temperatures will continue in the Southwest and southern Great Basin, with low relative humidity of 5-15% continuing in the southern Great Basin and Arizona. A backdoor cold front will push moisture westward toward the Divide in the Southwest, with isolated to scattered mixed wet and dry thunderstorms near the Divide. Farther east across the eastern half of New Mexico to the southern High Plains, more widespread wet thunderstorms are expected with locally heavy rainfall. Temperatures 10-20°F above normal are expected in California and the coastal Northwest today, while drier conditions are expected in Montana. Scattered showers and thunderstorms will continue in much of the Southeast. A warming trend is expected in much of Alaska today with temperatures rising a few degrees above normal while relative humidity falls to 20-30% across much of the Interior.</div>
+<div class="section" id="weather">
+  <div class="section-title">Predictive Services Weather Discussion</div>
+  <div class="weather-card">Above normal temperatures will persist across the Upper Great Lakes today, with increasing winds expected across northern Minnesota with south winds 10-20 mph gusting 20-30 mph amid minimum relative humidity 20-30% creating locally elevated conditions. Winds will be lighter in Michigan, but minimum relative humidity will be lower at 15-25%.
+
+Above normal temperatures will continue in Arizona and the Great Basin, with low relative humidity of 5-15% continuing in the southern Great Basin and Arizona. Isolated dry thunderstorms are possible in eastern Arizona into far western New Mexico, but thunderstorms will become wetter and increase in coverage near and east of the Divide into the southern High Plains.
+
+A cold front will move into the Northwest and northern Rockies today with cooler temperatures, but showers will be scattered and light. Scattered thunderstorms will continue in the southern half of Florida, but much drier conditions are expected east of the Appalachians as minimum relative humidity falls to 18-30%.
+
+Above normal temperatures are expected much of Alaska today while relative humidity falls to 18-30% across much of the Interior.</div>
+</div>
 
 <!-- SPC OUTLOOK -->
-<div id="spc" class="section-title">SPC Day 1 Fire Weather Outlook</div>
-<div class="alert-entry spc-idrt">
-  <div><span class="alert-type">Isolated Dry Thunderstorms</span></div>
-  <div class="alert-body">
-    <div class="alert-area">Western New Mexico / Vicinity</div>
-    <div class="alert-desc">Valid: 021200Z – 031200Z (Tue Jun 2 – Wed Jun 3, 2026)
+<div class="section" id="spc">
+  <div class="section-title">SPC Day 1 Fire Weather Outlook — Valid Jun 3 1200Z to Jun 4 1200Z</div>
 
-Weak and diffuse upper-level troughing will be over the Southwest, with moisture aloft increasing along/east of the Divide in New Mexico and along portions of the Arizona/New Mexico and New Mexico-Colorado borders. PWAT values will increase to 0.4–0.6" across western New Mexico and into far eastern Arizona and southern Colorado, but surface dewpoints are likely to remain below 40°F and mostly 20–30°F. Deep, well-mixed inverted-V soundings are expected with high cloud bases of 10,000–13,000 feet AGL, with minimum RH of 10–20%. Weaker steering flow (5–15 knots) and deep, dry sub-cloud layers may create a mix of wet/dry thunderstorms, and storms will be wetter farther east as coverage and moisture increases. Overall, forcing for ascent aloft and enough buoyancy should produce isolated mostly dry thunderstorms over dry fuels (ERCs 80–95th percentile) in western New Mexico/vicinity.</div>
-    <div class="alert-meta">Valid: Tue Jun 2, 2026 1200Z – Wed Jun 3, 2026 1200Z &nbsp;·&nbsp; Issued: 1232 AM CDT Jun 2, 2026 &nbsp;·&nbsp; No Critical or Elevated fire weather risk areas today.</div>
+  <div class="alert-card spc-elevated">
+    <div class="alert-type">Elevated Concern</div>
+    <div class="alert-area">Northeastern Nevada into Southern Idaho</div>
+    <div class="alert-body">Sustained surface winds of 15–20 mph (gusts up to 35 mph), above normal temperatures, and 10–15% RH expected by peak heating ahead of a dry cold front. Enough continuity of very dry fuels coincident with these conditions will maintain Elevated fire weather concerns, accompanied by locally critical in terrain-favored areas. A dry cold front will move through the region during the afternoon.</div>
   </div>
+
+  <div class="alert-card spc-elevated">
+    <div class="alert-type">Elevated Concern — Mixed Dry Thunderstorms</div>
+    <div class="alert-area">Eastern Arizona into Western New Mexico and Southern Colorado</div>
+    <div class="alert-body">Isolated to scattered mixed wet/dry thunderstorms are likely again this afternoon. Storms east of the Rio Grande Valley will be mostly wet, with drier storms along/west of the Divide. Fuels remain dry, but some areas will have a second consecutive day of thunderstorms, which may help limit ignition potential. Storms may linger over areas due to weak steering flow.</div>
+  </div>
+
+  <div class="alert-card spc-elevated">
+    <div class="alert-type">Elevated Concern — Critical Fuels</div>
+    <div class="alert-area">Upper Midwest and Great Lakes</div>
+    <div class="alert-body">The upper-level ridge begins to flatten over the Upper Midwest and Great Lakes. Fuels remain very dry (90th+ percentile) amid above normal temperatures and lower RH, though stronger winds are displaced from the lowest relative humidity areas. No formal risk areas are designated today.</div>
+  </div>
+
+  <div style="font-size:12px;color:#666;margin-top:8px">No formal SPC risk area polygons are designated for today. Source: NWS Storm Prediction Center, issued 1241 AM CDT Wed Jun 03 2026</div>
 </div>
 
 <!-- NWS ALERTS -->
-<div id="nws" class="section-title">NWS Fire Weather Alerts</div>
-<div class="no-alerts">No active Red Flag Warnings or Fire Weather Watches at time of report generation.</div>
+<div class="section" id="nws">
+  <div class="section-title">NWS Fire Weather Alerts — 2 active</div>
+
+  <div class="alert-card rfw">
+    <div class="alert-type">🚩 Red Flag Warning</div>
+    <div class="alert-area">Owyhee Mountains · Western Twin Falls BLM · Southern Highlands (Idaho)</div>
+    <div class="alert-body">
+      <strong>Winds:</strong> West 15–25 mph, gusts up to 40 mph &nbsp;|&nbsp;
+      <strong>RH:</strong> 6–12% &nbsp;|&nbsp;
+      <strong>Valid:</strong> 3 PM – 9 PM MDT Wednesday (Jun 3)<br>
+      Dry cold front passage Wednesday afternoon to evening. Very low relative humidity with gusty westerly winds. Fire Weather Zones 423, 424 and 426. Issued by NWS Boise ID.
+    </div>
+  </div>
+
+  <div class="alert-card fww">
+    <div class="alert-type">⚠️ Fire Weather Watch</div>
+    <div class="alert-area">Color Country Mountains · Grand Staircase (Utah)</div>
+    <div class="alert-body">
+      <strong>Winds:</strong> Southwest 10–15 mph, gusts up to 35 mph &nbsp;|&nbsp;
+      <strong>RH:</strong> As low as 6% &nbsp;|&nbsp;
+      <strong>Valid:</strong> Thursday morning through Thursday evening (Jun 4)<br>
+      Critical fire weather conditions expected Thursday. Any new fire starts or existing fires may spread rapidly. Fire Weather Zones 496 and 498. Issued by NWS Salt Lake City UT.
+    </div>
+  </div>
+</div>
 
 <!-- LARGE FIRES BY GACC -->
-<div id="large-fires" class="section-title">Large Fires — Grouped by GACC</div>
+<div class="section" id="large-fires">
+  <div class="section-title">Large Fires — Grouped by GACC</div>
 
-<!-- SWCC -->
-<div class="gacc-header high">
-  <div class="gacc-header-top">
-    <h3>Southwest Area</h3>
-    <span class="gacc-meta">SWCC</span>
-    <span class="pl-badge pl3" style="font-size:0.72rem;padding:2px 9px;">PL 3</span>
+  <!-- SWCC -->
+  <div class="gacc-section">
+    <div class="gacc-header">
+      <h3>Southwest Area <small style="color:#999;font-size:12px;font-weight:400">(SWCC)</small> <span class="pl-badge pl3" style="font-size:11px">PL 3</span></h3>
+      <div class="gacc-meta">4 total incidents · 38,203 cumulative acres · 1 CIMT committed (SW Team 2)</div>
+      <div class="gacc-stats-row">
+        <span>New fires: <strong>7</strong></span>
+        <span>New large: <strong>0</strong></span>
+        <span>Uncontained large: <strong>1</strong></span>
+      </div>
+    </div>
+    <div class="fire-card">
+      <div class="fire-header">
+        <span class="fire-name">Seven Cabins</span>
+        <span class="state-tag">NM</span>
+      </div>
+      <div class="fire-narrative">Lincoln NF, USFS · CIMT (SW Team 2). Thirteen miles northeast of Capitan, NM. Brush, timber and light slash. Minimal fire behavior with creeping and smoldering. Numerous structures threatened. Area, road and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
+      <div class="fire-stats">
+        <span><strong>31,770</strong> acres <span style="color:#e67e22">(+1,350)</span></span>
+        <span><strong>61%</strong> contained · Est. 7/1</span>
+        <span><strong>583</strong> personnel</span>
+        <span>10 crews · 10 engines · 7 helos</span>
+        <span><strong>$31.2M</strong> cost-to-date</span>
+      </div>
+    </div>
   </div>
-  <div class="gacc-meta">4 total incidents &nbsp;·&nbsp; 38,853 cumulative acres &nbsp;·&nbsp; 1 CIMT committed (SW Team 2)</div>
-  <div class="gacc-stats-row">
-    <div>New fires: <span>5</span></div>
-    <div>New large: <span>0</span></div>
-    <div>Uncontained: <span>1</span></div>
-  </div>
-</div>
 
-<div class="fire-card">
-  <div class="fire-header">
-    <span class="fire-name">Seven Cabins</span>
-    <span class="state-tag">NM</span>
+  <!-- OSCC -->
+  <div class="gacc-section">
+    <div class="gacc-header">
+      <h3>Southern California Area <small style="color:#999;font-size:12px;font-weight:400">(OSCC)</small> <span class="pl-badge pl2" style="font-size:11px">PL 2</span></h3>
+      <div class="gacc-meta">4 total incidents · 21,190 cumulative acres</div>
+      <div class="gacc-stats-row">
+        <span>New fires: <strong>23</strong></span>
+        <span>New large: <strong>1</strong></span>
+        <span>Uncontained large: <strong>1</strong></span>
+      </div>
+    </div>
+    <div class="fire-card new-fire">
+      <div class="fire-header">
+        <span class="fire-name">Border 6</span>
+        <span class="state-tag">CA</span>
+        <span class="new-badge">NEW</span>
+      </div>
+      <div class="fire-narrative">San Diego Unit, Cal Fire. One mile east of Marron Valley, CA. Grass. Moderate fire behavior with creeping. Evacuations, road and trail closures in effect.</div>
+      <div class="fire-stats">
+        <span><strong>700</strong> acres</span>
+        <span><strong>0%</strong> contained · Est. 6/9</span>
+        <span><strong>178</strong> personnel</span>
+        <span>3 crews · 11 engines · 5 helos</span>
+        <span><strong>$1M</strong> cost-to-date</span>
+      </div>
+    </div>
   </div>
-  <div class="fire-narrative">CIMT (SW Team 2) assigned. Thirteen miles northeast of Capitan, NM. Lincoln National Forest, USFS. Brush, timber and light slash. Active fire behavior with flanking, single tree torching and short-range spotting. Numerous structures threatened. Area, road and trail closures in effect.</div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">30,420 <span class="acre-change">▲1,069</span></span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">57%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">Jul 1</span><span class="fire-stat-key">Est. Containment</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">650</span><span class="fire-stat-key">Personnel</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">11 / 13 / 7</span><span class="fire-stat-key">Crews/Engines/Heli</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$29.6M</span><span class="fire-stat-key">Cost-to-Date</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">NM-LNF (USFS)</span><span class="fire-stat-key">Unit</span></div>
-  </div>
-</div>
 
-<!-- GBCC -->
-<div class="gacc-header" style="margin-top:20px;">
-  <div class="gacc-header-top">
-    <h3>Great Basin Area</h3>
-    <span class="gacc-meta">GBCC</span>
-    <span class="pl-badge pl2" style="font-size:0.72rem;padding:2px 9px;">PL 2</span>
+  <!-- GBCC -->
+  <div class="gacc-section">
+    <div class="gacc-header">
+      <h3>Great Basin Area <small style="color:#999;font-size:12px;font-weight:400">(GBCC)</small> <span class="pl-badge pl2" style="font-size:11px">PL 2</span></h3>
+      <div class="gacc-meta">2 total incidents · 2,785 cumulative acres</div>
+      <div class="gacc-stats-row">
+        <span>New fires: <strong>8</strong></span>
+        <span>New large: <strong>0</strong></span>
+        <span>Uncontained large: <strong>1</strong></span>
+      </div>
+    </div>
+    <div class="fire-card">
+      <div class="fire-header">
+        <span class="fire-name">Summit Creek</span>
+        <span class="state-tag">ID</span>
+      </div>
+      <div class="fire-narrative">Sawtooth NF, USFS. Eleven miles southeast of Oakley, ID. Timber. Moderate fire behavior with group torching and short-range spotting. Residences threatened. Area closures in effect. Reduction in acreage due to more accurate mapping.</div>
+      <div class="fire-stats">
+        <span><strong>1,741</strong> acres <span style="color:#2ecc71">(-2)</span></span>
+        <span><strong>62%</strong> contained · Est. 6/7</span>
+        <span><strong>257</strong> personnel</span>
+        <span>9 crews · 2 engines · 2 helos</span>
+        <span><strong>$2.6M</strong> cost-to-date</span>
+      </div>
+    </div>
   </div>
-  <div class="gacc-meta">3 total incidents &nbsp;·&nbsp; 5,235 cumulative acres</div>
-  <div class="gacc-stats-row">
-    <div>New fires: <span>12</span></div>
-    <div>New large: <span>0</span></div>
-    <div>Uncontained: <span>1</span></div>
-  </div>
-</div>
 
-<div class="fire-card">
-  <div class="fire-header">
-    <span class="fire-name">Summit Creek</span>
-    <span class="state-tag">ID</span>
+  <!-- NRCC -->
+  <div class="gacc-section">
+    <div class="gacc-header">
+      <h3>Northern Rockies Area <small style="color:#999;font-size:12px;font-weight:400">(NRCC)</small> <span class="pl-badge pl1" style="font-size:11px">PL 1</span></h3>
+      <div class="gacc-meta">3 total incidents · 5,277 cumulative acres</div>
+      <div class="gacc-stats-row">
+        <span>New fires: <strong>3</strong></span>
+        <span>New large: <strong>0</strong></span>
+        <span>Uncontained large: <strong>1</strong></span>
+      </div>
+    </div>
+    <div class="fire-card">
+      <div class="fire-header">
+        <span class="fire-name">Jericho Creek</span>
+        <span class="state-tag">MT</span>
+      </div>
+      <div class="fire-narrative">Helena-Lewis and Clark NF, USFS. Fifteen miles southwest of Helena, MT. Timber. Minimal fire behavior.</div>
+      <div class="fire-stats">
+        <span><strong>2,068</strong> acres</span>
+        <span><strong>84%</strong> contained · Est. 6/15</span>
+        <span><strong>1</strong> personnel</span>
+        <span><strong>$820K</strong> cost-to-date</span>
+      </div>
+    </div>
   </div>
-  <div class="fire-narrative">Eleven miles southeast of Oakley, ID. Sawtooth National Forest, USFS. Timber. Moderate fire behavior with group torching and short-range spotting. Residences threatened. Area closures in effect.</div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">1,743 <span class="acre-change">▲305</span></span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">54%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">Jun 7</span><span class="fire-stat-key">Est. Containment</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">285</span><span class="fire-stat-key">Personnel</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">9 / 2 / 5</span><span class="fire-stat-key">Crews/Engines/Heli</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$2.4M</span><span class="fire-stat-key">Cost-to-Date</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">ID-STF (USFS)</span><span class="fire-stat-key">Unit</span></div>
-  </div>
-</div>
 
-<!-- NRCC -->
-<div class="gacc-header" style="margin-top:20px;">
-  <div class="gacc-header-top">
-    <h3>Northern Rockies Area</h3>
-    <span class="gacc-meta">NRCC</span>
-    <span class="pl-badge pl1" style="font-size:0.72rem;padding:2px 9px;">PL 1</span>
+  <!-- SACC -->
+  <div class="gacc-section">
+    <div class="gacc-header">
+      <h3>Southern Area <small style="color:#999;font-size:12px;font-weight:400">(SACC)</small> <span class="pl-badge pl1" style="font-size:11px">PL 1</span></h3>
+      <div class="gacc-meta">13 total incidents · 35,315 cumulative acres</div>
+      <div class="gacc-stats-row">
+        <span>New fires: <strong>11</strong></span>
+        <span>New large: <strong>0</strong></span>
+        <span>Uncontained large: <strong>2</strong></span>
+      </div>
+    </div>
+    <div class="fire-card">
+      <div class="fire-header">
+        <span class="fire-name">Shell</span>
+        <span class="state-tag">FL</span>
+      </div>
+      <div class="fire-narrative">National Forests in Florida, USFS. Thirteen miles west of Deland, FL. Southern rough. Minimal fire behavior.</div>
+      <div class="fire-stats">
+        <span><strong>2,822</strong> acres</span>
+        <span><strong>70%</strong> contained · Est. 6/10</span>
+        <span><strong>18</strong> personnel</span>
+        <span>3 engines</span>
+        <span><strong>$300K</strong> cost-to-date</span>
+      </div>
+    </div>
+    <div class="fire-card">
+      <div class="fire-header">
+        <span class="fire-name">Lochloosa West</span>
+        <span class="state-tag">FL</span>
+      </div>
+      <div class="fire-narrative">Florida Forest Service. Started on private land six miles southwest of Hawthorne, FL. Timber and southern rough. No new information.</div>
+      <div class="fire-stats">
+        <span><strong>956</strong> acres</span>
+        <span><strong>85%</strong> contained · Est. 6/29</span>
+        <span><strong>69</strong> personnel</span>
+        <span>9 engines</span>
+        <span><strong>$150K</strong> cost-to-date</span>
+      </div>
+    </div>
   </div>
-  <div class="gacc-meta">4 total incidents &nbsp;·&nbsp; 6,496 cumulative acres</div>
-  <div class="gacc-stats-row">
-    <div>New fires: <span>1</span></div>
-    <div>New large: <span>0</span></div>
-    <div>Uncontained: <span>1</span></div>
-  </div>
-</div>
 
-<div class="fire-card">
-  <div class="fire-header">
-    <span class="fire-name">Jericho Creek</span>
-    <span class="state-tag">MT</span>
-  </div>
-  <div class="fire-narrative">Fifteen miles southwest of Helena, MT. Helena-Lewis and Clark National Forest, USFS. Timber. Minimal fire behavior with smoldering.</div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">2,068</span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">82%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">Jun 15</span><span class="fire-stat-key">Est. Containment</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">11</span><span class="fire-stat-key">Personnel</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">0 / 0 / 0</span><span class="fire-stat-key">Crews/Engines/Heli</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$820K</span><span class="fire-stat-key">Cost-to-Date</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">MT-HLF (USFS)</span><span class="fire-stat-key">Unit</span></div>
-  </div>
-</div>
-
-<!-- SACC -->
-<div class="gacc-header" style="margin-top:20px;">
-  <div class="gacc-header-top">
-    <h3>Southern Area</h3>
-    <span class="gacc-meta">SACC</span>
-    <span class="pl-badge pl1" style="font-size:0.72rem;padding:2px 9px;">PL 1</span>
-  </div>
-  <div class="gacc-meta">14 total incidents &nbsp;·&nbsp; 36,327 cumulative acres</div>
-  <div class="gacc-stats-row">
-    <div>New fires: <span>3</span></div>
-    <div>New large: <span>0</span></div>
-    <div>Uncontained: <span>2</span></div>
-  </div>
-</div>
-
-<div class="fire-card">
-  <div class="fire-header">
-    <span class="fire-name">Shell</span>
-    <span class="state-tag">FL</span>
-  </div>
-  <div class="fire-narrative">Thirteen miles west of Deland, FL. National Forests in Florida, USFS. Southern rough. Minimal fire behavior.</div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">2,822</span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">70%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">Jun 10</span><span class="fire-stat-key">Est. Containment</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">20</span><span class="fire-stat-key">Personnel</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">0 / 3 / 0</span><span class="fire-stat-key">Crews/Engines/Heli</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$300K</span><span class="fire-stat-key">Cost-to-Date</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">FL-FNF (USFS)</span><span class="fire-stat-key">Unit</span></div>
-  </div>
-</div>
-
-<div class="fire-card">
-  <div class="fire-header">
-    <span class="fire-name">Lochloosa West</span>
-    <span class="state-tag">FL</span>
-  </div>
-  <div class="fire-narrative">Started on private land six miles southwest of Hawthorne, FL. Florida Forest Service. Timber and southern rough. Minimal fire behavior with smoldering and creeping.</div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">956</span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">85%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">Jun 29</span><span class="fire-stat-key">Est. Containment</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">69</span><span class="fire-stat-key">Personnel</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">0 / 9 / 0</span><span class="fire-stat-key">Crews/Engines/Heli</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$150K</span><span class="fire-stat-key">Cost-to-Date</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">FL-FLS (Private)</span><span class="fire-stat-key">Unit</span></div>
-  </div>
-</div>
-
-<!-- NWCC -->
-<div class="gacc-header" style="margin-top:20px;">
-  <div class="gacc-header-top">
-    <h3>Northwest Area</h3>
-    <span class="gacc-meta">NWCC</span>
-    <span class="pl-badge pl1" style="font-size:0.72rem;padding:2px 9px;">PL 1</span>
-  </div>
-  <div class="gacc-meta">2 total incidents &nbsp;·&nbsp; 2,084 cumulative acres</div>
-  <div class="gacc-stats-row">
-    <div>New fires: <span>1</span></div>
-    <div>New large: <span>0</span></div>
-    <div>Uncontained: <span>1</span></div>
-  </div>
-</div>
-
-<div class="fire-card">
-  <div class="fire-header">
-    <span class="fire-name">0231 Zen</span>
-    <span class="state-tag">OR</span>
-  </div>
-  <div class="fire-narrative">Prineville District, BLM, Oregon. No narrative summary available in today's report.</div>
-  <div class="fire-stats">
-    <div class="fire-stat"><span class="fire-stat-val">1,634</span><span class="fire-stat-key">Acres</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">37%</span><span class="fire-stat-key">Contained</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">Unknown</span><span class="fire-stat-key">Est. Containment</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">34</span><span class="fire-stat-key">Personnel</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">1 / 2 / 0</span><span class="fire-stat-key">Crews/Engines/Heli</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">$500K</span><span class="fire-stat-key">Cost-to-Date</span></div>
-    <div class="fire-stat"><span class="fire-stat-val">OR-PRD (BLM)</span><span class="fire-stat-key">Unit</span></div>
-  </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  <strong>Wildfire Aware Situation Report</strong><br>
-  Generated: 2026-06-02 13:42 UTC<br>
-  Sources:
-  <a href="https://www.nifc.gov/nicc-files/sitreprt.pdf" target="_blank">NIFC Incident Management Sit Report</a> &nbsp;·&nbsp;
-  <a href="https://www.weather.gov/fire" target="_blank">NWS Fire Weather</a> &nbsp;·&nbsp;
-  <a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html" target="_blank">SPC Fire Weather Outlook</a>
+  <div>Wildfire Aware Situation Report &nbsp;·&nbsp; Generated June 3, 2026</div>
+  <div style="margin-top:6px">
+    <a href="https://www.nifc.gov/nicc-files/sitreprt.pdf" target="_blank">NIFC Incident Management Sit Report</a> &nbsp;·&nbsp;
+    <a href="https://www.weather.gov/fire" target="_blank">NWS Fire Weather</a> &nbsp;·&nbsp;
+    <a href="https://www.spc.noaa.gov/products/fire_wx/" target="_blank">SPC Fire Weather Outlook</a>
+  </div>
 </div>
 
 </div>
