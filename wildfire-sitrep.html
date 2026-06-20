@@ -1,64 +1,70 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wildfire Aware Situation Report</title>
+<title>Wildfire Aware Situation Report — Saturday June 20, 2026</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#1a1a1a;color:#e8e8e8;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;padding:24px 16px}
-.wrap{max-width:860px;margin:0 auto}
-a{color:#e67e22;text-decoration:none}
-.muted{color:#999}
-.card{background:#242424;border:1px solid #3a3a3a;border-radius:10px;padding:18px;margin-bottom:18px}
-h1{font-size:26px;font-weight:700}
-h2{font-size:20px;font-weight:700;margin:28px 0 12px;color:#fff}
-.uc{text-transform:uppercase;letter-spacing:.05em;font-size:11px}
-.nav{display:flex;flex-wrap:wrap;gap:8px;background:#242424;border:1px solid #3a3a3a;border-radius:10px;padding:12px;margin-bottom:18px}
-.nav a{background:rgba(230,126,34,0.12);border:1px solid #e67e22;border-radius:20px;padding:6px 14px;font-size:13px;color:#e67e22}
-.nav a:hover{background:rgba(230,126,34,0.25)}
-.header{border-left:4px solid #e67e22;padding-left:16px;margin-bottom:18px}
-.header .sub{color:#999;font-size:14px;margin-top:4px}
-.plbanner{background:linear-gradient(135deg,#e67e22,#c0392b);border-radius:10px;padding:22px;margin-bottom:18px;color:#fff}
-.plbanner .big{font-size:32px;font-weight:800}
-.plbanner .desc{margin-top:6px;font-size:14px;opacity:.95}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
-.stat{background:#242424;border:1px solid #3a3a3a;border-radius:10px;padding:16px;text-align:center}
-.stat .num{font-size:30px;font-weight:800;color:#e67e22}
-.stat .lab{color:#999;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
-.gaccgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.gcell{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:12px;text-align:center}
-.gcell .code{font-weight:700;font-size:16px}
-.gcell .nm{color:#999;font-size:11px;margin:3px 0 8px}
-.pl-badge{display:inline-block;color:#1a1a1a;font-weight:700;border-radius:12px;padding:3px 10px;font-size:12px}
-.pl-badge.small{font-size:10px;padding:2px 8px}
-.fire{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:14px;margin-bottom:12px}
-.fire .top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.fire .nm{font-weight:700;font-size:16px}
-.tag{background:#333;border:1px solid #4a4a4a;border-radius:4px;padding:1px 7px;font-size:11px;color:#ccc}
-.badge-new{color:#f1c40f;background:rgba(241,196,15,0.25);border:1px solid rgba(241,196,15,0.35);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700}
-.badge-ctn{color:#2ecc71;background:rgba(39,174,96,0.2);border:1px solid rgba(39,174,96,0.35);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700}
-.fire .narr{color:#ccc;font-size:14px;margin:6px 0}
-.srow{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:#bbb;margin-top:6px}
-.srow b{color:#e67e22}
-.contained{border-left:4px solid #2ecc71}
-.gacchdr{background:#242424;border:1px solid #3a3a3a;border-radius:8px;padding:14px;margin:18px 0 12px;border-left:4px solid #e67e22}
-.gacchdr.hot{border-left-color:#e74c3c}
-.gacchdr .h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.gacchdr .h .t{font-weight:700;font-size:17px}
-.gacchdr .meta{color:#999;font-size:13px;margin-top:6px}
-.gacchdr .mini{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:#bbb;margin-top:8px}
-.gacchdr .mini b{color:#e67e22}
-.alert{border-radius:8px;padding:12px 14px;margin-bottom:10px;border:1px solid #3a3a3a}
-.alert .ev{font-weight:700;margin-bottom:4px}
-.rfw,.spc-critical{background:rgba(192,57,43,0.15);border-color:#c0392b}
-.fww,.spc-elevated{background:rgba(241,196,15,0.12);border-color:#b8901a}
-.rfw .ev,.spc-critical .ev{color:#e74c3c}
-.fww .ev,.spc-elevated .ev{color:#f1c40f}
-.alert .det{font-size:13px;color:#ccc}
-.banner-ok{background:rgba(46,204,113,0.12);border:1px solid #2ecc71;border-radius:8px;padding:14px;color:#2ecc71;font-weight:600}
-.disc{white-space:pre-wrap;font-size:14px;line-height:1.7;color:#ddd}
-.footer{color:#999;font-size:13px;border-top:1px solid #3a3a3a;padding-top:16px;margin-top:24px}
-.footer a{margin-right:14px}
+:root{--bg:#1a1a1a;--card:#242424;--border:#3a3a3a;--text:#e8e8e8;--muted:#999;
+--orange:#e67e22;--yellow:#f1c40f;--red:#c0392b;}
+*{box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+font-size:15px;line-height:1.5;margin:0;padding:0 16px 60px;}
+.wrap{max-width:860px;margin:0 auto;}
+a{color:var(--orange);text-decoration:none;}
+h2{font-size:1.25rem;margin:34px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.nav{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;
+display:flex;flex-wrap:wrap;gap:8px;margin:18px 0;}
+.nav a{background:rgba(230,126,34,0.12);border:1px solid var(--orange);color:var(--orange);
+border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;}
+.nav a:hover{background:rgba(230,126,34,0.25);}
+.header{border-left:4px solid var(--orange);padding:6px 0 6px 16px;margin:20px 0;}
+.header h1{margin:0;font-size:1.7rem;}
+.header .sub{color:var(--muted);font-size:.9rem;margin-top:4px;}
+.pl-banner{background:linear-gradient(135deg,#e67e22,#c0392b);border-radius:12px;
+padding:20px 24px;margin:18px 0;}
+.pl-banner .lvl{font-size:2rem;font-weight:800;line-height:1;}
+.pl-banner .desc{margin-top:8px;font-size:.95rem;opacity:.95;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0;}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+.stat .num{color:var(--orange);font-size:1.8rem;font-weight:800;}
+.stat .lbl{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;margin-top:4px;}
+.gacc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.gacc-cell{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.gacc-cell .code{font-weight:800;font-size:1.05rem;}
+.gacc-cell .nm{color:var(--muted);font-size:.72rem;margin:2px 0 8px;}
+.pl-badge{display:inline-block;color:#1a1a1a;font-weight:700;font-size:.72rem;
+padding:3px 10px;border-radius:12px;}
+.fire{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:12px 0;}
+.fire .ftitle{font-weight:700;font-size:1.05rem;}
+.tag{display:inline-block;background:#333;color:var(--muted);font-size:.7rem;font-weight:700;
+padding:2px 7px;border-radius:5px;margin-left:6px;vertical-align:middle;}
+.badge-new{color:var(--yellow);background:rgba(241,196,15,0.25);border:1px solid rgba(241,196,15,0.35);
+font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:5px;margin-left:6px;vertical-align:middle;}
+.badge-ctn{color:#2ecc71;background:rgba(39,174,96,0.2);font-size:.68rem;font-weight:800;
+padding:2px 8px;border-radius:5px;margin-left:6px;vertical-align:middle;}
+.fire .narr{color:#cfcfcf;font-size:.9rem;margin:8px 0;}
+.fire .row{display:flex;flex-wrap:wrap;gap:16px;font-size:.82rem;color:var(--muted);margin-top:8px;}
+.fire .row b{color:var(--text);}
+.contained{border-left:4px solid #2ecc71;}
+.gacc-hdr{background:var(--card);border:1px solid var(--border);border-left:5px solid var(--orange);
+border-radius:10px;padding:14px 16px;margin:22px 0 6px;}
+.gacc-hdr.high{border-left-color:var(--red);}
+.gacc-hdr .gh-title{font-weight:800;font-size:1.1rem;}
+.gacc-hdr .gh-meta{color:var(--muted);font-size:.82rem;margin-top:4px;}
+.gacc-hdr .gh-stats{display:flex;flex-wrap:wrap;gap:18px;font-size:.8rem;margin-top:8px;}
+.gacc-hdr .gh-stats b{color:var(--orange);}
+.alert{border-radius:10px;padding:14px 16px;margin:12px 0;border:1px solid var(--border);}
+.spc-critical,.rfw{background:rgba(192,57,43,0.14);border-left:5px solid var(--red);}
+.spc-elevated,.fww{background:rgba(241,196,15,0.12);border-left:5px solid var(--yellow);}
+.alert .atype{font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+.alert .aarea{font-weight:700;margin:4px 0;}
+.alert .ameta{font-size:.82rem;color:var(--muted);}
+.banner-info{background:rgba(46,204,113,0.12);border:1px solid #2ecc71;border-radius:10px;padding:14px 16px;}
+.disc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;line-height:1.7;}
+.disc p{margin:0 0 12px;}
+.footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:.82rem;}
+.footer a{margin-right:14px;}
 </style></head><body><div class="wrap">
-<div class="nav">
+<nav class="nav">
 <a href="#gacc-levels">GACC Levels</a>
 <a href="#new-fires">New Large Fires</a>
 <a href="#contained-fires">Contained Fires</a>
@@ -66,278 +72,171 @@ h2{font-size:20px;font-weight:700;margin:28px 0 12px;color:#fff}
 <a href="#spc">SPC Outlook</a>
 <a href="#nws">NWS Alerts</a>
 <a href="#large-fires">Large Fires</a>
-</div>
-<div class="header"><h1>&#128293; Wildfire Aware Situation Report</h1>
-<div class="sub">Friday June 19, 2026 &middot; 0730 MDT &middot; National Interagency Fire Center</div></div>
-<div class="plbanner"><div class="uc" style="opacity:.85">National Preparedness Level</div>
-<div class="big">PL 3</div>
-<div class="desc">Initial attack activity: Light (81 fires). 4 new large incidents reported nationally with 28 uncontained large fires under active management.</div></div>
+</nav>
+<div class="header"><h1>🔥 Wildfire Aware Situation Report</h1>
+<div class="sub">Saturday June 20, 2026 · 0730 MDT · National Interagency Fire Center</div></div>
+<div class="pl-banner"><div class="lvl">National Preparedness Level 3</div>
+<div class="desc">Initial attack activity is <b>Light (129 fires)</b>. 3 new large incidents reported, with 28 uncontained large fires nationwide.</div></div>
 <div class="stats">
-<div class="stat"><div class="num">28</div><div class="lab">Uncontained Large Fires</div></div>
-<div class="stat"><div class="num">4</div><div class="lab">New Large Fires</div></div>
-<div class="stat"><div class="num">3</div><div class="lab">Large Fires Contained</div></div>
-<div class="stat"><div class="num">2</div><div class="lab">CIMTs Committed</div></div>
-<div class="stat"><div class="num">195,084</div><div class="lab">Total Active Acres</div></div>
+<div class="stat"><div class="num">28</div><div class="lbl">Uncontained Large Fires</div></div>
+<div class="stat"><div class="num">3</div><div class="lbl">New Large Fires</div></div>
+<div class="stat"><div class="num">2</div><div class="lbl">Large Fires Contained</div></div>
+<div class="stat"><div class="num">2</div><div class="lbl">CIMTs Committed</div></div>
+<div class="stat"><div class="num">210,584</div><div class="lbl">Total Active Acres</div></div>
 </div>
-<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">
-<div class="gcell"><div class="code">AICC</div><div class="nm">Alaska</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
-<div class="gcell"><div class="code">NWCC</div><div class="nm">Northwest</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
-<div class="gcell"><div class="code">ONCC</div><div class="nm">Northern California</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
-<div class="gcell"><div class="code">OSCC</div><div class="nm">Southern California</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
-<div class="gcell"><div class="code">NRCC</div><div class="nm">Northern Rockies</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
-<div class="gcell"><div class="code">GBCC</div><div class="nm">Great Basin</div><span class="pl-badge" style="background:#e67e22">PL 3</span></div>
-<div class="gcell"><div class="code">SWCC</div><div class="nm">Southwest</div><span class="pl-badge" style="background:#e67e22">PL 3</span></div>
-<div class="gcell"><div class="code">RMCC</div><div class="nm">Rocky Mountain</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
-<div class="gcell"><div class="code">EACC</div><div class="nm">Eastern Area</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
-<div class="gcell"><div class="code">SACC</div><div class="nm">Southern Area</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
+<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gacc-grid">
+<div class="gacc-cell"><div class="code">AICC</div><div class="nm">Alaska</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
+<div class="gacc-cell"><div class="code">NWCC</div><div class="nm">Northwest</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
+<div class="gacc-cell"><div class="code">ONCC</div><div class="nm">Northern California</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
+<div class="gacc-cell"><div class="code">OSCC</div><div class="nm">Southern California</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
+<div class="gacc-cell"><div class="code">NRCC</div><div class="nm">Northern Rockies</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
+<div class="gacc-cell"><div class="code">GBCC</div><div class="nm">Great Basin</div><span class="pl-badge" style="background:#e67e22">PL 3</span></div>
+<div class="gacc-cell"><div class="code">SWCC</div><div class="nm">Southwest</div><span class="pl-badge" style="background:#e67e22">PL 3</span></div>
+<div class="gacc-cell"><div class="code">RMCC</div><div class="nm">Rocky Mountain</div><span class="pl-badge" style="background:#f1c40f">PL 2</span></div>
+<div class="gacc-cell"><div class="code">EACC</div><div class="nm">Eastern Area</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
+<div class="gacc-cell"><div class="code">SACC</div><div class="nm">Southern Area</div><span class="pl-badge" style="background:#2ecc71">PL 1</span></div>
 </div>
-<h2 id="new-fires">New Large Fires &mdash; 4 active new incidents in NM, CA, FL, ID (plus 0 new, contained)</h2>
-<div class="fire"><div class="top"><span class="nm">Rio</span>
-<span class="tag">NM</span><span class="badge-new">NEW</span></div>
-<div class="narr">Santa Fe NF, USFS. Fifteen miles east of Espanola, NM. Timber, brush and grass. Moderate fire behavior with creeping, flanking and isolated torching.</div>
-<div class="srow"><span><b>128</b> acres</span><span><b>0%</b> contained</span><span>SWCC</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Lost</span>
-<span class="tag">CA</span><span class="badge-new">NEW</span></div>
-<div class="narr">Kern County Fire Department. Thirty-five miles west of Bakersfield, CA. Grass and brush. Active fire behavior with running, uphill runs and spotting. Numerous structures and energy infrastructure threatened. Evacuations and road closures in effect.</div>
-<div class="srow"><span><b>4,324</b> acres</span><span><b>5%</b> contained</span><span>OSCC</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Coptic</span>
-<span class="tag">FL</span><span class="badge-new">NEW</span></div>
-<div class="narr">Everglades National Park, NPS. Fifteen miles northwest of Homestead, FL. Grass. Moderate fire behavior.</div>
-<div class="srow"><span><b>1,680</b> acres</span><span><b>40%</b> contained</span><span>SACC</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Gold Run</span>
-<span class="tag">ID</span><span class="badge-new">NEW</span></div>
-<div class="narr">Cataldo Area Office, IDL. Eight miles east of Kellogg, ID. Timber. Moderate fire behavior with backing, creeping and smoldering. Energy infrastructure threatened. Road and trail closures in effect.</div>
-<div class="srow"><span><b>300</b> acres</span><span><b>20%</b> contained</span><span>NRCC</span></div></div>
+<h2 id="new-fires">New Large Fires — 2 active new incidents in AK, CA (plus 1 new, contained)</h2>
+<div class="fire"><div class="ftitle">Star<span class="tag">CA</span><span class="badge-new">NEW</span></div><div class="narr">Kern County Fire Department. Sixteen miles east of Bakersfield, CA. Grass and brush. Moderate fire behavior with uphill runs, running and backing. Railroad infrastructure threatened. Road closures in effect.</div><div class="row"><span><b>530</b> acres</span><span><b>27%</b> contained</span><span>OSCC · Southern California</span></div></div>
+<div class="fire"><div class="ftitle">Bear<span class="tag">AK</span><span class="badge-new">NEW</span></div><div class="narr">Tanana Zone, BLM. Started on NPS land 35 miles southeast of Lake Minchumina, AK. Timber and hardwood litter. Active fire behavior with isolated torching and running.</div><div class="row"><span><b>400</b> acres</span><span><b>0%</b> contained</span><span>AICC · Alaska</span></div></div>
 <h2 id="contained-fires">Contained Fires</h2>
-<div class="fire contained"><div class="top"><span class="nm">Cable Creek</span>
-<span class="tag">OR</span><span class="badge-ctn">Contained</span></div>
-<div class="srow"><span><b>610</b> acres</span><span><b>100%</b> contained</span><span>NWCC</span><span>$300K</span></div></div>
-<div class="fire contained"><div class="top"><span class="nm">Median</span>
-<span class="tag">ID</span><span class="badge-ctn">Contained</span></div>
-<div class="srow"><span><b>4,060</b> acres</span><span><b>100%</b> contained</span><span>GBCC</span><span>$500K</span></div></div>
-<div class="fire contained"><div class="top"><span class="nm">Trail 13 09</span>
-<span class="tag">FL</span><span class="badge-ctn">Contained</span></div>
-<div class="srow"><span><b>690</b> acres</span><span><b>100%</b> contained</span><span>SACC</span><span>NR</span></div></div>
-<h2 id="weather">Weather Discussion</h2><div class="card"><div class="disc">National Predictive Services Outlook (7-Day Significant Fire Potential Outlook).
-
-The NIFC Incident Management Situation Report references the following predictive services products for the national weather discussion:
-
-• National Weather Service, Storm Prediction Center: Fire Weather Outlook map and discussion (see the SPC Day 1 Outlook section below).
-• National Weather Service: Fire Weather Hazards map.
-• National Weather Service, Weather Prediction Center: National Forecast Chart and Short Range Forecast Discussion.
-
-Per the live SPC Day 1 discussion: broad upper troughing over the Interior West promotes Great Basin surface low development, driving dry southwesterly flow across eastern California toward the Four Corners. Deep-layer ascent and northward mid-level moisture transport support high-based thunderstorm development from the northern Great Basin into the Pacific Northwest. The combination of dry, windy conditions and thunderstorms over receptive fuels supports efficient wildfire ignition and spread across a sizeable portion of the Interior West today.</div></div>
+<div class="fire contained"><div class="ftitle">Mateo<span class="tag">CA</span><span class="badge-ctn">Contained</span></div><div class="narr">Marine Corps Base Camp Pendleton (PMQ). Fire is fully contained.</div><div class="row"><span><b>1,377</b> acres</span><span><b>100%</b> contained</span><span>OSCC · Southern California</span><span>Cost: <b>$2.1M</b></span></div></div>
+<div class="fire contained"><div class="ftitle">West Buck Lake 64<span class="tag">FL</span><span class="badge-new">NEW</span><span class="badge-ctn">Contained</span></div><div class="narr">Florida Forest Service. Fire reached full containment this reporting period.</div><div class="row"><span><b>300</b> acres</span><span><b>100%</b> contained</span><span>SACC · Southern Area</span><span>Cost: <b>NR</b></span></div></div>
+<h2 id="weather">Predictive Services Discussion</h2><div class="disc">
+<p>Scattered dry thunderstorms will focus a bit farther to the east today, sparking an uptick in new ignitions across much of southern Idaho, northeastern Nevada and far northern Utah. Thunderstorms will be more isolated with westward extent into northern California and southeastern Oregon. Critical fire weather with relative humidity as low as 5-15% and west-southwest wind gusts from 30-45 mph will stretch from western Wyoming into northern parts of the West Slope and much of eastern and southern Utah. Farther to the south, from the Four Corners into western Arizona, a critical burn environment will take shape due to the combination of hot temperatures, relative humidity in the single digits and gusty southwesterly winds. Westerly Cascade gap winds will increase across eastern Washington and Oregon, potentially affecting any of the active fires in the Northwest. Hot and unstable conditions, along with scattered afternoon thunderstorms will continue across the Florida peninsula. Look for severe thunderstorms and areas of significant flash flooding from eastern Colorado through portions of the Missouri Valley.</p>
+<p>The potential for lightning-ignited fires will also increase across central and eastern Interior Alaska as thunderstorms become more numerous and temperatures continue to trend higher. Puerto Rico and the U.S. Virgin Islands will see another hot day, with dry trade winds maintaining an elevated risk for fire activity.</p>
+</div>
 <h2 id="spc">SPC Day 1 Fire Weather Outlook</h2>
-<div class="muted" style="margin-bottom:10px">Issued 0202 AM CDT Fri Jun 19 2026 · Valid 191200Z - 201200Z · pulled live via browser</div>
-<div class="alert spc-critical"><div class="ev">Critical &mdash; Portions of far northern California into extreme southern Oregon and northwestern Nevada</div>
-<div class="det"><b>Affected:</b> Northern Sierra and adjacent terrain within the broader dry-thunderstorm zone (pop ~783,527 incl. Reno, Sparks, Carson City and Sun Valley, NV and Ashland, OR)<br><b>Reasoning:</b> Deep boundary-layer mixing combined with high-based thunderstorms over fuels at the 80th-90th percentile ERC. Inverted-v profiles approaching 500 mb with 0.75+ inch precipitable water support efficient lightning-induced ignitions and wind-driven spread.</div></div>
-<div class="alert spc-elevated"><div class="ev">Elevated &mdash; Eastern California into the Great Basin toward the Four Corners region</div>
-<div class="det"><b>Affected:</b> Interior West communities across eastern CA, NV, UT and the Four Corners<br><b>Reasoning:</b> Ahead of a developing Great Basin surface low, afternoon mixing of a deep boundary layer brings 15-20 mph sustained southwesterly winds with 10-15% RH over dry fuels.</div></div>
-<div class="alert spc-elevated"><div class="ev">Scattered / Isolated Dry Thunderstorms &mdash; Northern Great Basin into the Pacific Northwest, northern Rockies and northern Sierra</div>
-<div class="det"><b>Affected:</b> ~45,425 sq mi, pop ~783,527 — Reno, Sparks, Carson City and Sun Valley, NV; Ashland, OR<br><b>Reasoning:</b> High-based thunderstorms develop over the northern Sierra and progress toward southeastern Oregon and the northern Great Basin through the afternoon and evening; orographic lift along higher terrain prolongs coverage.</div></div>
+<p style="color:var(--muted);font-size:.85rem;">Jun 20, 2026 Day 1 Fire Weather Outlook — Valid 201200Z - 211200Z (issued 0147 AM CDT Sat Jun 20 2026). Pulled live via browser from the Storm Prediction Center.</p>
+<div class="alert spc-critical"><div class="atype">Critical Risk</div><div class="aarea">Eastern Great Basin into the Four Corners region</div><div class="ameta">132,528 sq mi · pop ~1,106,480 — Grand Junction &amp; Montrose &amp; Clifton, CO; Farmington &amp; Gallup, NM</div><div class="ameta" style="margin-top:6px;">Afternoon surface lee troughing supports widespread SW surface winds of 15-25 mph amid 5-15% RH. Critical highlights cover areas with the highest likelihood of 20+ mph winds and 5-10% RH overlapping for several hours; ERCs easily exceed the 80th percentile, supporting rapid wildfire spread.</div></div>
+<div class="alert spc-critical"><div class="atype">Critical Risk</div><div class="aarea">Northeastern Great Basin — scattered dry thunderstorms</div><div class="ameta">Dry-thunderstorm risk: 26,774 sq mi · pop ~603,003 — Ogden, Logan &amp; Roy, UT; Pocatello &amp; Twin Falls, ID</div><div class="ameta" style="margin-top:6px;">High-based storms near stronger mid-level flow may move faster with little rainfall accumulation, supporting a regionally greater lightning-ignition rate over dry fuels. Scattered dry thunderstorm highlights continued.</div></div>
+<div class="alert spc-elevated"><div class="atype">Elevated Risk</div><div class="aarea">Eastern Great Basin (broad) and along/lee of the Cascades</div><div class="ameta">Eastern WA/OR Cascade lee and Interior West</div><div class="ameta" style="margin-top:6px;">Strong westerly downslope flow to the lee of the Cascades brings 15-25 mph sustained winds with RH as low as 15%. Widespread Elevated highlights also extend across the eastern Great Basin where dry/windy conditions and dry fuels support fire spread below Critical criteria.</div></div>
 <h2 id="nws">NWS Fire Weather Alerts</h2>
-<div class="muted" style="margin-bottom:10px">18 active Red Flag Warnings &middot; 13 active Fire Weather Watches</div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Western Shasta County Mountains Above 3000 ft; Western Shasta County Foothills Between 1000-3000 ft; Shasta Lake Area and Interstate 5 Between 1000-3000 ft; South-Central Shasta County Including Redding Metro; Eastern Shasta County Foothills Between 1000-3000 ft; Eastern Shasta County Mountains and Southern Cascades Above 3000 ft; Burney Basin<br><b>Valid:</b> Jun 19, 06:16 &ndash; Jun 19, 19:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Southeast Coastal Plains; Southern Hills; West Coast; Vieques; Southwest Coastal Plains and Mona Island; Saint Croix<br><b>Valid:</b> Jun 19, 10:00 &ndash; Jun 19, 16:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Lime Village<br><b>Valid:</b> Jun 19, 13:00 &ndash; Jun 20, 01:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Lower Matanuska Valley; Western Susitna Valley; Southern Susitna Valley; Central Susitna Valley; Northern Susitna Valley<br><b>Valid:</b> Jun 19, 13:00 &ndash; Jun 20, 01:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Surprise Valley California; Eastern Lassen County; Northern Washoe County<br><b>Valid:</b> Jun 19, 08:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Northern Sierra Front - Carson City/Douglas/Storey/Southern Washoe/Eastern Lyon/Far Southern Lassen Counties; Southern Sierra Front - Alpine/Northern Mono/Southern Lyon/Western Mineral Counties<br><b>Valid:</b> Jun 19, 12:00 &ndash; Jun 19, 21:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">West Humboldt Basin - Pershing County; Lahontan Basin - Churchill and Eastern Mineral Counties<br><b>Valid:</b> Jun 19, 12:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Northwest Deserts/Northwest Plateau<br><b>Valid:</b> Jun 19, 11:00 &ndash; Jun 19, 20:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Lake Mead NRA/Colorado River-AZ side; Esmeralda and Nye County Deserts/CNC Dispatch; Lincoln County/Ely Dispatch; Nye County Deserts/Las Vegas Dispatch; Sheep Range; Spring Mountains; Clark and SW Lincoln County Deserts/Las Vegas Dispatch; Lake Mead NRA/Colorado River-NV side<br><b>Valid:</b> Jun 19, 11:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Western Klamath National Forest; Central Siskiyou County Including Shasta Valley; Siskiyou County from the Cascade Mountains East and South to Mt Shasta; Modoc County Except for the Surprise Valley; Siskiyou Mountains<br><b>Winds:</b> Gusts up to 35 mph. &middot; <b>Valid:</b> Jun 19, 08:00 &ndash; Jun 19, 19:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Klamath Basin and the Fremont-Winema National Forest; South Central Oregon Desert including the BLM Land in Eastern Lake and Western Harney Counties<br><b>Winds:</b> Gusts up to 35 mph. &middot; <b>Valid:</b> Jun 19, 13:00 &ndash; Jun 20, 01:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Southeastern Humboldt County and northern Lander County; Humboldt County - Quinn; Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko County; Eastern Elko County<br><b>Valid:</b> Jun 19, 14:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">White Pine and Northeast Nye Counties; Northern Nye County - Mojave; Central Nevada - Toiyabe<br><b>Valid:</b> Jun 19, 11:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Mojave Desert<br><b>Winds:</b> Southwest 10 to 20 mph with gusts up to 35 mph. &middot; <b>RH:</b> As low as 10 percent. &middot; <b>Valid:</b> Jun 19, 15:00 &ndash; Jun 20, 00:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Central Utah West Desert; Color Country West Desert<br><b>Winds:</b> Southwest 15 to 25 mph with gusts up to 35 mph. &middot; <b>RH:</b> As low as 9 percent. &middot; <b>Valid:</b> Jun 19, 15:00 &ndash; Jun 20, 03:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Burns BLM; Southern Grasslands<br><b>Winds:</b> Gusty erratic winds up to 50 mph. &middot; <b>Valid:</b> Jun 19, 14:00 &ndash; Jun 20, 06:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Owyhee Mountains; Southern Highlands<br><b>Winds:</b> Gusty erratic winds up to 45 mph. &middot; <b>Valid:</b> Jun 19, 18:00 &ndash; Jun 20, 12:00</div></div>
-<div class="alert rfw"><div class="ev">Red Flag Warning</div>
-<div class="det">Northeastern Interior Humboldt and Southwestern Siskiyou Including Orleans; Eastern Interior Humboldt Including Willow Creek and Hoopa; Northwestern Trinity Including Salyer and Big Bar; Northeastern Trinity Including Trinity Lake<br><b>Winds:</b> Storms could produce gusty and erratic &middot; <b>Valid:</b> Jun 19, 08:00 &ndash; Jun 19, 19:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Lower Columbia Basin of Oregon; Central Mountains of Oregon; Kittitas Valley; Lower Columbia Basin<br><b>Winds:</b> West 15 to 25 mph with gusts up to 35 mph. &middot; <b>RH:</b> As low as 10 percent. &middot; <b>Valid:</b> Jun 20, 11:00 &ndash; Jun 20, 23:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Jackson County Below 9000 Feet; South and Southeast Grand/West Central and Southwest Boulder/Gilpin/Clear Creek/Summit/North and West Park Counties Above 9000 Feet; Grand and Summit Counties Below 9000 Feet; Central and Southeast Park County; West Jackson and West Grand Counties Above 9000 Feet; South and East Jackson/Larimer/North and Northeast Grand/Northwest Boulder Counties Above 9000 Feet<br><b>Winds:</b> West 20 to 30 mph with gusts up to 45 mph. &middot; <b>RH:</b> As low as 10 percent. &middot; <b>Valid:</b> Jun 20, 12:00 &ndash; Jun 20, 21:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Upper Arkansas River Valley Including Lake County and Chaffee County; Teller County/Rampart Range Including Pikes Peak and Florissant Fossil Beds National Monument; Fremont County Including Canon City/Howard/Texas Creek; Eastern San Juan Mountains and La Garita Mountains Including Wolf Creek Pass and Creede; San Luis Valley Including Alamosa/Del Norte/Fort Garland/Saguache; Southern Front Range Including Sangre De Cristo Mountains/Wet Mountains/La Veta Pass; Southern El Paso County Including Fort Carson and Colorado Springs; Pueblo County Including Pueblo; Huerfano County Including Walsenburg; Western Las Animas County Including Trinidad and Thatcher; Crowley County Including Ordway; Otero County Including La Junta and Western Comanche Grasslands; Eastern Las Animas County Including Pinon Canyon<br><b>Winds:</b> Southwest 20 to 30 mph with gusts up to 45 mph. &middot; <b>RH:</b> As low as 7 percent. &middot; <b>Valid:</b> Jun 20, 11:00 &ndash; Jun 20, 22:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Okanogan Valley<br><b>Valid:</b> Jun 20, 11:00 &ndash; Jun 20, 23:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Central Washington Cascade Foothills; Waterville Plateau; Western Columbia Basin<br><b>Valid:</b> Jun 20, 11:00 &ndash; Jun 20, 23:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Northwest Plateau; West Central Mountains; North Central Mountains; Upper Rio Grande Valley and Lower Chama River Valley<br><b>Winds:</b> West winds 15 to 25 mph with gusts up to 35 mph. &middot; <b>RH:</b> Relative humidity between 5 to 10 percent. &middot; <b>Valid:</b> Jun 20, 12:00 &ndash; Jun 20, 19:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Western Uintah Basin; Tavaputs Plateau; Manti National Forest; San Rafael Swell; Central Utah Mountains; Henry Mountains; Color Country Mountains; Grand Staircase<br><b>Winds:</b> West 10 to 20 mph with gusts up to 35 mph. &middot; <b>RH:</b> As low as 6 percent. &middot; <b>Valid:</b> Jun 20, 12:00 &ndash; Jun 20, 22:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Little Snake; Routt; White River; Lower Colorado River; Colorado River Headwaters; Southwest Colorado Lower Forecast Area; Paradox Valley; Northern San Juan; North Fork; Gunnison Basin; Southwest Colorado Upper West Forecast Area; Southwest Colorado Upper East Forecast Area; Eastern Uintah Basin; Book Cliffs; Colorado River Basin; Southeast Utah<br><b>Winds:</b> West 15 to 25 mph with gusts up to 45 mph. &middot; <b>RH:</b> 6 to 11 percent. &middot; <b>Valid:</b> Jun 20, 12:00 &ndash; Jun 20, 22:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">White Mountains and High Terrain South of the Yukon River; Fortymile Country; Upper Tanana Valley; Delta Junction; Upper Chena River Valley; Tanana Flats; Eielson AFB and Salcha; Goldstream Valley and Nenana Hills; Chatanika River Valley; Two Rivers; Fairbanks Metro Area; Nenana; Northern Denali Borough; Eastern Delta Junction<br><b>Winds:</b> Near thunderstorms, gusts could reach as high as 40 &middot; <b>Valid:</b> Jun 20, 09:00 &ndash; Jun 21, 22:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Surprise Valley California; Eastern Lassen County; Northern Washoe County<br><b>Valid:</b> Jun 19, 08:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">West Humboldt Basin - Pershing County<br><b>Valid:</b> Jun 19, 08:00 &ndash; Jun 19, 23:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Upper Snake River Valley/Idaho Falls BLM; Caribou Range/Caribou NF; Sawtooth Range/Northern Sawtooth NF; Goose Creek and Raft River Valley/Southern Sawtooth NF/Twin Falls BLM south of the Snake River; East Salmon River Mountains/Salmon NF; Lemhi and Lost River Range/Challis NF<br><b>Winds:</b> Stronger storms will be capable of producing &middot; <b>Valid:</b> Jun 20, 09:00 &ndash; Jun 20, 21:00</div></div>
-<div class="alert fww"><div class="ev">Fire Weather Watch</div>
-<div class="det">Northeastern Interior Humboldt and Southwestern Siskiyou Including Orleans; Eastern Interior Humboldt Including Willow Creek and Hoopa; Northwestern Trinity Including Salyer and Big Bar; Northeastern Trinity Including Trinity Lake<br><b>Valid:</b> Jun 19, 05:00 &ndash; Jun 19, 21:00</div></div>
-<h2 id="large-fires">Large Fires &mdash; Grouped by GACC</h2>
-<div class="gacchdr "><div class="h"><span class="t">Great Basin Area (GBCC)</span><span class="pl-badge small" style="background:#e67e22">PL 3</span></div>
-<div class="meta">9 total incidents &middot; 26,396 cumulative acres</div>
-<div class="mini"><span><b>13</b> new fires</span><span><b>0</b> new large</span><span><b>5</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Grapevine</span>
-<span class="tag">NV</span></div>
-<div class="narr">Ely District, BLM. Ten miles southeast of Caliente, NV. Timber. Extreme fire behavior with torching, running and spotting.</div>
-<div class="srow"><span><b>3,949</b> acres (+2,824)</span><span><b>0%</b> contained</span><span><b>146</b> personnel</span><span>$500K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Kane Springs</span>
-<span class="tag">NV</span></div>
-<div class="narr">Ely District, BLM. Seventeen miles southwest of Caliente, NV. Grass and brush. Extreme fire behavior with wind-driven runs and flanking.</div>
-<div class="srow"><span><b>6,000</b> acres (+5,000)</span><span><b>0%</b> contained</span><span><b>93</b> personnel</span><span>$500K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Rock Canyon</span>
-<span class="tag">AZ</span></div>
-<div class="narr">Northern District, Arizona DOF. Twenty miles southeast of Fredonia, AZ. Timber, brush and grass. Moderate fire behavior with isolated torching, creeping and smoldering. Structures threatened. Area, road and trail closures in effect.</div>
-<div class="srow"><span><b>4,512</b> acres (+2,012)</span><span><b>10%</b> contained</span><span><b>298</b> personnel</span><span>$2.1M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Sawmill</span>
-<span class="tag">UT</span></div>
-<div class="narr">Color Country Paria Unit, BLM. Forty-four miles southeast of Cedar City, UT. Dormant brush and grass. Extreme fire behavior with torching, running and spotting. Structures threatened. Area and road closures in effect.</div>
-<div class="srow"><span><b>2,086</b> acres</span><span><b>0%</b> contained</span><span><b>148</b> personnel</span><span>$3M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Dellenbaugh</span>
-<span class="tag">NV</span></div>
-<div class="narr">Lake Mead National Recreation Area, NPS. Eighty miles south of St. George, UT. Timber. Moderate fire behavior with creeping and isolated torching. Residences threatened.</div>
-<div class="srow"><span><b>767</b> acres</span><span><b>50%</b> contained</span><span><b>124</b> personnel</span><span>$950K</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Northwest Area (NWCC)</span><span class="pl-badge small" style="background:#f1c40f">PL 2</span></div>
-<div class="meta">10 total incidents &middot; 67,880 cumulative acres &middot; 1 CIMTs committed</div>
-<div class="mini"><span><b>11</b> new fires</span><span><b>0</b> new large</span><span><b>7</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Tule Rd</span>
-<span class="tag">WA</span></div>
-<div class="narr">Yakama Agency, BIA. CIMT (NW Team 2); the team is also managing the Roza incident. Five miles south of Toppenish, WA. Grass, brush and dormant brush. Minimal fire behavior with creeping and smoldering. Residences and energy infrastructure threatened. Area closures in effect.</div>
-<div class="srow"><span><b>24,090</b> acres (+131)</span><span><b>75%</b> contained</span><span><b>449</b> personnel</span><span>$1.9M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Juniper Dunes</span>
-<span class="tag">WA</span></div>
-<div class="narr">Spokane District, BLM. Ten miles northeast of Pasco, WA. Grass and brush. Minimal fire behavior. Area, road and trail closures in effect. Last report unless significant activity occurs.</div>
-<div class="srow"><span><b>13,003</b> acres</span><span><b>90%</b> contained</span><span><b>93</b> personnel</span><span>$1.7M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Tucannon Mutual Aid</span>
-<span class="tag">WA</span></div>
-<div class="narr">Washington State Fire Marshal&#x27;s Office. Eight miles east of Dayton, WA. Grass and brush. Minimal fire behavior with smoldering and creeping. Structures and energy infrastructure threatened.</div>
-<div class="srow"><span><b>8,031</b> acres (+299)</span><span><b>50%</b> contained</span><span><b>162</b> personnel</span><span><b>5</b> structures lost</span><span>$625K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Kartar</span>
-<span class="tag">WA</span></div>
-<div class="narr">Colville Agency, BIA. Fifteen miles southeast of Omak, WA. Grass, timber and brush. Moderate fire behavior with running. Structures threatened. Area closures in effect.</div>
-<div class="srow"><span><b>7,534</b> acres (+34)</span><span><b>1%</b> contained</span><span><b>160</b> personnel</span><span>$1M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Roza</span>
-<span class="tag">WA</span></div>
-<div class="narr">Spokane District, BLM. Nine miles north of Selah, WA. Brush and grass. Minimal fire behavior with creeping and smoldering. Critical infrastructure threatened. Area closures in effect.</div>
-<div class="srow"><span><b>3,923</b> acres</span><span><b>50%</b> contained</span><span><b>55</b> personnel</span><span>$350K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Old Emigrant</span>
-<span class="tag">OR</span></div>
-<div class="narr">Pendleton Unit, Oregon DOF. Six miles southeast of Pendleton, OR. Grass and brush. Moderate fire behavior with creeping and smoldering. Residences threatened. Road closures in effect. Reduction in acreage due to more accurate mapping.</div>
-<div class="srow"><span><b>1,495</b> acres (-5)</span><span><b>60%</b> contained</span><span><b>191</b> personnel</span><span>$1.8M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Upriver</span>
-<span class="tag">WA</span></div>
-<div class="narr">Northeast Region, Washington DNR. Started on private land one mile east of Spokane, WA. Timber and grass. Minimal fire behavior with creeping and smoldering. Numerous residences threatened. Area, road and trail closures in effect. Reduction in acreage due to more accurate mapping.</div>
-<div class="srow"><span><b>213</b> acres (-4)</span><span><b>39%</b> contained</span><span><b>348</b> personnel</span><span><b>16</b> structures lost</span><span>$2.2M</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Southwest Area (SWCC)</span><span class="pl-badge small" style="background:#e67e22">PL 3</span></div>
-<div class="meta">5 total incidents &middot; 11,486 cumulative acres</div>
-<div class="mini"><span><b>11</b> new fires</span><span><b>1</b> new large</span><span><b>3</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Bear</span>
-<span class="tag">NM</span></div>
-<div class="narr">Gila NF, USFS. Eighteen miles southeast of Quemado, NM. Timber and brush. Moderate fire behavior with backing, flanking and smoldering. Area closures in effect.</div>
-<div class="srow"><span><b>7,769</b> acres</span><span><b>91%</b> contained</span><span><b>298</b> personnel</span><span><b>6</b> structures lost</span><span>$9.7M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Sycamore</span>
-<span class="tag">AZ</span></div>
-<div class="narr">Tonto NF, USFS. Fifteen miles north of Globe, AZ. Grass, chaparral and brush. Moderate fire behavior with flanking and backing. Residences threatened.</div>
-<div class="srow"><span><b>3,341</b> acres (+1,141)</span><span><b>0%</b> contained</span><span><b>100</b> personnel</span><span>$1.1M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Rio</span>
-<span class="tag">NM</span><span class="badge-new">NEW</span></div>
-<div class="narr">Santa Fe NF, USFS. Fifteen miles east of Espanola, NM. Timber, brush and grass. Moderate fire behavior with creeping, flanking and isolated torching.</div>
-<div class="srow"><span><b>128</b> acres</span><span><b>0%</b> contained</span><span><b>125</b> personnel</span><span>$150K</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Southern California Area (OSCC)</span><span class="pl-badge small" style="background:#f1c40f">PL 2</span></div>
-<div class="meta">5 total incidents &middot; 10,092 cumulative acres</div>
-<div class="mini"><span><b>15</b> new fires</span><span><b>1</b> new large</span><span><b>3</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Lost</span>
-<span class="tag">CA</span><span class="badge-new">NEW</span></div>
-<div class="narr">Kern County Fire Department. Thirty-five miles west of Bakersfield, CA. Grass and brush. Active fire behavior with running, uphill runs and spotting. Numerous structures and energy infrastructure threatened. Evacuations and road closures in effect.</div>
-<div class="srow"><span><b>4,324</b> acres</span><span><b>5%</b> contained</span><span><b>318</b> personnel</span><span><b>4</b> structures lost</span><span>NR</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Shore</span>
-<span class="tag">CA</span></div>
-<div class="narr">Riverside Unit, Cal Fire. Two miles west of Calimesa, CA. Grass and brush. Minimal fire behavior with smoldering, creeping and backing. Structures threatened.</div>
-<div class="srow"><span><b>3,085</b> acres</span><span><b>78%</b> contained</span><span><b>583</b> personnel</span><span>$3.8M</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Mateo</span>
-<span class="tag">CA</span></div>
-<div class="narr">Marine Corps Base Camp Pendleton, DOW. Ten miles north of Camp Pendleton, CA. Chaparral, grass and brush. Minimal fire behavior with creeping, isolated torching and smoldering.</div>
-<div class="srow"><span><b>1,335</b> acres (+152)</span><span><b>60%</b> contained</span><span><b>218</b> personnel</span><span><b>2</b> structures lost</span><span>$1.6M</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Southern Area (SACC)</span><span class="pl-badge small" style="background:#2ecc71">PL 1</span></div>
-<div class="meta">20 total incidents &middot; 36,735 cumulative acres</div>
-<div class="mini"><span><b>6</b> new fires</span><span><b>1</b> new large</span><span><b>7</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Quarry 2</span>
-<span class="tag">FL</span></div>
-<div class="narr">Florida Forest Service. Six miles west of Doral, FL. Brush. Moderate fire behavior with flanking. Road closures in effect.</div>
-<div class="srow"><span><b>17,200</b> acres (+1,300)</span><span><b>75%</b> contained</span><span><b>24</b> personnel</span><span>NR</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Rookery</span>
-<span class="tag">FL</span></div>
-<div class="narr">Lake Woodruff NWR, FWS. Three miles northwest of Deland, FL. Grass. Minimal fire behavior.</div>
-<div class="srow"><span><b>3,700</b> acres</span><span><b>25%</b> contained</span><span><b>7</b> personnel</span><span>$40K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Shell</span>
-<span class="tag">FL</span></div>
-<div class="narr">National Forests in Florida, USFS. Thirteen miles west of Deland, FL. Southern rough. Minimal fire behavior.</div>
-<div class="srow"><span><b>2,822</b> acres</span><span><b>70%</b> contained</span><span><b>11</b> personnel</span><span>$350K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">School Lands</span>
-<span class="tag">OK</span></div>
-<div class="narr">Oklahoma DOF. Nine miles northwest of Waynoka, OK. Grass and brush. No new information.</div>
-<div class="srow"><span><b>2,000</b> acres</span><span><b>20%</b> contained</span><span><b>5</b> personnel</span><span>$9K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Coptic</span>
-<span class="tag">FL</span><span class="badge-new">NEW</span></div>
-<div class="narr">Everglades National Park, NPS. Fifteen miles northwest of Homestead, FL. Grass. Moderate fire behavior.</div>
-<div class="srow"><span><b>1,680</b> acres</span><span><b>40%</b> contained</span><span><b>17</b> personnel</span><span><b>2</b> structures lost</span><span>$80K</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Well 13</span>
-<span class="tag">FL</span></div>
-<div class="narr">Florida Forest Service. Five miles west of Medley, FL. Brush. Minimal fire behavior with backing.</div>
-<div class="srow"><span><b>1,300</b> acres (+800)</span><span><b>50%</b> contained</span><span><b>3</b> personnel</span><span>NR</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Rose Bay Canal</span>
-<span class="tag">NC</span></div>
-<div class="narr">North Carolina Forest Service. Ten miles southwest of Fairfield, NC. Timber. Moderate fire behavior with smoldering and isolated torching.</div>
-<div class="srow"><span><b>662</b> acres</span><span><b>53%</b> contained</span><span><b>90</b> personnel</span><span><b>1</b> structures lost</span><span>$1M</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Rocky Mountain Area (RMCC)</span><span class="pl-badge small" style="background:#f1c40f">PL 2</span></div>
-<div class="meta">2 total incidents &middot; 39,393 cumulative acres &middot; 1 CIMTs committed</div>
-<div class="mini"><span><b>3</b> new fires</span><span><b>0</b> new large</span><span><b>1</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">South Fork</span>
-<span class="tag">NE</span></div>
-<div class="narr">Nebraska NF, USFS. CIMT (RM Team 2). Twelve miles west of Crawford, NE. Grass and timber. Minimal fire behavior with backing and creeping. Area and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
-<div class="srow"><span><b>39,057</b> acres</span><span><b>80%</b> contained</span><span><b>382</b> personnel</span><span><b>2</b> structures lost</span><span>$10.6M</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Northern Rockies Area (NRCC)</span><span class="pl-badge small" style="background:#2ecc71">PL 1</span></div>
-<div class="meta">1 total incidents &middot; 300 cumulative acres</div>
-<div class="mini"><span><b>4</b> new fires</span><span><b>1</b> new large</span><span><b>1</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Gold Run</span>
-<span class="tag">ID</span><span class="badge-new">NEW</span></div>
-<div class="narr">Cataldo Area Office, IDL. Eight miles east of Kellogg, ID. Timber. Moderate fire behavior with backing, creeping and smoldering. Energy infrastructure threatened. Road and trail closures in effect.</div>
-<div class="srow"><span><b>300</b> acres</span><span><b>20%</b> contained</span><span><b>249</b> personnel</span><span><b>3</b> structures lost</span><span>$515K</span></div></div>
-<div class="gacchdr "><div class="h"><span class="t">Alaska Area (AICC)</span><span class="pl-badge small" style="background:#f1c40f">PL 2</span></div>
-<div class="meta">2 total incidents &middot; 1,942 cumulative acres</div>
-<div class="mini"><span><b>0</b> new fires</span><span><b>0</b> new large</span><span><b>1</b> uncontained</span></div></div>
-<div class="fire"><div class="top"><span class="nm">Kilolitna</span>
-<span class="tag">AK</span></div>
-<div class="narr">Tanana Zone, BLM. Started on FWS land 60 miles northwest of Rampart, AK. Brush and timber. No new information. Last narrative report unless new information is received.</div>
-<div class="srow"><span><b>1,964</b> acres</span><span><b>0%</b> contained</span><span><b>0</b> personnel</span><span>NR</span></div></div>
-<div class="footer">Wildfire Aware Situation Report &middot; Generated June 19, 2026 13:44<br>
+<p style="color:var(--muted);font-size:.85rem;">22 active Red Flag Warnings &amp; Fire Weather Watches.</p>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Burns BLM; Southern Grasslands</div>
+<div class="ameta">Valid: Jun 19 2PM – Jun 20 6PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Central Interior</div>
+<div class="ameta">Winds: Near thunderstorms, gusts could reach as high as 40</div>
+<div class="ameta">Valid: Jun 20 10AM – Jun 21 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Central Washington Cascade Foothills; Waterville Plateau; Western Columbia Basin</div>
+<div class="ameta">Winds: : West 15 to 25 mph with gusts up to 40 mph</div>
+<div class="ameta">Valid: Jun 20 3PM – Jun 20 11PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Chuska Mountains and Defiance Plateau; Little Colorado River Valley in Navajo County; Little Colorado River Valley in Apache County</div>
+<div class="ameta">Valid: Jun 20 11AM – Jun 20 6PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Jackson County Below 9000 Feet; South and Southeast Grand/West Central and Southwest Boulder/Gilpin/Clear Creek/Summit/North and West Park Counties Above 9000 Feet; Grand and Summit Counties Below 9000 Feet; Central and Southeast Park County; West Jackson and West Grand Counties Above 9000 Feet; South and East Jackson/Larimer/North and Northeast Grand/Northwest Boulder Counties Above 9000 Feet</div>
+<div class="ameta">Winds: West 15 to 25 mph with gusts up to 45 mph · RH: As low as 9 percent</div>
+<div class="ameta">Valid: Jun 20 11AM – Jun 20 9PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Kittitas Valley</div>
+<div class="ameta">Winds: Northwest 20 to 30 mph with gusts up to 45 mph · RH: As low as 16 percent</div>
+<div class="ameta">Valid: Jun 20 4PM – Jun 20 8PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Little Snake; Routt; White River; Southwest Colorado Lower Forecast Area; Paradox Valley; Northern San Juan; North Fork; Gunnison Basin; Southwest Colorado Upper West Forecast Area; Eastern Uintah Basin; Book Cliffs; Colorado River Basin; Southeast Utah</div>
+<div class="ameta">Winds: Southwest 15 to 25 mph with gusts up to 40 mph · RH: 6 to 11 percent</div>
+<div class="ameta">Valid: Jun 20 12PM – Jun 20 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Lower Colorado River; Colorado River Headwaters</div>
+<div class="ameta">Winds: Southwest 15 to 25 mph with gusts up to 40 mph · RH: 6 to 11 percent</div>
+<div class="ameta">Valid: Jun 20 12PM – Jun 20 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Lower Columbia Basin of Oregon; Central Mountains of Oregon; Lower Columbia Basin</div>
+<div class="ameta">Winds: West 15 to 25 mph with gusts up to 35 mph · RH: As low as 9 percent</div>
+<div class="ameta">Valid: Jun 20 3PM – Jun 20 8PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">North Slopes of the Western Alaska Range; Upper Kuskokwim Valley</div>
+<div class="ameta">Winds: Near thunderstorms, gusts could reach as high as 40</div>
+<div class="ameta">Valid: Jun 20 10AM – Jun 21 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Northwest Plateau; West Central Mountains; North Central Mountains; Upper Rio Grande Valley and Lower Chama River Valley</div>
+<div class="ameta">RH: Relative humidity between 5 to 10 percent</div>
+<div class="ameta">Valid: Jun 20 12PM – Jun 20 7PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Okanogan Valley</div>
+<div class="ameta">Winds: : North 15 to 25 mph with gusts up to 40 mph</div>
+<div class="ameta">Valid: Jun 20 11AM – Jun 20 11PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Owyhee Mountains; Southern Highlands</div>
+<div class="ameta">Valid: Jun 19 6PM – Jun 20 6PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Southwest Colorado Upper East Forecast Area</div>
+<div class="ameta">Winds: West 10 to 20 mph with gusts up to 30 mph · RH: 7 to 12 percent</div>
+<div class="ameta">Valid: Jun 20 12PM – Jun 20 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Teller County/Rampart Range Including Pikes Peak and Florissant Fossil Beds National Monument; Southern Front Range Including Sangre De Cristo Mountains/Wet Mountains/La Veta Pass; Southern El Paso County Including Fort Carson and Colorado Springs; Pueblo County Including Pueblo; Huerfano County Including Walsenburg; Western Las Animas County Including Trinidad and Thatcher; Crowley County Including Ordway; Otero County Including La Junta and Western Comanche Grasslands; Eastern Las Animas County Including Pinon Canyon</div>
+<div class="ameta">Winds: Southwest 15 to 25 mph with gusts up to 40 mph · RH: As low as 8 percent</div>
+<div class="ameta">Valid: Jun 20 11AM – Jun 20 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Upper Arkansas River Valley Including Lake County and Chaffee County; Fremont County Including Canon City/Howard/Texas Creek; Eastern San Juan Mountains and La Garita Mountains Including Wolf Creek Pass and Creede; San Luis Valley Including Alamosa/Del Norte/Fort Garland/Saguache</div>
+<div class="ameta">Winds: West 15 to 25 mph with gusts up to 45 mph · RH: As low as 7 percent</div>
+<div class="ameta">Valid: Jun 20 11AM – Jun 20 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Upper Snake River Valley/Idaho Falls BLM; Caribou Range/Caribou NF; Sawtooth Range/Northern Sawtooth NF; Goose Creek and Raft River Valley/Southern Sawtooth NF/Twin Falls BLM south of the Snake River; East Salmon River Mountains/Salmon NF; Lemhi and Lost River Range/Challis NF</div>
+<div class="ameta">Valid: Jun 20 7AM – Jun 20 9PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko County; Eastern Elko County</div>
+<div class="ameta">Valid: Jun 20 9AM – Jun 20 5PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">Western Uintah Basin; Tavaputs Plateau; Manti National Forest; San Rafael Swell; Central Utah Mountains; Henry Mountains; Color Country Mountains; Grand Staircase</div>
+<div class="ameta">Winds: West 10 to 20 mph with gusts up to 35 mph · RH: Falling into the 7 to 12 percent range</div>
+<div class="ameta">Valid: Jun 20 12PM – Jun 20 10PM</div>
+</div>
+<div class="alert rfw"><div class="atype">Red Flag Warning</div><div class="aarea">White Mountains and High Terrain South of the Yukon River; Fortymile Country; Upper Tanana Valley; Delta Junction; Upper Chena River Valley; Tanana Flats; Eielson AFB and Salcha; Goldstream Valley and Nenana Hills; Chatanika River Valley; Two Rivers; Fairbanks Metro Area; Nenana; Northern Denali Borough; Eastern Delta Junction</div>
+<div class="ameta">Winds: Near thunderstorms, gusts could reach as high as 40</div>
+<div class="ameta">Valid: Jun 20 10AM – Jun 21 10PM</div>
+</div>
+<div class="alert fww"><div class="atype">Fire Weather Watch</div><div class="aarea">Salt Lake Desert</div>
+<div class="ameta">Valid: Jun 20 2PM – Jun 20 10PM</div>
+</div>
+<div class="alert fww"><div class="atype">Fire Weather Watch</div><div class="aarea">Upper Arkansas River Valley Including Lake County and Chaffee County; Fremont County Including Canon City/Howard/Texas Creek; Eastern San Juan Mountains and La Garita Mountains Including Wolf Creek Pass and Creede; San Luis Valley Including Alamosa/Del Norte/Fort Garland/Saguache</div>
+<div class="ameta">Winds: West 15 to 25 mph with gusts up to 45 mph · RH: As low as 7 percent</div>
+<div class="ameta">Valid: Jun 21 11AM – Jun 21 10PM</div>
+</div>
+<h2 id="large-fires">Large Fires — Grouped by GACC</h2>
+<div class="gacc-hdr "><div class="gh-title">Great Basin Area (GBCC) <span class="pl-badge" style="background:#e67e22;font-size:.65rem;">PL 3</span></div><div class="gh-meta">9 total incidents · 31,424 cumulative acres</div><div class="gh-stats"><span><b>12</b> new fires</span><span><b>0</b> new large</span><span><b>5</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Kane Springs<span class="tag">NV</span></div><div class="narr">Ely District, BLM. Seventeen miles southwest of Caliente, NV. Grass and brush. Extreme fire behavior with wind-driven runs, torching and smoldering.</div><div class="row"><span><b>7,500</b> acres (+1,500)</span><span><b>10%</b> contained</span><span><b>166</b> personnel</span><span>Cost: <b>$1M</b></span></div></div>
+<div class="fire"><div class="ftitle">Grapevine<span class="tag">NV</span></div><div class="narr">Ely District, BLM. Ten miles southeast of Caliente, NV. Timber and brush. Extreme fire behavior with wind-driven runs, running and spotting.</div><div class="row"><span><b>6,000</b> acres (+2,051)</span><span><b>0%</b> contained</span><span><b>188</b> personnel</span><span>Cost: <b>$1M</b></span></div></div>
+<div class="fire"><div class="ftitle">Rock Canyon<span class="tag">AZ</span></div><div class="narr">Northern District, Arizona DOF. Twenty miles southeast of Fredonia, AZ. Timber, brush and grass. Moderate fire behavior with isolated torching, creeping and smoldering. Structures threatened. Area closures in effect.</div><div class="row"><span><b>4,512</b> acres</span><span><b>20%</b> contained</span><span><b>360</b> personnel</span><span>Cost: <b>$3M</b></span></div></div>
+<div class="fire"><div class="ftitle">Sawmill<span class="tag">UT</span></div><div class="narr">Color Country Paria Unit, BLM. Forty-four miles northwest of Cedar City, UT. Dormant brush and grass. Extreme fire behavior with running, torching and spotting. Structures threatened. Area and road closures in effect.</div><div class="row"><span><b>3,563</b> acres (+1,477)</span><span><b>0%</b> contained</span><span><b>170</b> personnel</span><span>Cost: <b>$4M</b></span></div></div>
+<div class="fire"><div class="ftitle">Dellenbaugh<span class="tag">NV</span></div><div class="narr">Lake Mead National Recreation Area, NPS. Eighty miles south of St. George, UT. Timber. Minimal fire behavior with creeping and torching. Residences threatened.</div><div class="row"><span><b>767</b> acres</span><span><b>75%</b> contained</span><span><b>122</b> personnel</span><span>Cost: <b>$1.1M</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Southwest Area (SWCC) <span class="pl-badge" style="background:#e67e22;font-size:.65rem;">PL 3</span></div><div class="gh-meta">7 total incidents · 11,644 cumulative acres</div><div class="gh-stats"><span><b>9</b> new fires</span><span><b>0</b> new large</span><span><b>3</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Sycamore<span class="tag">AZ</span></div><div class="narr">Tonto NF, USFS. Fifteen miles north of Globe, AZ. Grass, chaparral and brush. Active fire behavior with group torching, spotting and running. Structures and energy infrastructure threatened. Area and road closures in effect. Reduction in acreage due to more accurate mapping.</div><div class="row"><span><b>3,328</b> acres (-13)</span><span><b>0%</b> contained</span><span><b>160</b> personnel</span><span>Cost: <b>$1.1M</b></span></div></div>
+<div class="fire"><div class="ftitle">Rio<span class="tag">NM</span></div><div class="narr">Santa Fe NF, USFS. Fifteen miles east of Espanola, NM. Timber, brush and grass. Moderate fire behavior with backing, creeping and smoldering.</div><div class="row"><span><b>184</b> acres (+56)</span><span><b>0%</b> contained</span><span><b>144</b> personnel</span><span>Cost: <b>$1.1M</b></span></div></div>
+<div class="fire"><div class="ftitle">Bear<span class="tag">NM</span></div><div class="narr">Gila NF, USFS. Eighteen miles southeast of Quemado, NM. Timber and brush. Minimal fire behavior with smoldering, creeping and backing. Area closures in effect.</div><div class="row"><span><b>7,769</b> acres</span><span><b>97%</b> contained</span><span><b>255</b> personnel</span><span>Cost: <b>$10M</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Northwest Area (NWCC) <span class="pl-badge" style="background:#f1c40f;font-size:.65rem;">PL 2</span></div><div class="gh-meta">10 total incidents · 71,668 cumulative acres · 1 CIMTs committed</div><div class="gh-stats"><span><b>18</b> new fires</span><span><b>0</b> new large</span><span><b>6</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Kartar<span class="tag">WA</span></div><div class="narr">Colville Agency, BIA. Fifteen miles southeast of Omak, WA. Grass, timber and brush. Moderate fire behavior with backing and running. Structures threatened. Area and road closures in effect.</div><div class="row"><span><b>11,706</b> acres (+4,172)</span><span><b>0%</b> contained</span><span><b>205</b> personnel</span><span>Cost: <b>$3M</b></span></div></div>
+<div class="fire"><div class="ftitle">Old Emigrant<span class="tag">OR</span></div><div class="narr">Pendleton Unit, Oregon DOF. Six miles southeast of Pendleton, OR. Grass and brush. Minimal fire behavior with smoldering and creeping. Residences threatened. Road closures in effect. Reduction in acreage due to more accurate mapping.</div><div class="row"><span><b>1,460</b> acres (-35)</span><span><b>60%</b> contained</span><span><b>163</b> personnel</span><span>Cost: <b>$1.5M</b></span></div></div>
+<div class="fire"><div class="ftitle">Upriver<span class="tag">WA</span></div><div class="narr">Northeast Region, Washington DNR. Started on private land one mile east of Spokane, WA. Timber and grass. Minimal fire behavior with smoldering. Numerous residences threatened. Evacuations, area, road and trail closures in effect.</div><div class="row"><span><b>213</b> acres</span><span><b>60%</b> contained</span><span><b>303</b> personnel</span><span><b>18</b> structures lost</span><span>Cost: <b>$2.9M</b></span></div></div>
+<div class="fire"><div class="ftitle">Tule Rd<span class="tag">WA</span></div><div class="narr">Yakama Agency, BIA. CIMT (NW Team 2), also managing the Roza incident. Five miles south of Toppenish, WA. Grass, brush and dormant brush. Minimal fire behavior with creeping and smoldering. Residences threatened. Area closures in effect.</div><div class="row"><span><b>24,090</b> acres</span><span><b>95%</b> contained</span><span><b>376</b> personnel</span><span>Cost: <b>$3.1M</b></span></div></div>
+<div class="fire"><div class="ftitle">Tucannon Mutual Aid<span class="tag">WA</span></div><div class="narr">Washington State Fire Marshal&#x27;s Office. Eight miles east of Dayton, WA. Grass and brush. Minimal fire behavior with smoldering. Residences threatened. Last report unless significant activity occurs.</div><div class="row"><span><b>8,069</b> acres (+38)</span><span><b>94%</b> contained</span><span><b>87</b> personnel</span><span><b>5</b> structures lost</span><span>Cost: <b>$750K</b></span></div></div>
+<div class="fire"><div class="ftitle">Roza<span class="tag">WA</span></div><div class="narr">Spokane District, BLM. Nine miles north of Selah, WA. Brush and grass. Minimal fire behavior with smoldering. Area closures in effect. Reduction in acreage due to more accurate mapping.</div><div class="row"><span><b>3,536</b> acres (-387)</span><span><b>90%</b> contained</span><span><b>47</b> personnel</span><span>Cost: <b>$754K</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Rocky Mountain Area (RMCC) <span class="pl-badge" style="background:#f1c40f;font-size:.65rem;">PL 2</span></div><div class="gh-meta">2 total incidents · 40,032 cumulative acres · 1 CIMTs committed</div><div class="gh-stats"><span><b>7</b> new fires</span><span><b>0</b> new large</span><span><b>1</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">South Fork<span class="tag">NE</span></div><div class="narr">Nebraska NF, USFS. Transfer of command from CIMT (RM Team 2) back to the local unit will occur tomorrow. Twelve miles west of Crawford, NE. Grass and timber. Minimal fire behavior with creeping and smoldering. Area closures in effect.</div><div class="row"><span><b>39,696</b> acres (+639)</span><span><b>90%</b> contained</span><span><b>278</b> personnel</span><span>Cost: <b>$11.2M</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Southern California Area (OSCC) <span class="pl-badge" style="background:#f1c40f;font-size:.65rem;">PL 2</span></div><div class="gh-meta">5 total incidents · 14,174 cumulative acres</div><div class="gh-stats"><span><b>27</b> new fires</span><span><b>1</b> new large</span><span><b>3</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Lost<span class="tag">CA</span></div><div class="narr">Kern County Fire Department. Thirty-five miles west of Bakersfield, CA. Grass and brush. Minimal fire behavior with backing, creeping and smoldering.</div><div class="row"><span><b>7,834</b> acres (+3,510)</span><span><b>27%</b> contained</span><span><b>558</b> personnel</span><span>Cost: <b>NR</b></span></div></div>
+<div class="fire"><div class="ftitle">Star<span class="tag">CA</span><span class="badge-new">NEW</span></div><div class="narr">Kern County Fire Department. Sixteen miles east of Bakersfield, CA. Grass and brush. Moderate fire behavior with uphill runs, running and backing. Railroad infrastructure threatened. Road closures in effect.</div><div class="row"><span><b>530</b> acres</span><span><b>27%</b> contained</span><span><b>164</b> personnel</span><span>Cost: <b>NR</b></span></div></div>
+<div class="fire"><div class="ftitle">Shore<span class="tag">CA</span></div><div class="narr">Riverside Unit, Cal Fire. Two miles west of Calimesa, CA. Grass and brush. Minimal fire behavior with smoldering. Structures threatened.</div><div class="row"><span><b>3,085</b> acres</span><span><b>91%</b> contained</span><span><b>291</b> personnel</span><span>Cost: <b>$4.5M</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Alaska Area (AICC) <span class="pl-badge" style="background:#f1c40f;font-size:.65rem;">PL 2</span></div><div class="gh-meta">2 total incidents · 1,926 cumulative acres</div><div class="gh-stats"><span><b>0</b> new fires</span><span><b>1</b> new large</span><span><b>2</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Kilolitna<span class="tag">AK</span></div><div class="narr">Tanana Zone, BLM. Started on FWS land 60 miles northwest of Rampart, AK. Brush and timber. Moderate fire behavior with smoldering, backing and single tree torching.</div><div class="row"><span><b>3,663</b> acres (+1,699)</span><span><b>0%</b> contained</span><span><b>0</b> personnel</span><span>Cost: <b>NR</b></span></div></div>
+<div class="fire"><div class="ftitle">Bear<span class="tag">AK</span><span class="badge-new">NEW</span></div><div class="narr">Tanana Zone, BLM. Started on NPS land 35 miles southeast of Lake Minchumina, AK. Timber and hardwood litter. Active fire behavior with isolated torching and running.</div><div class="row"><span><b>400</b> acres</span><span><b>0%</b> contained</span><span><b>0</b> personnel</span><span>Cost: <b>NR</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Southern Area (SACC) <span class="pl-badge" style="background:#2ecc71;font-size:.65rem;">PL 1</span></div><div class="gh-meta">20 total incidents · 38,315 cumulative acres</div><div class="gh-stats"><span><b>10</b> new fires</span><span><b>1</b> new large</span><span><b>7</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Quarry 2<span class="tag">FL</span></div><div class="narr">Florida Forest Service. Six miles west of Doral, FL. Brush. Active fire behavior with flanking and backing. Area and road closures in effect.</div><div class="row"><span><b>17,200</b> acres</span><span><b>80%</b> contained</span><span><b>24</b> personnel</span><span>Cost: <b>NR</b></span></div></div>
+<div class="fire"><div class="ftitle">Rookery<span class="tag">FL</span></div><div class="narr">Lake Woodruff NWR, FWS. Three miles northwest of Deland, FL. Grass. Minimal fire behavior with creeping and smoldering.</div><div class="row"><span><b>3,900</b> acres (+200)</span><span><b>25%</b> contained</span><span><b>7</b> personnel</span><span>Cost: <b>$40K</b></span></div></div>
+<div class="fire"><div class="ftitle">Coptic<span class="tag">FL</span></div><div class="narr">Everglades National Park, NPS. Fifteen miles northwest of Homestead, FL. Grass. Moderate fire behavior. Numerous structures threatened.</div><div class="row"><span><b>2,935</b> acres (+1,255)</span><span><b>40%</b> contained</span><span><b>20</b> personnel</span><span>Cost: <b>$200K</b></span></div></div>
+<div class="fire"><div class="ftitle">Shell<span class="tag">FL</span></div><div class="narr">National Forests in Florida, USFS. Thirteen miles west of Deland, FL. Southern rough. Minimal fire behavior.</div><div class="row"><span><b>2,822</b> acres</span><span><b>70%</b> contained</span><span><b>11</b> personnel</span><span>Cost: <b>$350K</b></span></div></div>
+<div class="fire"><div class="ftitle">School Lands<span class="tag">OK</span></div><div class="narr">Oklahoma DOF. Nine miles northwest of Waynoka, OK. Grass and brush. No new information. Last narrative report unless new information is received.</div><div class="row"><span><b>2,000</b> acres</span><span><b>20%</b> contained</span><span><b>5</b> personnel</span><span>Cost: <b>$9K</b></span></div></div>
+<div class="fire"><div class="ftitle">Well 13<span class="tag">FL</span></div><div class="narr">Florida Forest Service. Five miles west of Medley, FL. Brush. Active fire behavior with flanking and backing. Road closures in effect.</div><div class="row"><span><b>1,425</b> acres (+125)</span><span><b>60%</b> contained</span><span><b>3</b> personnel</span><span>Cost: <b>NR</b></span></div></div>
+<div class="fire"><div class="ftitle">Rose Bay Canal<span class="tag">NC</span></div><div class="narr">North Carolina Forest Service. Ten miles southwest of Fairfield, NC. Timber. Moderate fire behavior with smoldering. Precipitation occurred over the fire area yesterday.</div><div class="row"><span><b>662</b> acres</span><span><b>65%</b> contained</span><span><b>101</b> personnel</span><span>Cost: <b>$1M</b></span></div></div>
+<div class="gacc-hdr "><div class="gh-title">Northern Rockies Area (NRCC) <span class="pl-badge" style="background:#2ecc71;font-size:.65rem;">PL 1</span></div><div class="gh-meta">1 total incidents · 300 cumulative acres</div><div class="gh-stats"><span><b>2</b> new fires</span><span><b>0</b> new large</span><span><b>1</b> uncontained</span></div></div>
+<div class="fire"><div class="ftitle">Gold Run<span class="tag">ID</span></div><div class="narr">Cataldo Area Office, IDL. Eight miles east of Kellogg, ID. Timber. Minimal fire behavior with creeping and smoldering.</div><div class="row"><span><b>300</b> acres</span><span><b>22%</b> contained</span><span><b>178</b> personnel</span><span><b>3</b> structures lost</span><span>Cost: <b>$833K</b></span></div></div>
+<div class="footer">
+<div><b>Wildfire Aware Situation Report</b> · Generated June 20, 2026 13:42</div>
+<div style="margin-top:8px;">
 <a href="https://www.nifc.gov/nicc/predictive-services/intelligence">NIFC Incident Management Sit Report</a>
 <a href="https://www.weather.gov/fire/">NWS Fire Weather</a>
-<a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html">SPC Fire Weather Outlook</a></div>
+<a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html">SPC Fire Weather Outlook</a>
+</div></div>
 </div></body></html>
