@@ -47,32 +47,23 @@ cloud version does not use a PAT at all.
 
 ## Schedule
 
-Runs at **14:15 UTC** daily (~08:15 MDT), shortly after NIFC posts the report
+Runs at **13:45 UTC** daily (~07:45 MDT), shortly after NIFC posts the report
 around 0730 MDT. Adjust the `cron:` line in the workflow if you want a
 different time. You can also trigger a run manually from the **Actions** tab
 (`workflow_dispatch`). If a run fails, GitHub emails the repo owner by default.
 
-## Run it locally
+## Waiting for the day's report
 
-```bash
-pip install -r requirements.txt
+NIFC's posting time drifts, so the run may fire before today's PDF is up. The
+generator handles this: it checks the PDF's "Report date" against today
+(US Mountain time) and, if it's still yesterday's edition, waits and re-downloads
+until the current one appears. Two env vars tune this (set them in the workflow's
+`Generate report` step if you want to change the defaults):
 
-# Live pull:
-OUTPUT_PATH=wildfire-sitrep.html \
-CONTACT_EMAIL=you@example.com \
-python generate.py
+- `RETRY_INTERVAL_SECONDS` — poll interval while waiting (default `300`, i.e. 5 min)
+- `MAX_WAIT_MINUTES` — give up after this long (default `180`, i.e. 3 h)
 
-# Offline test against a already-downloaded PDF:
-LOCAL_PDF=/path/to/sitreprt.pdf python generate.py
-```
-
-## Maintenance notes
-
-- The parser keys off the NIFC report's current layout (GACC summary table,
-  `"<Area> Area (PL n)"` section headers, and the 15-column fire tables). If
-  NIFC changes the PDF format, the table/section regexes in `generate.py` are
-  where you'd adjust.
-- Per-fire narratives are best-effort: if one can't be matched it's simply
-  omitted, and the numeric data (from the tables) is unaffected.
-- To also keep a dated archive, add a copy step in the workflow, e.g.
-  `cp wildfire-sitrep.html archive/$(date -u +%F).html` before the commit.
+If today's edition never appears within `MAX_WAIT_MINUTES`, the run exits with an
+error (so the failure email fires) and the published site keeps the previous
+day's report rather than republishing stale data. Note: during the off-season, if
+NIFC skips a 
