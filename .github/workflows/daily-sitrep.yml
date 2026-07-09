@@ -1,0 +1,51 @@
+name: Daily Wildfire Sitrep
+
+# NIFC posts the Incident Management Situation Report around 0730 MDT (1330 UTC).
+# Run a little after that with buffer; also allow manual runs.
+on:
+  schedule:
+    - cron: "45 13 * * *"   # 13:45 UTC daily (~07:45 MDT)
+  workflow_dispatch: {}
+
+# Let the workflow's built-in GITHUB_TOKEN commit the regenerated HTML.
+# No personal access token required.
+permissions:
+  contents: write
+
+concurrency:
+  group: wildfire-sitrep
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate report
+        env:
+          OUTPUT_PATH: wildfire-sitrep.html
+          CONTACT_EMAIL: rachael.brady@theanalyticalmoose.com
+        run: python generate.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- wildfire-sitrep.html; then
+            echo "No content change today; skipping commit."
+          else
+            git add wildfire-sitrep.html
+            git commit -m "Daily wildfire situation report - $(date -u +'%Y-%m-%d')"
+            git push
+          fi
