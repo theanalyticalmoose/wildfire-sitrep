@@ -21,9 +21,15 @@ import sys
 import html
 import json
 import datetime
+import time
 import urllib.request
 
 import pdfplumber
+
+try:
+    from zoneinfo import ZoneInfo
+except Exception:  # pragma: no cover
+    ZoneInfo = None
 
 NIFC_PDF_URL = "https://www.nifc.gov/nicc-files/sitreprt.pdf"
 NWS_ALERTS_URL = ("https://api.weather.gov/alerts/active?event="
@@ -595,18 +601,82 @@ h2 .sub{font-size:0.8rem;font-weight:400;color:#999}
 # --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
-def main():
-    local_pdf = os.environ.get("LOCAL_PDF")
+def target_report_date():
+    """Today's date in US Mountain time (the report is stamped 0730 MDT)."""
+    if ZoneInfo is not None:
+        try:
+            return datetime.datetime.now(ZoneInfo("America/Denver")).date()
+        except Exception:  # pragma: no cover
+            pass
+    # Fallback if tzdata is unavailable: MDT = UTC-6.
+    return (datetime.datetime.now(datetime.timezone.utc)
+            - datetime.timedelta(hours=6)).date()
+
+
+def report_date_to_date(s):
+    """Parse the PDF's 'Thursday July 9, 2026' header into a date object."""
+    s = (s or "").strip()
+    try:
+        return datetime.datetime.strptime(s, "%A %B %d, %Y").date()
+    except ValueError:
+        pass
+    m = re.search(r"([A-Z][a-z]+ \d{1,2}, \d{4})", s)
+    if m:
+        try:
+            return datetime.datetime.strptime(m.group(1), "%B %d, %Y").date()
+        except ValueError:
+            pass
+    return None
+
+
+def get_fresh_pdf():
+    """Download the NIFC PDF and keep retrying every RETRY_INTERVAL_SECONDS
+    until the report is dated for today (Mountain time), or MAX_WAIT_MINUTES
+    elapses. Returns parsed data.
+
+    If today's edition never appears within the window, raises SystemExit so
+    the workflow fails (triggering the failure-email alert) and the site keeps
+    yesterday's report rather than republishing stale data.
+    """
     pdf_path = "/tmp/sitreprt.pdf"
-    if local_pdf and os.path.exists(local_pdf):
-        pdf_path = local_pdf
-        print(f"Using local PDF: {pdf_path}")
-    else:
-        print("Downloading NIFC PDF...")
+    target = target_report_date()
+    interval = int(os.environ.get("RETRY_INTERVAL_SECONDS", "300"))
+    max_wait = int(os.environ.get("MAX_WAIT_MINUTES", "180"))
+    deadline = time.monotonic() + max_wait * 60
+    attempt = 0
+    while True:
+        attempt += 1
+        print(f"Downloading NIFC PDF (attempt {attempt}, target {target})...")
         with open(pdf_path, "wb") as fh:
             fh.write(http_get(NIFC_PDF_URL, binary=True))
+        data = parse_pdf(pdf_path)
+        rd = report_date_to_date(data["report_date"])
+        if rd is None:
+            print(f"  Could not parse report date '{data['report_date']}'; "
+                  f"proceeding with the downloaded edition.")
+            return data
+        if rd >= target:
+            print(f"  Fresh edition: dated {rd} (target {target}).")
+            return data
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise SystemExit(
+                f"NIFC report still stale (dated {rd}, expected {target}) after "
+                f"{max_wait} min. Failing so the alert fires; the published site "
+                f"keeps yesterday's report.")
+        wait = min(interval, remaining)
+        print(f"  Stale edition dated {rd} < target {target}. "
+              f"Waiting {int(wait)}s, then retrying...")
+        time.sleep(wait)
 
-    data = parse_pdf(pdf_path)
+
+def main():
+    local_pdf = os.environ.get("LOCAL_PDF")
+    if local_pdf and os.path.exists(local_pdf):
+        print(f"Using local PDF (offline mode, freshness check skipped): {local_pdf}")
+        data = parse_pdf(local_pdf)
+    else:
+        data = get_fresh_pdf()
     print(f"Report date: {data['report_date']} | National PL {data['national_pl']}")
 
     print("Fetching NWS alerts...")
