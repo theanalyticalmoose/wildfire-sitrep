@@ -12,7 +12,9 @@ No LLM, no browser, no stored secrets. Designed to run on GitHub Actions.
 Env vars (all optional):
   OUTPUT_PATH   where to write the HTML (default: wildfire-sitrep.html)
   CONTACT_EMAIL User-Agent contact string for NWS/NOAA requests
-  LOCAL_PDF     path to a local PDF (offline testing; skips download)
+  LOCAL_PDF     path to a local PDF (offline testing; skips download + freshness wait)
+  RETRY_INTERVAL_SECONDS  poll interval while waiting for today's edition (default 300 = 5 min)
+  MAX_WAIT_MINUTES        give up after this long and fail the run (default 180 = 3 h)
 """
 
 import os
