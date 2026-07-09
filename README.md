@@ -38,12 +38,6 @@ HTML changed**, so you don't get empty daily commits.
 Your report will be live at:
 `https://<user>.github.io/<repo>/wildfire-sitrep.html`
 
-## Security note
-
-The original Cowork task file contained a hard-coded GitHub personal access
-token in plaintext. **Revoke that token** (GitHub → Settings → Developer
-settings → Personal access tokens) — it should be treated as compromised. This
-cloud version does not use a PAT at all.
 
 ## Schedule
 
