@@ -61,7 +61,7 @@ until the current one appears. Two env vars tune this (set them in the workflow'
 `Generate report` step if you want to change the defaults):
 
 - `RETRY_INTERVAL_SECONDS` — poll interval while waiting (default `300`, i.e. 5 min)
-- `MAX_WAIT_MINUTES` — give up after this long (default `180`, i.e. 3 h)
+- `MAX_WAIT_MINUTES` — give up after this long (default `60`, i.e. 1 h)
 
 If today's edition never appears within `MAX_WAIT_MINUTES`, the run exits with an
 error (so the failure email fires) and the published site keeps the previous
