@@ -14,7 +14,7 @@ Env vars (all optional):
   CONTACT_EMAIL User-Agent contact string for NWS/NOAA requests
   LOCAL_PDF     path to a local PDF (offline testing; skips download + freshness wait)
   RETRY_INTERVAL_SECONDS  poll interval while waiting for today's edition (default 300 = 5 min)
-  MAX_WAIT_MINUTES        give up after this long and fail the run (default 180 = 3 h)
+  MAX_WAIT_MINUTES        give up after this long and fail the run (default 60 = 1 h)
 """
 
 import os
@@ -643,7 +643,7 @@ def get_fresh_pdf():
     pdf_path = "/tmp/sitreprt.pdf"
     target = target_report_date()
     interval = int(os.environ.get("RETRY_INTERVAL_SECONDS", "300"))
-    max_wait = int(os.environ.get("MAX_WAIT_MINUTES", "180"))
+    max_wait = int(os.environ.get("MAX_WAIT_MINUTES", "60"))
     deadline = time.monotonic() + max_wait * 60
     attempt = 0
     while True:
