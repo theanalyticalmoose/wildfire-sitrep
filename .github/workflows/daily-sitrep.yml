@@ -4,7 +4,7 @@ name: Daily Wildfire Sitrep
 # Run a little after that with buffer; also allow manual runs.
 on:
   schedule:
-    - cron: "45 13 * * *"   # 13:45 UTC daily (~07:45 MDT)
+    - cron: "45 12 * * *"   # 13:45 UTC daily (~07:45 MDT)
   workflow_dispatch: {}
 
 # Let the workflow's built-in GITHUB_TOKEN commit the regenerated HTML.
