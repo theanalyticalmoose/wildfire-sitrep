@@ -349,7 +349,7 @@ def esc(x):
 
 
 def pl_badge(pl, small=False):
-    fs = "0.72rem" if small else "0.8rem"
+    fs = "12px" if small else "13px"
     return (f'<span style="background:{PLC.get(pl, "#6c733d")};'
             f'color:{PLC_FG.get(pl, "#fff")};font-weight:700;'
             f'padding:2px 9px;border-radius:12px;font-size:{fs};white-space:nowrap;">PL {pl}</span>')
@@ -358,17 +358,17 @@ def pl_badge(pl, small=False):
 def new_badge():
     return ('<span style="color:#280069;background:rgba(40,0,105,0.07);'
             'border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;'
-            'border-radius:10px;font-size:0.7rem;letter-spacing:0.5px;">NEW</span>')
+            'border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span>')
 
 
 def contained_badge():
     return ('<span style="color:#6c733d;background:rgba(108,115,61,0.14);font-weight:700;'
-            'padding:1px 8px;border-radius:10px;font-size:0.7rem;">CONTAINED</span>')
+            'padding:1px 8px;border-radius:10px;font-size:11px;">CONTAINED</span>')
 
 
 def state_tag(s):
     return (f'<span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;'
-            f'font-size:0.72rem;font-weight:600;">{esc(s)}</span>')
+            f'font-size:12px;font-weight:600;">{esc(s)}</span>')
 
 
 def acnum(v):
@@ -516,17 +516,17 @@ def render(data, nws, spc):
                  f'Weather Outlook{vt} delineates no Critical or Elevated risk areas. '
                  f'Pulled live from spc.noaa.gov.</div>')
         if spc.get("body"):
-            H.append('<div class="muted" style="margin:6px 0 10px;font-size:0.85rem;">'
+            H.append('<div class="muted" style="margin:6px 0 10px;font-size:14px;">'
                      'Forecaster discussion (localized concerns kept below formal highlight '
                      'criteria):</div>')
-            H.append(f'<div class="alert spc-elevated" style="font-size:0.86rem;">'
+            H.append(f'<div class="alert spc-elevated" style="font-size:14px;">'
                      f'{esc(spc["body"])}</div>')
     else:
         vt = f' (valid {esc(spc["valid"])})' if spc.get("valid") else ""
         H.append(f'<div class="alert spc-critical"><b>Risk areas forecast{vt}.</b> '
                  f'See discussion below.</div>')
         if spc.get("body"):
-            H.append(f'<div class="alert spc-elevated" style="font-size:0.86rem;">'
+            H.append(f'<div class="alert spc-elevated" style="font-size:14px;">'
                      f'{esc(spc["body"])}</div>')
 
     H.append('<h2 id="nws">NWS Fire Weather Alerts</h2>')
@@ -537,7 +537,7 @@ def render(data, nws, spc):
         H.append(f'<div class="alert {cls}"><div class="atitle">{esc(a["event"])} — '
                  f'{esc(a["area"])}</div>')
         if a["headline"]:
-            H.append(f'<div style="font-size:0.86rem;margin-bottom:5px;">{esc(a["headline"])}</div>')
+            H.append(f'<div style="font-size:14px;margin-bottom:5px;">{esc(a["headline"])}</div>')
         det = []
         if a["wind"]:
             det.append(f'<b>Winds:</b> {esc(a["wind"])}')
@@ -545,7 +545,7 @@ def render(data, nws, spc):
             det.append(f'<b>Min RH:</b> {esc(a["rh"])}')
         if a["onset"] or a["ends"]:
             det.append(f'<b>Valid:</b> {esc(a["onset"])} to {esc(a["ends"])}')
-        H.append(f'<div style="font-size:0.84rem;">{" &nbsp;·&nbsp; ".join(det)}</div></div>')
+        H.append(f'<div style="font-size:13px;">{" &nbsp;·&nbsp; ".join(det)}</div></div>')
 
     H.append('<h2 id="large-fires">Large Fires <span class="sub">— Grouped by GACC</span></h2>')
     active_codes = sorted(linked_codes,
@@ -612,18 +612,18 @@ body{background:#f2f2f2;color:#2f292b;font-family:"David Libre",Georgia,"Times N
 a{color:#074259}
 h1,h2,.stat .n,.plbanner .big,.gcell .code{font-family:"Oswald","Arial Narrow",sans-serif}
 .header{border-left:5px solid #5f0000;padding:6px 0 6px 16px;margin-bottom:22px}
-.header h1{font-size:1.85rem;font-weight:700;letter-spacing:0.3px}
-.plbanner{background:linear-gradient(135deg,#5f0000,#93400c);border-radius:14px;padding:20px 22px;margin-bottom:22px;color:#f8f4ec}
-.plbanner .big{font-size:2.1rem;font-weight:700;line-height:1.15;letter-spacing:0.5px}
+.header h1{font-size:30px;font-weight:700;letter-spacing:0.3px}
+.plbanner{background:#5f0000;background:linear-gradient(135deg,#5f0000,#93400c);border-radius:14px;padding:20px 22px;margin-bottom:22px;color:#f8f4ec}
+.plbanner .big{font-size:34px;font-weight:700;line-height:1.15;letter-spacing:0.5px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:30px}
 .stat{background:#fff;border:1px solid #ddd5c7;border-radius:12px;padding:16px}
-.stat .n{font-size:1.9rem;font-weight:600;color:#5f0000}
-.stat .l{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:#8a8178;margin-top:4px;font-family:"Oswald",sans-serif;font-weight:500}
-.stat-a{text-decoration:none;color:inherit;display:block}
+.stat .n{font-size:30px;font-weight:600;color:#5f0000}
+.stat .l{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#8a8178;margin-top:4px;font-family:"Oswald",sans-serif;font-weight:500}
+.stat-a{text-decoration:none;color:#2f292b;display:block}
 .stat-a .stat{transition:border-color 0.15s, box-shadow 0.15s;height:100%}
 .stat-a:hover .stat{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
-h2{font-size:1.3rem;font-weight:600;letter-spacing:0.4px;margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid #5f0000;color:#2f292b;scroll-margin-top:12px}
-h2 .sub{font-size:0.8rem;font-weight:400;color:#8a8178;font-family:"David Libre",serif;letter-spacing:0}
+h2{font-size:21px;font-weight:600;letter-spacing:0.4px;margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid #5f0000;color:#2f292b;scroll-margin-top:12px}
+h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",serif;letter-spacing:0}
 .wxcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
 .wx-ok{background:rgba(108,115,61,0.10);border-color:#6c733d}
 .wx-ok .n{color:#535c2b}
@@ -631,25 +631,25 @@ h2 .sub{font-size:0.8rem;font-weight:400;color:#8a8178;font-family:"David Libre"
 .wx-rfw .n{color:#5f0000}
 .wx-fww{background:rgba(187,140,77,0.12);border-color:#bb8c4d}
 .wx-fww .n{color:#8a5f22}
-.gcell-a{text-decoration:none;color:inherit;display:block}
+.gcell-a{text-decoration:none;color:#2f292b;display:block}
 .gcell-a .gcell{transition:border-color 0.15s, box-shadow 0.15s}
 .gcell-a:hover .gcell{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
 .gaccgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .gcell{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.gcell .code{font-weight:600;font-size:1rem;letter-spacing:0.5px}
-.gcell .full{font-size:0.68rem;color:#8a8178}
+.gcell .code{font-weight:600;font-size:16px;letter-spacing:0.5px}
+.gcell .full{font-size:11px;color:#8a8178}
 .card{background:#fff;border:1px solid #ddd5c7;border-radius:12px;padding:16px 18px;margin-bottom:14px}
 .fire{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:14px 16px;margin-bottom:12px}
 .fire.new{border-left:4px solid #280069}
-.fire .fname{font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
-.fire .narr{color:#4f4944;font-size:0.92rem;margin-bottom:9px}
-.fire .srow{font-size:0.87rem;color:#4a443f;border-top:1px solid #e8e1d4;padding-top:8px}
+.fire .fname{font-size:17px;font-weight:700;display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
+.fire .narr{color:#4f4944;font-size:15px;margin-bottom:9px}
+.fire .srow{font-size:14px;color:#4a443f;border-top:1px solid #e8e1d4;padding-top:8px}
 .contained-card{border-left:4px solid #6c733d}
 .gacchead{border-radius:12px;padding:14px 18px;margin:22px 0 12px;background:#2f292b;border:1px solid #2f292b;color:#f2f2f2;scroll-margin-top:12px}
 .gacchead .muted{color:#b8b0a4}
-.gacchead .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:1.4rem;font-weight:700}
-.gacchead .meta{color:#b8b0a4;font-size:0.95rem;margin-top:4px}
-.gacchead .mrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:1rem}
+.gacchead .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:22px;font-weight:700}
+.gacchead .meta{color:#b8b0a4;font-size:15px;margin-top:4px}
+.gacchead .mrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:16px}
 .gacchead .mrow b{color:#e59a3c}
 .alert{border-radius:10px;padding:13px 16px;margin-bottom:11px;background:#fff}
 .spc-critical,.rfw{background:rgba(95,0,0,0.05);border:1px solid #5f0000;border-left:5px solid #5f0000}
@@ -657,7 +657,7 @@ h2 .sub{font-size:0.8rem;font-weight:400;color:#8a8178;font-family:"David Libre"
 .alert .atitle{font-weight:700;margin-bottom:5px}
 .banner-ok{background:rgba(108,115,61,0.10);border:1px solid #6c733d;border-left:5px solid #6c733d;border-radius:10px;padding:14px 16px;margin-bottom:12px}
 .wxtext p{margin-bottom:12px}
-.footer{margin-top:44px;border-top:2px solid #5f0000;padding-top:18px;color:#8a8178;font-size:0.84rem}
+.footer{margin-top:44px;border-top:2px solid #5f0000;padding-top:18px;color:#8a8178;font-size:13px}
 .footer a{margin-right:14px}
 </style>"""
 
