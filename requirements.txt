@@ -1,1 +1,2 @@
 pdfplumber>=0.11
+premailer>=3.10
