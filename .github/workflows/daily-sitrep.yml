@@ -4,7 +4,7 @@ name: Daily Wildfire Sitrep
 # Run a little after that with buffer; also allow manual runs.
 on:
   schedule:
-    - cron: "45 12 * * *"→ Runs at 12:45   # 12:45 UTC daily (~06:45 MDT)
+    - cron: "45 12 * * *"   # 12:45 UTC daily (~06:45 MDT)
   workflow_dispatch: {}
 
 # Let the workflow's built-in GITHUB_TOKEN commit the regenerated HTML.
@@ -39,13 +39,53 @@ jobs:
         run: python generate.py
 
       - name: Commit if changed
+        id: commit
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- wildfire-sitrep.html; then
             echo "No content change today; skipping commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git add wildfire-sitrep.html
             git commit -m "Daily wildfire situation report - $(date -u +'%Y-%m-%d')"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      # Emails the full report HTML via Resend after each day's report is
+      # committed. Requires the RESEND_API_KEY repository secret; if the
+      # secret isn't set, this step just logs a note and succeeds.
+      # Note: onboarding@resend.dev can only deliver to the email address
+      # that owns the Resend account. Once you verify a domain in Resend,
+      # change EMAIL_FROM to an address on that domain.
+      - name: Email report via Resend
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_FROM: "Wildfire Sitrep <onboarding@resend.dev>"
+          EMAIL_TO: rachael.brady@theanalyticalmoose.com
+        run: |
+          if [ -z "$RESEND_API_KEY" ]; then
+            echo "RESEND_API_KEY secret not set; skipping email."
+            exit 0
+          fi
+          python - <<'EOF'
+          import json, os, re
+
+          html = open("wildfire-sitrep.html", encoding="utf-8").read()
+          m = re.search(r"<title>(.*?)</title>", html, re.DOTALL)
+          subject = m.group(1).strip() if m else "Wildfire Aware Situation Report"
+          with open("/tmp/resend.json", "w", encoding="utf-8") as fh:
+              json.dump({
+                  "from": os.environ["EMAIL_FROM"],
+                  "to": [os.environ["EMAIL_TO"]],
+                  "subject": subject,
+                  "html": html,
+              }, fh)
+          EOF
+          curl -fsS -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            --data @/tmp/resend.json
+          echo "Email sent to $EMAIL_TO"
