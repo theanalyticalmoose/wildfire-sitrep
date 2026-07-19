@@ -75,15 +75,42 @@ jobs:
           python - <<'EOF'
           import json, os, re
 
+          from premailer import transform
+
           html = open("wildfire-sitrep.html", encoding="utf-8").read()
           m = re.search(r"<title>(.*?)</title>", html, re.DOTALL)
           subject = m.group(1).strip() if m else "Wildfire Aware Situation Report"
+
+          # Email clients are unreliable with <style> sheets, so inline all CSS.
+          # Also slim the result to stay under Gmail's ~102KB clipping limit:
+          # drop the stylesheet/script, dead in-page jump links, and web-only
+          # properties, and add a view-in-browser fallback link up top.
+          out = transform(html, disable_validation=True, remove_classes=True,
+                          cssutils_logging_level="CRITICAL")
+          out = re.sub(r"<style>.*?</style>", "", out, flags=re.DOTALL)
+          out = re.sub(r"<script>.*?</script>", "", out, flags=re.DOTALL)
+          out = re.sub(r' title="Jump to [^"]*"', "", out)
+          out = re.sub(r'<a href="#[^"]*" style="[^"]*">(.*?)</a>', r"\1",
+                       out, flags=re.DOTALL)
+          for junk in ("transition:border-color 0.15s, box-shadow 0.15s;",
+                       "transition:border-color 0.15s, box-shadow 0.15s",
+                       "scroll-margin-top:12px;", "scroll-margin-top:12px",
+                       "height:100%;", "height:100%"):
+              out = out.replace(junk, "")
+          out = out.replace(";;", ";").replace(';"', '"')
+          out = out.replace('<div style="max-width:860px',
+              '<div style="text-align:center;font-size:12px;color:#8a8178;margin-bottom:10px;">'
+              '<a href="https://theanalyticalmoose.github.io/wildfire-sitrep/wildfire-sitrep.html" '
+              'style="color:#074259;">View this report in your browser</a></div>'
+              '<div style="max-width:860px', 1)
+          print(f"email body: {len(out.encode())} bytes (inlined from {len(html.encode())})")
+
           with open("/tmp/resend.json", "w", encoding="utf-8") as fh:
               json.dump({
                   "from": os.environ["EMAIL_FROM"],
                   "to": [os.environ["EMAIL_TO"]],
                   "subject": subject,
-                  "html": html,
+                  "html": out,
               }, fh)
           EOF
           http_code=$(curl -sS -o /tmp/resend-response.json -w "%{http_code}" \
