@@ -28,7 +28,8 @@ The GitHub Actions workflow (`.github/workflows/daily-sitrep.yml`) runs it
 daily and commits the result **only if the HTML changed**, so you don't get
 empty daily commits. The NWS and SPC fetches are best-effort — if one fails,
 the report still renders without it; only a stale NIFC PDF fails the run
-(see below).
+(see below). If a `RESEND_API_KEY` secret is configured, the workflow also
+emails each day's report (see "Email delivery" below).
 
 ## Repository contents
 
@@ -84,6 +85,23 @@ days with no new edition the run will fail after `MAX_WAIT_MINUTES` and email
 you. If that gets noisy, disable the workflow for the winter (**Actions →
 Daily Wildfire Sitrep → ⋯ → Disable workflow**) or stretch the cron to weekly,
 and re-enable it in spring.
+
+## Email delivery (optional)
+
+After each day's report is committed, the workflow emails the full HTML
+report via [Resend](https://resend.com). To enable it:
+
+1. Create an API key in the Resend dashboard (**API Keys → Create API key**).
+2. Add it to this repo as a secret named `RESEND_API_KEY`:
+   **Settings → Secrets and variables → Actions → New repository secret**.
+
+With the secret absent, the email step just logs a note and succeeds, so the
+workflow works fine without it — this is the only secret the repo uses.
+
+The sender defaults to Resend's built-in `onboarding@resend.dev`, which can
+only deliver to the email address that owns the Resend account. Once you
+verify a domain in Resend, change `EMAIL_FROM` (and `EMAIL_TO` if needed) in
+the workflow's `Email report via Resend` step.
 
 ## Running locally
 
