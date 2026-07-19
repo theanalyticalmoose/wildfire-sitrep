@@ -418,7 +418,7 @@ def render(data, nws, spc):
     linked_codes = {c for c in d["sections"]
                     if any(f["gacc"] == c and f["pct"] != "100" for f in fires)}
 
-    H.append(f'<div class="header"><h1>&#128293; Wildfire Aware Situation Report</h1>'
+    H.append(f'<div class="header">'
              f'<div class="muted">{esc(d["report_date"])} · 0730 MDT · '
              f'National Interagency Fire Center</div></div>')
 
