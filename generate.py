@@ -221,6 +221,10 @@ def build_fires(fire_rows, full, data):
             "gacc": None, "pos": None, "narr": "",
         }
         m = re.search(re.escape(name) + r"[^\n]{0,25}" + re.escape(acres), full)
+        if m is None:
+            # Fallback (long/wrapped names, complexes): locate the fire by its
+            # narrative line instead of its table row.
+            m = re.search(narrative_name_re(name), full)
         if m:
             fire["pos"] = m.start()
             for start, code in sec_bounds:
@@ -232,6 +236,13 @@ def build_fires(fire_rows, full, data):
 
     attach_narratives(fires, full, data)
     return fires
+
+
+def narrative_name_re(name):
+    """Match a fire's name at the start of its narrative. Complexes read
+    'Name (5 fires),' so allow an optional parenthetical before the comma."""
+    return (r"(?:\*\s*)?" + re.escape(name) +
+            r"(?:\s*\([^)]{0,30}\))?\s*,")
 
 
 def attach_narratives(fires, full, data):
@@ -248,13 +259,13 @@ def attach_narratives(fires, full, data):
 
         hits = []
         for f in by_section.get(code, []):
-            m = re.search(r"(?:\*\s*)?" + re.escape(f["name"]) + r",", narr_block)
+            m = re.search(narrative_name_re(f["name"]), narr_block)
             if m:
                 hits.append((m.start(), f))
         hits.sort()
         for idx, (start, f) in enumerate(hits):
             end = hits[idx + 1][0] if idx + 1 < len(hits) else len(narr_block)
-            f["narr"] = collapse(narr_block[start:end])
+            f["narr"] = re.sub(r"^\*\s*", "", collapse(narr_block[start:end]))
 
 
 def parse_weather(full):
@@ -328,7 +339,9 @@ def fetch_spc():
 # --------------------------------------------------------------------------- #
 # HTML rendering
 # --------------------------------------------------------------------------- #
-PLC = {1: "#2ecc71", 2: "#f1c40f", 3: "#e67e22", 4: "#e74c3c", 5: "#ff4444"}
+# Brand severity ramp: olive, tan, orange, salmon, maroon.
+PLC = {1: "#6c733d", 2: "#bb8c4d", 3: "#d58317", 4: "#e87f7f", 5: "#5f0000"}
+PLC_FG = {1: "#fff", 2: "#2f292b", 3: "#fff", 4: "#2f292b", 5: "#fff"}
 
 
 def esc(x):
@@ -337,23 +350,24 @@ def esc(x):
 
 def pl_badge(pl, small=False):
     fs = "0.72rem" if small else "0.8rem"
-    return (f'<span style="background:{PLC.get(pl, "#2ecc71")};color:#111;font-weight:700;'
+    return (f'<span style="background:{PLC.get(pl, "#6c733d")};'
+            f'color:{PLC_FG.get(pl, "#fff")};font-weight:700;'
             f'padding:2px 9px;border-radius:12px;font-size:{fs};white-space:nowrap;">PL {pl}</span>')
 
 
 def new_badge():
-    return ('<span style="color:#f1c40f;background:rgba(241,196,15,0.25);'
-            'border:1px solid rgba(241,196,15,0.35);font-weight:700;padding:1px 8px;'
+    return ('<span style="color:#280069;background:rgba(40,0,105,0.07);'
+            'border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;'
             'border-radius:10px;font-size:0.7rem;letter-spacing:0.5px;">NEW</span>')
 
 
 def contained_badge():
-    return ('<span style="color:#2ecc71;background:rgba(39,174,96,0.2);font-weight:700;'
+    return ('<span style="color:#6c733d;background:rgba(108,115,61,0.14);font-weight:700;'
             'padding:1px 8px;border-radius:10px;font-size:0.7rem;">CONTAINED</span>')
 
 
 def state_tag(s):
-    return (f'<span style="background:#333;color:#bbb;padding:1px 7px;border-radius:6px;'
+    return (f'<span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;'
             f'font-size:0.72rem;font-weight:600;">{esc(s)}</span>')
 
 
@@ -368,15 +382,15 @@ def chg_html(chg):
     if chg in ("---", "0", "", None):
         return ""
     if str(chg).startswith("-"):
-        return f' <span style="color:#999;">({esc(chg)})</span>'
-    return f' <span style="color:#e67e22;">(+{esc(chg)})</span>'
+        return f' <span style="color:#8a8178;">({esc(chg)})</span>'
+    return f' <span style="color:#d58317;">(+{esc(chg)})</span>'
 
 
 def stat_row(f):
-    parts = [f'<b style="color:#e67e22;">{esc(f["acres"])}</b> acres{chg_html(f["chg"])}',
+    parts = [f'<b style="color:#d58317;">{esc(f["acres"])}</b> acres{chg_html(f["chg"])}',
              f'{esc(f["pct"])}% contained', f'{esc(f["ppl"])} personnel']
     if f["strc"] and str(f["strc"]) not in ("0", "---", ""):
-        parts.append(f'<span style="color:#e74c3c;">{esc(f["strc"])} structures lost</span>')
+        parts.append(f'<span style="color:#5f0000;">{esc(f["strc"])} structures lost</span>')
     parts.append(f'{esc(f["cost"])} to date')
     return " &nbsp;·&nbsp; ".join(parts)
 
@@ -400,18 +414,25 @@ def render(data, nws, spc):
     H.append(STYLE)
     H.append('</head><body><div class="wrap">')
 
-    H.append('<div class="nav">'
-             '<a href="#gacc-levels">GACC Levels</a>'
-             '<a href="#new-fires">New Large Fires</a>'
-             '<a href="#contained-fires">Contained Fires</a>'
-             '<a href="#weather">Weather Discussion</a>'
-             '<a href="#spc">SPC Outlook</a>'
-             '<a href="#nws">NWS Alerts</a>'
-             '<a href="#large-fires">Large Fires</a></div>')
+    # GACC areas that will get a section below (drives grid-cell links)
+    linked_codes = {c for c in d["sections"]
+                    if any(f["gacc"] == c and f["pct"] != "100" for f in fires)}
 
     H.append(f'<div class="header"><h1>&#128293; Wildfire Aware Situation Report</h1>'
              f'<div class="muted">{esc(d["report_date"])} · 0730 MDT · '
              f'National Interagency Fire Center</div></div>')
+
+    cards = [("Uncontained Large Fires", d["national"]["uncontained"], "#large-fires"),
+             ("New Large Fires", d["national"]["new_large"], "#new-fires"),
+             ("Large Fires Contained", d["national"]["contained"], "#contained-fires"),
+             ("CIMTs Committed", d["national"]["cimts"], "#large-fires"),
+             ("Total Active Acres", d["total_acres"], "#gacc-levels")]
+    H.append('<div class="stats">')
+    for label, n, href in cards:
+        H.append(f'<a class="stat-a" href="{href}"><div class="stat">'
+                 f'<div class="n">{esc(n)}</div>'
+                 f'<div class="l">{esc(label)}</div></div></a>')
+    H.append('</div>')
 
     H.append(f'<div class="plbanner"><div class="big">National Preparedness Level '
              f'{d["national_pl"]}</div><div style="margin-top:8px;opacity:0.95;">'
@@ -420,33 +441,50 @@ def render(data, nws, spc):
              f'{d["national"]["uncontained"]} uncontained large fires currently active '
              f'across the country.</div></div>')
 
-    cards = [("Uncontained Large Fires", d["national"]["uncontained"]),
-             ("New Large Fires", d["national"]["new_large"]),
-             ("Large Fires Contained", d["national"]["contained"]),
-             ("CIMTs Committed", d["national"]["cimts"]),
-             ("Total Active Acres", d["total_acres"])]
-    H.append('<div class="stats">')
-    for label, n in cards:
-        H.append(f'<div class="stat"><div class="n">{esc(n)}</div>'
-                 f'<div class="l">{esc(label)}</div></div>')
-    H.append('</div>')
-
     H.append('<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">')
     for code in GACC_CELL_ORDER:
         pl = d["gacc_summary"].get(code, {}).get("pl", 1)
-        H.append(f'<div class="gcell"><div><div class="code">{code}</div>'
-                 f'<div class="full">{esc(GACC_NAMES[code])}</div></div>{pl_badge(pl)}</div>')
+        cell = (f'<div class="gcell"><div><div class="code">{code}</div>'
+                f'<div class="full">{esc(GACC_NAMES[code])}</div></div>{pl_badge(pl)}</div>')
+        if code in linked_codes:
+            cell = (f'<a class="gcell-a" href="#gacc-{code}" '
+                    f'title="Jump to {code} large fires">{cell}</a>')
+        H.append(cell)
     H.append('</div>')
 
+    # Fire weather at a glance: SPC verdict + alert counts, linking down
+    rfw_ct = sum(1 for a in nws if a["event"] == "Red Flag Warning")
+    fww_ct = sum(1 for a in nws if a["event"] == "Fire Weather Watch")
+    other_ct = len(nws) - rfw_ct - fww_ct
+    H.append('<h2 id="wx-glance">Fire Weather at a Glance</h2><div class="wxcards">')
+    if not spc.get("available"):
+        H.append('<a class="stat-a" href="#spc"><div class="stat"><div class="n">N/A</div>'
+                 '<div class="l">SPC Day 1 Outlook</div></div></a>')
+    elif spc.get("no_risk"):
+        H.append('<a class="stat-a" href="#spc"><div class="stat wx-ok">'
+                 '<div class="n">NO RISK</div><div class="l">SPC Day 1 Outlook</div></div></a>')
+    else:
+        H.append('<a class="stat-a" href="#spc"><div class="stat wx-rfw">'
+                 '<div class="n">RISK</div><div class="l">SPC Day 1 Outlook</div></div></a>')
+    H.append(f'<a class="stat-a" href="#nws"><div class="stat {"wx-rfw" if rfw_ct else "wx-ok"}">'
+             f'<div class="n">{rfw_ct}</div><div class="l">Red Flag Warnings</div></div></a>')
+    H.append(f'<a class="stat-a" href="#nws"><div class="stat {"wx-fww" if fww_ct else "wx-ok"}">'
+             f'<div class="n">{fww_ct}</div><div class="l">Fire Weather Watches</div></div></a>')
+    if other_ct:
+        H.append(f'<a class="stat-a" href="#nws"><div class="stat wx-rfw">'
+                 f'<div class="n">{other_ct}</div><div class="l">Other Fire Alerts</div></div></a>')
+    H.append('</div>')
+
+    extra = (f' (plus {new_contained_ct} reported new, already contained)'
+             if new_contained_ct else '')
     H.append(f'<h2 id="new-fires">New Large Fires <span class="sub">— {len(new_active)} '
-             f'active new incidents in {", ".join(new_states) or "—"} '
-             f'(plus {new_contained_ct} new, contained)</span></h2>')
+             f'active new incidents in {", ".join(new_states) or "—"}{extra}</span></h2>')
     for f in sorted(new_active, key=lambda x: acnum(x["acres"]), reverse=True):
         H.append(f'<div class="fire new"><div class="fname">{esc(f["name"])} '
                  f'{state_tag(f["state"])} {new_badge()}</div>')
         if f["narr"]:
             H.append(f'<div class="narr">{esc(f["narr"])}</div>')
-        H.append(f'<div class="srow"><b style="color:#e67e22;">{esc(f["acres"])}</b> acres '
+        H.append(f'<div class="srow"><b style="color:#d58317;">{esc(f["acres"])}</b> acres '
                  f'&nbsp;·&nbsp; {esc(f["pct"])}% contained &nbsp;·&nbsp; '
                  f'{esc(f["gacc"] or "")}</div></div>')
 
@@ -458,7 +496,7 @@ def render(data, nws, spc):
         H.append(f'<div class="fire contained-card"><div class="fname">{esc(f["name"])} '
                  f'{state_tag(f["state"])}{nb} {contained_badge()}</div>'
                  f'<div class="srow" style="border-top:none;padding-top:0;">'
-                 f'<b style="color:#e67e22;">{esc(f["acres"])}</b> acres &nbsp;·&nbsp; '
+                 f'<b style="color:#d58317;">{esc(f["acres"])}</b> acres &nbsp;·&nbsp; '
                  f'100% contained &nbsp;·&nbsp; {esc(f["gacc"] or "")} &nbsp;·&nbsp; '
                  f'{esc(f["cost"])} to date</div></div>')
 
@@ -510,18 +548,17 @@ def render(data, nws, spc):
         H.append(f'<div style="font-size:0.84rem;">{" &nbsp;·&nbsp; ".join(det)}</div></div>')
 
     H.append('<h2 id="large-fires">Large Fires <span class="sub">— Grouped by GACC</span></h2>')
-    active_codes = [c for c in d["sections"]
-                    if any(f["gacc"] == c and f["pct"] != "100" for f in fires)]
-    active_codes.sort(key=lambda c: (-d["sections"][c]["pl"],
-                                     -acnum(d["gacc_summary"].get(c, {}).get("acres", "0"))))
+    active_codes = sorted(linked_codes,
+                          key=lambda c: (-d["sections"][c]["pl"],
+                                         -acnum(d["gacc_summary"].get(c, {}).get("acres", "0"))))
     for code in active_codes:
         sec = d["sections"][code]
         gfires = [f for f in fires if f["gacc"] == code and f["pct"] != "100"]
         if not gfires:
             continue
-        border = "#e74c3c" if sec["pl"] >= 4 else "#e67e22"
+        border = "#5f0000" if sec["pl"] >= 4 else "#d58317"
         summ = d["gacc_summary"].get(code, {})
-        H.append(f'<div class="gacchead" style="border-left:4px solid {border};">'
+        H.append(f'<div class="gacchead" id="gacc-{code}" style="border-left:4px solid {border};">'
                  f'<div class="top">{esc(GACC_NAMES[code])} Area '
                  f'<span class="muted" style="font-weight:400;">({code})</span> '
                  f'{pl_badge(sec["pl"], True)}</div>')
@@ -550,52 +587,77 @@ def render(data, nws, spc):
              '<a href="https://www.weather.gov/fire/">NWS Fire Weather</a>'
              '<a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html">'
              'SPC Fire Weather Outlook</a></div>')
-    H.append('</div></body></html>')
+    H.append('</div>')
+    H.append(SCROLL_SCRIPT)
+    H.append('</body></html>')
     return "\n".join(H)
 
 
+SCROLL_SCRIPT = """<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  var el = document.getElementById(a.getAttribute('href').slice(1));
+  if (el) { e.preventDefault(); el.scrollIntoView({behavior: 'smooth', block: 'start'}); }
+});
+</script>"""
+
+
 STYLE = """<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=David+Libre:wght@400;500;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#1a1a1a;color:#e8e8e8;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.55;padding:20px 14px 60px}
+body{background:#f2f2f2;color:#2f292b;font-family:"David Libre",Georgia,"Times New Roman",serif;font-size:15.5px;line-height:1.6;padding:20px 14px 60px}
 .wrap{max-width:860px;margin:0 auto}
-.muted{color:#999}
-a{color:#e67e22}
-.nav{background:#242424;border:1px solid #3a3a3a;border-radius:12px;padding:12px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
-.nav a{background:rgba(230,126,34,0.12);border:1px solid #e67e22;color:#e67e22;text-decoration:none;padding:5px 13px;border-radius:20px;font-size:0.82rem;font-weight:600}
-.nav a:hover{background:rgba(230,126,34,0.28)}
-.header{border-left:4px solid #e67e22;padding:6px 0 6px 16px;margin-bottom:22px}
-.header h1{font-size:1.7rem;font-weight:700}
-.plbanner{background:linear-gradient(135deg,#e67e22,#c0392b);border-radius:14px;padding:20px 22px;margin-bottom:22px;color:#fff}
-.plbanner .big{font-size:2.1rem;font-weight:800;line-height:1.1}
+.muted{color:#8a8178}
+a{color:#074259}
+h1,h2,.stat .n,.plbanner .big,.gcell .code{font-family:"Oswald","Arial Narrow",sans-serif}
+.header{border-left:5px solid #5f0000;padding:6px 0 6px 16px;margin-bottom:22px}
+.header h1{font-size:1.85rem;font-weight:700;letter-spacing:0.3px}
+.plbanner{background:linear-gradient(135deg,#5f0000,#93400c);border-radius:14px;padding:20px 22px;margin-bottom:22px;color:#f8f4ec}
+.plbanner .big{font-size:2.1rem;font-weight:700;line-height:1.15;letter-spacing:0.5px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:30px}
-.stat{background:#242424;border:1px solid #3a3a3a;border-radius:12px;padding:16px}
-.stat .n{font-size:1.9rem;font-weight:800;color:#e67e22}
-.stat .l{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:#999;margin-top:4px}
-h2{font-size:1.25rem;margin:34px 0 14px;padding-bottom:8px;border-bottom:1px solid #3a3a3a}
-h2 .sub{font-size:0.8rem;font-weight:400;color:#999}
+.stat{background:#fff;border:1px solid #ddd5c7;border-radius:12px;padding:16px}
+.stat .n{font-size:1.9rem;font-weight:600;color:#5f0000}
+.stat .l{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:#8a8178;margin-top:4px;font-family:"Oswald",sans-serif;font-weight:500}
+.stat-a{text-decoration:none;color:inherit;display:block}
+.stat-a .stat{transition:border-color 0.15s, box-shadow 0.15s;height:100%}
+.stat-a:hover .stat{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:0.4px;margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid #5f0000;color:#2f292b;scroll-margin-top:12px}
+h2 .sub{font-size:0.8rem;font-weight:400;color:#8a8178;font-family:"David Libre",serif;letter-spacing:0}
+.wxcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
+.wx-ok{background:rgba(108,115,61,0.10);border-color:#6c733d}
+.wx-ok .n{color:#535c2b}
+.wx-rfw{background:rgba(95,0,0,0.06);border-color:#5f0000}
+.wx-rfw .n{color:#5f0000}
+.wx-fww{background:rgba(187,140,77,0.12);border-color:#bb8c4d}
+.wx-fww .n{color:#8a5f22}
+.gcell-a{text-decoration:none;color:inherit;display:block}
+.gcell-a .gcell{transition:border-color 0.15s, box-shadow 0.15s}
+.gcell-a:hover .gcell{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
 .gaccgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.gcell{background:#242424;border:1px solid #3a3a3a;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.gcell .code{font-weight:700;font-size:1rem}
-.gcell .full{font-size:0.68rem;color:#999}
-.card{background:#242424;border:1px solid #3a3a3a;border-radius:12px;padding:16px 18px;margin-bottom:14px}
-.fire{background:#242424;border:1px solid #3a3a3a;border-radius:10px;padding:14px 16px;margin-bottom:12px}
-.fire.new{border-left:3px solid #f1c40f}
+.gcell{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gcell .code{font-weight:600;font-size:1rem;letter-spacing:0.5px}
+.gcell .full{font-size:0.68rem;color:#8a8178}
+.card{background:#fff;border:1px solid #ddd5c7;border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.fire{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.fire.new{border-left:4px solid #280069}
 .fire .fname{font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
-.fire .narr{color:#cfcfcf;font-size:0.9rem;margin-bottom:9px}
-.fire .srow{font-size:0.85rem;color:#ddd;border-top:1px solid #333;padding-top:8px}
-.contained-card{border-left:3px solid #2ecc71}
-.gacchead{border-radius:12px;padding:14px 18px;margin:22px 0 12px;background:#242424;border:1px solid #3a3a3a}
-.gacchead .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:1.1rem;font-weight:700}
-.gacchead .meta{color:#999;font-size:0.8rem;margin-top:4px}
-.gacchead .mrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:0.82rem}
-.gacchead .mrow b{color:#e67e22}
-.alert{border-radius:10px;padding:13px 16px;margin-bottom:11px}
-.spc-critical,.rfw{background:rgba(192,57,43,0.15);border:1px solid #c0392b;border-left:4px solid #c0392b}
-.spc-elevated,.fww{background:rgba(241,196,15,0.12);border:1px solid #b8901a;border-left:4px solid #f1c40f}
+.fire .narr{color:#4f4944;font-size:0.92rem;margin-bottom:9px}
+.fire .srow{font-size:0.87rem;color:#4a443f;border-top:1px solid #e8e1d4;padding-top:8px}
+.contained-card{border-left:4px solid #6c733d}
+.gacchead{border-radius:12px;padding:14px 18px;margin:22px 0 12px;background:#2f292b;border:1px solid #2f292b;color:#f2f2f2;scroll-margin-top:12px}
+.gacchead .muted{color:#b8b0a4}
+.gacchead .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:1.4rem;font-weight:700}
+.gacchead .meta{color:#b8b0a4;font-size:0.95rem;margin-top:4px}
+.gacchead .mrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:1rem}
+.gacchead .mrow b{color:#e59a3c}
+.alert{border-radius:10px;padding:13px 16px;margin-bottom:11px;background:#fff}
+.spc-critical,.rfw{background:rgba(95,0,0,0.05);border:1px solid #5f0000;border-left:5px solid #5f0000}
+.spc-elevated,.fww{background:rgba(187,140,77,0.10);border:1px solid #bb8c4d;border-left:5px solid #bb8c4d}
 .alert .atitle{font-weight:700;margin-bottom:5px}
-.banner-ok{background:rgba(39,174,96,0.12);border:1px solid #2ecc71;border-left:4px solid #2ecc71;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.banner-ok{background:rgba(108,115,61,0.10);border:1px solid #6c733d;border-left:5px solid #6c733d;border-radius:10px;padding:14px 16px;margin-bottom:12px}
 .wxtext p{margin-bottom:12px}
-.footer{margin-top:44px;border-top:1px solid #3a3a3a;padding-top:18px;color:#999;font-size:0.82rem}
+.footer{margin-top:44px;border-top:2px solid #5f0000;padding-top:18px;color:#8a8178;font-size:0.84rem}
 .footer a{margin-right:14px}
 </style>"""
 
