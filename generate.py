@@ -422,6 +422,17 @@ def render(data, nws, spc):
              f'<div class="muted">{esc(d["report_date"])} · 0730 MDT · '
              f'National Interagency Fire Center</div></div>')
 
+    # PLB markers let the email step rebuild this banner as a table so its
+    # maroon fill survives email clients that drop div backgrounds.
+    H.append('<!--PLB-->')
+    H.append(f'<div class="plbanner"><div class="big">National Preparedness Level '
+             f'{d["national_pl"]}</div><div style="margin-top:8px;opacity:0.95;">'
+             f'Initial attack activity: {esc(d["ia_activity"])}. '
+             f'{d["national"]["new_large"]} new large incidents reported nationally, with '
+             f'{d["national"]["uncontained"]} uncontained large fires currently active '
+             f'across the country.</div></div>')
+    H.append('<!--/PLB-->')
+
     cards = [("Uncontained Large Fires", d["national"]["uncontained"], "#large-fires"),
              ("New Large Fires", d["national"]["new_large"], "#new-fires"),
              ("Large Fires Contained", d["national"]["contained"], "#contained-fires"),
@@ -433,13 +444,6 @@ def render(data, nws, spc):
                  f'<div class="n">{esc(n)}</div>'
                  f'<div class="l">{esc(label)}</div></div></a>')
     H.append('</div>')
-
-    H.append(f'<div class="plbanner"><div class="big">National Preparedness Level '
-             f'{d["national_pl"]}</div><div style="margin-top:8px;opacity:0.95;">'
-             f'Initial attack activity: {esc(d["ia_activity"])}. '
-             f'{d["national"]["new_large"]} new large incidents reported nationally, with '
-             f'{d["national"]["uncontained"]} uncontained large fires currently active '
-             f'across the country.</div></div>')
 
     H.append('<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">')
     for code in GACC_CELL_ORDER:
