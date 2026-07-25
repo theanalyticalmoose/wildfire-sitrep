@@ -332,11 +332,22 @@ def fetch_spc():
     issued = re.search(r"\d{3,4}\s+[AP]M\s+[A-Z]{2,4}\s+\w{3}\s+\w{3}\s+\d{2}\s+\d{4}", txt)
     no_risk = "No Risk Areas Forecast" in txt
 
-    # Raw SPC text product (the ZCZC ... block embedded in the page).
+    # Raw SPC text product. The page may or may not include the ZCZC/FNUS21
+    # comms wrappers, so try several anchors against the tag-stripped page.
+    stripped = html.unescape(re.sub(r"<[^>]+>", "", txt))
     prod = ""
-    mp = re.search(r"ZCZC\s+SPCFWDDY1(.*?)(?:NNNN|\$\$)", txt, re.DOTALL)
-    if mp:
-        prod = html.unescape(re.sub(r"<[^>]+>", "", mp.group(1)))
+    for pat in (r"ZCZC\s+SPCFWDDY1(.*?)(?:NNNN|\$\$|\Z)",
+                r"FNUS21\s+KWNS\s+\d+(.*?)(?:NNNN|\$\$|\Z)",
+                r"(Day 1 Fire Weather Outlook\s+NWS Storm Prediction Center"
+                r".*?)(?:NNNN|\$\$|\Z)"):
+        mp = re.search(pat, stripped, re.DOTALL)
+        if mp:
+            prod = mp.group(1)
+            break
+    # Cut anything after the forecaster signature (page footer links etc.).
+    ms = re.search(r"\.\.[A-Za-z][\w\-. ]*\.\.\s*\d{2}/\d{2}/\d{4}", prod)
+    if ms:
+        prod = prod[:ms.end()]
 
     # Headline risk areas: "...CRITICAL FIRE WEATHER AREA FOR ... ..."
     headlines = []
