@@ -320,7 +320,8 @@ def fetch_nws():
 
 
 def fetch_spc():
-    """Return dict with valid time, issuance, no_risk flag, and discussion body."""
+    """Mirror the live SPC Day 1 product: risk levels (wind/RH and dry
+    thunderstorm), the headline risk areas, and the full discussion text."""
     try:
         txt = http_get(SPC_URL)
     except Exception as e:  # noqa: BLE001
@@ -331,28 +332,60 @@ def fetch_spc():
     issued = re.search(r"\d{3,4}\s+[AP]M\s+[A-Z]{2,4}\s+\w{3}\s+\w{3}\s+\d{2}\s+\d{4}", txt)
     no_risk = "No Risk Areas Forecast" in txt
 
-    # Identify the highest risk level SPC has delineated today. Prefer the
-    # page's risk table cells; fall back to scanning the product text.
-    risk_level = None
-    if not no_risk:
-        cells = [c.lower() for c in
-                 re.findall(r">\s*(Extremely\s+Critical|Critical|Elevated)\s*<",
-                            txt, re.IGNORECASE)]
-        low = " ".join(cells) if cells else txt.lower()
-        if "extremely critical" in re.sub(r"\s+", " ", low):
-            risk_level = "EXTREMELY CRITICAL"
-        elif "critical" in low:
-            risk_level = "CRITICAL"
-        elif "elevated" in low:
-            risk_level = "ELEVATED"
+    # Raw SPC text product (the ZCZC ... block embedded in the page).
+    prod = ""
+    mp = re.search(r"ZCZC\s+SPCFWDDY1(.*?)(?:NNNN|\$\$)", txt, re.DOTALL)
+    if mp:
+        prod = html.unescape(re.sub(r"<[^>]+>", "", mp.group(1)))
 
+    # Headline risk areas: "...CRITICAL FIRE WEATHER AREA FOR ... ..."
+    headlines = []
+    for m in re.finditer(r"\.\.\.(.+?)\.\.\.", prod, re.DOTALL):
+        hl = collapse(m.group(1))
+        if len(hl) > 12 and hl == hl.upper():
+            headlines.append(hl)
+
+    # Risk levels: prefer the page's risk-table cells, then headlines/prose.
+    cells = " ".join(re.findall(
+        r">\s*(Extremely\s+Critical|Extreme|Critical|Elevated|Dry\s+Tstm)\s*<",
+        txt, re.IGNORECASE)).lower()
+    blob = re.sub(r"\s+", " ", " ".join(headlines) + " " + prod).lower()
+    scan = cells if cells else blob
+    risk_level = None
+    dry_tstm = None
+    if not no_risk:
+        if re.search(r"extremely critical|\bextreme\b", scan):
+            risk_level = "EXTREMELY CRITICAL"
+        elif "critical" in scan:
+            risk_level = "CRITICAL"
+        elif "elevated" in scan:
+            risk_level = "ELEVATED"
+        if "dry tstm" in scan or "dry thunderstorm" in blob:
+            if "scattered dry thunderstorm" in blob:
+                dry_tstm = "SCATTERED"
+            elif "isolated dry thunderstorm" in blob:
+                dry_tstm = "ISOLATED"
+            else:
+                dry_tstm = "DRY TSTM"
+
+    # Full discussion: paragraphs after the Valid line, minus headline blocks
+    # and the forecaster signature.
     body = ""
-    mb = re.search(r"\.\.\.Synopsis\.\.\.(.+?)(?:\.\.[A-Z][a-z]+\.\.|\n\.\.\.Please see)",
-                   txt, re.DOTALL)
-    if mb:
-        body = collapse(mb.group(1))
+    if prod:
+        tail = prod
+        mv = re.search(r"Valid\s+\d{6}Z\s*-\s*\d{6}Z", tail)
+        if mv:
+            tail = tail[mv.end():]
+        keep = []
+        for chunk in re.split(r"\n\s*\n", tail):
+            cc = collapse(chunk)
+            if not cc or cc.startswith("...") or re.match(r"\.\.[A-Za-z]", cc):
+                continue
+            keep.append(cc)
+        body = "\n\n".join(keep)
 
     return {"available": True, "no_risk": no_risk, "risk_level": risk_level,
+            "dry_tstm": dry_tstm, "headlines": headlines,
             "valid": collapse(valid.group(1)) if valid else "",
             "issued": collapse(issued.group(0)) if issued else "",
             "body": body}
@@ -496,6 +529,12 @@ def render(data, nws, spc):
         H.append(f'<a class="stat-a" href="#spc"><div class="stat {lcls}">'
                  f'<div class="n"{lsize}>{level}</div>'
                  f'<div class="l">SPC Day 1 Outlook</div></div></a>')
+    if spc.get("dry_tstm") and not spc.get("no_risk"):
+        dt = spc["dry_tstm"]
+        dsize = ' style="font-size:24px;line-height:38px;"' if len(dt) > 8 else ''
+        H.append(f'<a class="stat-a" href="#spc"><div class="stat wx-tstm">'
+                 f'<div class="n"{dsize}>{dt}</div>'
+                 f'<div class="l">Dry Thunderstorms</div></div></a>')
     H.append(f'<a class="stat-a" href="#nws"><div class="stat {"wx-rfw" if rfw_ct else "wx-ok"}">'
              f'<div class="n">{rfw_ct}</div><div class="l">Red Flag Warnings</div></div></a>')
     H.append(f'<a class="stat-a" href="#nws"><div class="stat {"wx-fww" if fww_ct else "wx-ok"}">'
@@ -554,13 +593,23 @@ def render(data, nws, spc):
                      f'{esc(spc["body"])}</div>')
     else:
         vt = f' (valid {esc(spc["valid"])})' if spc.get("valid") else ""
-        lvl = spc.get("risk_level")
-        head = f'{lvl.title()} risk areas forecast' if lvl else 'Risk areas forecast'
-        H.append(f'<div class="alert spc-critical"><b>{head}{vt}.</b> '
-                 f'See discussion below.</div>')
+        bits = []
+        if spc.get("risk_level"):
+            bits.append(f'{spc["risk_level"].title()} fire weather area')
+        if spc.get("dry_tstm"):
+            dt = spc["dry_tstm"]
+            bits.append(f'{dt.title()} dry thunderstorms' if dt != "DRY TSTM"
+                        else 'Dry thunderstorms')
+        head = " · ".join(bits) if bits else "Risk areas"
+        H.append(f'<div class="alert spc-critical"><b>{esc(head)} forecast{vt}.</b></div>')
+        for hl in spc.get("headlines", []):
+            hcls = "spc-elevated" if "ELEVATED" in hl else "spc-critical"
+            H.append(f'<div class="alert {hcls}" style="font-weight:700;">{esc(hl)}</div>')
         if spc.get("body"):
-            H.append(f'<div class="alert spc-elevated" style="font-size:14px;">'
-                     f'{esc(spc["body"])}</div>')
+            H.append('<div class="card wxtext">')
+            for para in spc["body"].split("\n\n"):
+                H.append(f'<p>{esc(para)}</p>')
+            H.append('</div>')
 
     H.append('<h2 id="nws">NWS Fire Weather Alerts</h2>')
     if not nws:
@@ -664,6 +713,8 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 .wx-rfw .n{color:#5f0000}
 .wx-fww{background:rgba(187,140,77,0.12);border-color:#bb8c4d}
 .wx-fww .n{color:#8a5f22}
+.wx-tstm{background:rgba(40,0,105,0.06);border-color:#280069}
+.wx-tstm .n{color:#280069}
 .gcell-a{text-decoration:none;color:#2f292b;display:block}
 .gcell-a .gcell{transition:border-color 0.15s, box-shadow 0.15s}
 .gcell-a:hover .gcell{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
