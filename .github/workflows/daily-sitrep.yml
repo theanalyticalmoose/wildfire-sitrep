@@ -89,6 +89,8 @@ jobs:
                           cssutils_logging_level="CRITICAL")
           out = re.sub(r"<style>.*?</style>", "", out, flags=re.DOTALL)
           out = re.sub(r"<script>.*?</script>", "", out, flags=re.DOTALL)
+          # Keep the email compact: full alert texts live on the web version.
+          out = re.sub(r"<details\b.*?</details>", "", out, flags=re.DOTALL)
           out = re.sub(r' title="Jump to [^"]*"', "", out)
           out = re.sub(r'<a href="#[^"]*" style="[^"]*">(.*?)</a>', r"\1",
                        out, flags=re.DOTALL)
