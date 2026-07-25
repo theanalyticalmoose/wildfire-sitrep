@@ -168,9 +168,11 @@ def parse_ytd(full, data):
     rows) and NIFC's own % of the ten-year average."""
     ytd = {}
     for key, label in (("fires", "TOTAL FIRES"), ("acres", "TOTAL ACRES")):
-        m = re.search(label + r":?\s*([^\n]+)", full)
-        if m:
-            nums = re.findall(r"[\d,]+", m.group(1))
+        # The daily-activity table uses the same TOTAL FIRES/ACRES labels and
+        # appears first; the year-to-date table is the LAST occurrence.
+        ms = list(re.finditer(label + r":?\s*([^\n]+)", full))
+        if ms:
+            nums = re.findall(r"[\d,]+", ms[-1].group(1))
             if nums:
                 ytd[key] = nums[-1]
     for key, label in (("fires_pct", "Fires"), ("acres_pct", "Acres")):
