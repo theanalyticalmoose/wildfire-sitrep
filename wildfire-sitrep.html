@@ -21,6 +21,7 @@ h1,h2,.stat .n,.plbanner .big,.gcell .code{font-family:"Oswald","Arial Narrow",s
 .stat-a:hover .stat{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
 h2{font-size:21px;font-weight:600;letter-spacing:0.4px;margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid #5f0000;color:#2f292b;scroll-margin-top:12px}
 h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",serif;letter-spacing:0}
+h3{font-family:"Oswald","Arial Narrow",sans-serif;font-size:17px;font-weight:600;letter-spacing:0.4px;margin:26px 0 12px;padding-bottom:6px;border-bottom:1px solid #d5cdbf;color:#5f0000;scroll-margin-top:12px}
 .wxcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
 .wx-ok{background:rgba(108,115,61,0.10);border-color:#6c733d}
 .wx-ok .n{color:#535c2b}
@@ -34,7 +35,7 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 .gcell-a .gcell{transition:border-color 0.15s, box-shadow 0.15s}
 .gcell-a:hover .gcell{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
 .gaccgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.gcell{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gcell{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;min-height:118px;height:100%}
 .gcell .code{font-weight:600;font-size:16px;letter-spacing:0.5px}
 .gcell .full{font-size:11px;color:#8a8178}
 .card{background:#fff;border:1px solid #ddd5c7;border-radius:12px;padding:16px 18px;margin-bottom:14px}
@@ -64,6 +65,12 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <!--PLB-->
 <div class="plbanner"><div class="big">National Preparedness Level 5</div><div style="margin-top:8px;opacity:0.95;">Initial attack activity: Light (145 fires). 21 new large incidents reported nationally, with 88 uncontained large fires currently active across the country.</div></div>
 <!--/PLB-->
+<div class="wxcards" id="wx-glance">
+<a class="stat-a" href="#spc"><div class="stat wx-rfw"><div class="n">CRITICAL</div><div class="l">SPC Day 1 Outlook</div></div></a>
+<a class="stat-a" href="#spc"><div class="stat wx-tstm"><div class="n" style="font-size:24px;line-height:38px;">SCATTERED</div><div class="l">Dry Thunderstorms</div></div></a>
+<a class="stat-a" href="#nws"><div class="stat wx-rfw"><div class="n">20</div><div class="l">Red Flag Warnings</div></div></a>
+<a class="stat-a" href="#nws"><div class="stat wx-ok"><div class="n">0</div><div class="l">Fire Weather Watches</div></div></a>
+</div>
 <div class="stats">
 <a class="stat-a" href="#large-fires"><div class="stat"><div class="n">88</div><div class="l">Uncontained Large Fires</div></div></a>
 <a class="stat-a" href="#new-fires"><div class="stat"><div class="n">21</div><div class="l">New Large Fires</div></div></a>
@@ -71,25 +78,26 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <a class="stat-a" href="#large-fires"><div class="stat"><div class="n">28</div><div class="l">CIMTs Committed</div></div></a>
 <a class="stat-a" href="#gacc-levels"><div class="stat"><div class="n">1,544,609</div><div class="l">Total Active Acres</div></div></a>
 </div>
-<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">
-<div class="gcell"><div><div class="code">AICC</div><div class="full">Alaska</div></div><span style="background:#6c733d;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 1</span></div>
-<a class="gcell-a" href="#gacc-NWCC" title="Jump to NWCC large fires"><div class="gcell"><div><div class="code">NWCC</div><div class="full">Northwest</div></div><span style="background:#5f0000;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 5</span></div></a>
-<a class="gcell-a" href="#gacc-ONCC" title="Jump to ONCC large fires"><div class="gcell"><div><div class="code">ONCC</div><div class="full">Northern California</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
-<a class="gcell-a" href="#gacc-OSCC" title="Jump to OSCC large fires"><div class="gcell"><div><div class="code">OSCC</div><div class="full">Southern California</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
-<a class="gcell-a" href="#gacc-NRCC" title="Jump to NRCC large fires"><div class="gcell"><div><div class="code">NRCC</div><div class="full">Northern Rockies</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
-<a class="gcell-a" href="#gacc-GBCC" title="Jump to GBCC large fires"><div class="gcell"><div><div class="code">GBCC</div><div class="full">Great Basin</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
-<div class="gcell"><div><div class="code">SWCC</div><div class="full">Southwest</div></div><span style="background:#bb8c4d;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 2</span></div>
-<a class="gcell-a" href="#gacc-RMCC" title="Jump to RMCC large fires"><div class="gcell"><div><div class="code">RMCC</div><div class="full">Rocky Mountain</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
-<a class="gcell-a" href="#gacc-EACC" title="Jump to EACC large fires"><div class="gcell"><div><div class="code">EACC</div><div class="full">Eastern Area</div></div><span style="background:#e87f7f;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 4</span></div></a>
-<a class="gcell-a" href="#gacc-SACC" title="Jump to SACC large fires"><div class="gcell"><div><div class="code">SACC</div><div class="full">Southern Area</div></div><span style="background:#bb8c4d;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 2</span></div></a>
+<div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-bottom:6px;">
+<a class="stat-a" href="#gacc-levels"><div class="stat" style="background:rgba(95,0,0,0.08);border-color:#5f0000;"><div class="n" style="color:#5f0000;">145</div><div class="l">Fires Year to Date</div><div style="margin-top:6px;font-size:13px;"><span style="color:#5f0000;font-weight:700;">128%</span> <span class="muted">of the 10-year average</span></div></div></a>
+<a class="stat-a" href="#gacc-levels"><div class="stat" style="background:rgba(143,29,14,0.08);border-color:#8f1d0e;"><div class="n" style="color:#8f1d0e;">15,381</div><div class="l">Acres Year to Date</div><div style="margin-top:6px;font-size:13px;"><span style="color:#8f1d0e;font-weight:700;">123%</span> <span class="muted">of the 10-year average</span></div></div></a>
 </div>
-<h2 id="wx-glance">Fire Weather at a Glance</h2><div class="wxcards">
-<a class="stat-a" href="#spc"><div class="stat wx-rfw"><div class="n">CRITICAL</div><div class="l">SPC Day 1 Outlook</div></div></a>
-<a class="stat-a" href="#spc"><div class="stat wx-tstm"><div class="n" style="font-size:24px;line-height:38px;">SCATTERED</div><div class="l">Dry Thunderstorms</div></div></a>
-<a class="stat-a" href="#nws"><div class="stat wx-rfw"><div class="n">20</div><div class="l">Red Flag Warnings</div></div></a>
-<a class="stat-a" href="#nws"><div class="stat wx-ok"><div class="n">0</div><div class="l">Fire Weather Watches</div></div></a>
+<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">
+<div class="gcell"><div><div class="code">AICC</div><div class="full">Alaska</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">0</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">0</b> acres</div></div><span style="background:#6c733d;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 1</span></div>
+<a class="gcell-a" href="#gacc-NWCC" title="Jump to NWCC large fires"><div class="gcell"><div><div class="code">NWCC</div><div class="full">Northwest</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">43</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">811,034</b> acres</div></div><span style="background:#5f0000;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 5</span></div></a>
+<a class="gcell-a" href="#gacc-ONCC" title="Jump to ONCC large fires"><div class="gcell"><div><div class="code">ONCC</div><div class="full">N. California</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">9</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">86,479</b> acres</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
+<a class="gcell-a" href="#gacc-OSCC" title="Jump to OSCC large fires"><div class="gcell"><div><div class="code">OSCC</div><div class="full">S. California</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">3</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">16,245</b> acres</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
+<a class="gcell-a" href="#gacc-NRCC" title="Jump to NRCC large fires"><div class="gcell"><div><div class="code">NRCC</div><div class="full">Northern Rockies</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">2</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">1,855</b> acres</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
+<a class="gcell-a" href="#gacc-GBCC" title="Jump to GBCC large fires"><div class="gcell"><div><div class="code">GBCC</div><div class="full">Great Basin</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">10</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">260,386</b> acres</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
+<div class="gcell"><div><div class="code">SWCC</div><div class="full">Southwest</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">3</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">37,606</b> acres</div></div><span style="background:#bb8c4d;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 2</span></div>
+<a class="gcell-a" href="#gacc-RMCC" title="Jump to RMCC large fires"><div class="gcell"><div><div class="code">RMCC</div><div class="full">Rocky Mountain</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">10</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">222,658</b> acres</div></div><span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 3</span></div></a>
+<a class="gcell-a" href="#gacc-EACC" title="Jump to EACC large fires"><div class="gcell"><div><div class="code">EACC</div><div class="full">Eastern Area</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">6</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">69,095</b> acres</div></div><span style="background:#e87f7f;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 4</span></div></a>
+<a class="gcell-a" href="#gacc-SACC" title="Jump to SACC large fires"><div class="gcell"><div><div class="code">SACC</div><div class="full">Southern Area</div><div style="font-size:12px;color:#8a8178;margin-top:4px;"><b style="color:#d58317;">17</b> fires</div><div style="font-size:12px;color:#8a8178;"><b style="color:#d58317;">39,251</b> acres</div></div><span style="background:#bb8c4d;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:13px;white-space:nowrap;">PL 2</span></div></a>
 </div>
 <h2 id="new-fires">New Large Fires <span class="sub">— 21 active new incidents in OR, WA, GA, LA, ID, CO, CA</span></h2>
+<div class="fire new"><div class="fname">Stubble <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Stubble, Malheur NWR, FWS. Fifteen miles southwest of Lawen, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened.</div>
+<div class="srow"><b style="color:#d58317;">10,229</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
 <div class="fire new"><div class="fname">Second Flat <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Second Flat, Burns District, BLM. Six miles northeast of Riley, OR. Timber, brush and grass. Extreme fire behavior with wind-driven runs, group torching and short-range spotting. Numerous structures threatened. Road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">6,000</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
@@ -117,6 +125,9 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire new"><div class="fname">Locust Grove <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Locust Grove, Benton County Fire Districts. Three miles south of Kennewick, WA. Grass and brush. Moderate fire behavior with creeping and backing.</div>
 <div class="srow"><b style="color:#d58317;">750</b> acres &nbsp;·&nbsp; 10% contained &nbsp;·&nbsp; NWCC</div></div>
+<div class="fire new"><div class="fname">Crater <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Crater, Burns District, BLM. Thirty-five miles south of Burns, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened.</div>
+<div class="srow"><b style="color:#d58317;">700</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
 <div class="fire new"><div class="fname">Signal Peak <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Signal Peak, Yakama Agency, BIA. One mile south of White Swan, WA. Grass and brush. Extreme fire behavior with running, wind-driven runs and spotting. Evacuations, area and road closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">500</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
@@ -133,7 +144,7 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="narr">Fox, Vale District, BLM. Twelve miles northeast of Huntington, OR. Grass. Extreme fire behavior with wind- driven runs, short-range spotting and uphill runs. Evacuations in effect.</div>
 <div class="srow"><b style="color:#d58317;">200</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
 <div class="fire new"><div class="fname">Bald Mountain <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
-<div class="narr">Bald Mountain, Second Flat and Jackass Butte incidents. Twelve miles north of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. Area and road closures in effect. Reduction in acreage due to more accurate mapping. Stone Creek, Malheur NF, USFS. Ten miles south of Suplee, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. Structures threatened. * Dairy, Malheur NF, USFS. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering. * Well, Burns District, BLM. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. * Crater, Burns District, BLM. Thirty-five miles south of Burns, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened. * Stubble, Malheur NWR, FWS. Fifteen miles southwest of Lawen, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened. * Bald Mountain, Burns District, BLM. Fifty miles southeast of Burns, OR. Grass and brush. Active fire behavior. Numerous structures threatened.</div>
+<div class="narr">Bald Mountain, Burns District, BLM. Fifty miles southeast of Burns, OR. Grass and brush. Active fire behavior. Numerous structures threatened.</div>
 <div class="srow"><b style="color:#d58317;">150</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
 <div class="fire new"><div class="fname">Castle <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Castle, Umpqua NF, USFS. Twenty-three miles northeast of Tiller, OR. Timber and closed timber litter. Active fire behavior with isolated torching and spotting.</div>
@@ -141,13 +152,11 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire new"><div class="fname">Luna <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Luna, North Cascades National Park, NPS. Ten miles north of Newhalem, WA. Timber. Active fire behavior with group torching and backing. Structures threatened. Area and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">111</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
-<div class="fire new"><div class="fname">Stubble <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
-<div class="srow"><b style="color:#d58317;">10,229</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
-<div class="fire new"><div class="fname">Crater <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
-<div class="srow"><b style="color:#d58317;">700</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; NWCC</div></div>
 <div class="fire new"><div class="fname">Well <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Well, Burns District, BLM. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching.</div>
 <div class="srow"><b style="color:#d58317;">18</b> acres &nbsp;·&nbsp; 70% contained &nbsp;·&nbsp; NWCC</div></div>
 <div class="fire new"><div class="fname">Dairy <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Dairy, Malheur NF, USFS. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering.</div>
 <div class="srow"><b style="color:#d58317;">8</b> acres &nbsp;·&nbsp; 70% contained &nbsp;·&nbsp; NWCC</div></div>
 <h2 id="contained-fires">Contained Fires</h2>
 <div class="fire contained-card"><div class="fname">0512 Box Springs <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#6c733d;background:rgba(108,115,61,0.14);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;">CONTAINED</span></div><div class="srow" style="border-top:none;padding-top:0;"><b style="color:#d58317;">21,432</b> acres &nbsp;·&nbsp; 100% contained &nbsp;·&nbsp; NWCC &nbsp;·&nbsp; NR to date</div></div>
@@ -156,86 +165,435 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire contained-card"><div class="fname">Turner <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">ID</span> <span style="color:#6c733d;background:rgba(108,115,61,0.14);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;">CONTAINED</span></div><div class="srow" style="border-top:none;padding-top:0;"><b style="color:#d58317;">681</b> acres &nbsp;·&nbsp; 100% contained &nbsp;·&nbsp; NRCC &nbsp;·&nbsp; 3.5M to date</div></div>
 <div class="fire contained-card"><div class="fname">518 Sully <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#6c733d;background:rgba(108,115,61,0.14);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;">CONTAINED</span></div><div class="srow" style="border-top:none;padding-top:0;"><b style="color:#d58317;">640</b> acres &nbsp;·&nbsp; 100% contained &nbsp;·&nbsp; NWCC &nbsp;·&nbsp; 50K to date</div></div>
 <div class="fire contained-card"><div class="fname">Creelman <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">CA</span> <span style="color:#6c733d;background:rgba(108,115,61,0.14);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;">CONTAINED</span></div><div class="srow" style="border-top:none;padding-top:0;"><b style="color:#d58317;">347</b> acres &nbsp;·&nbsp; 100% contained &nbsp;·&nbsp; OSCC &nbsp;·&nbsp; 2M to date</div></div>
-<h2 id="weather">Predictive Services Discussion</h2><div class="card wxtext">
+<h2 id="fire-weather">Fire Weather</h2>
+<h3 id="weather">Predictive Services Discussion</h3><div class="card wxtext">
 <p>Widespread critical conditions will develop across the Inland Northwest into the northern Rockies and northwestern Great Basin today from westerly winds 15-30 mph with gusts 30-45 mph amid relative humidity of 5-15%. Elevated conditions from slightly weaker westerly winds are expected in central Idaho to southwest and central Montana, as well, where temperatures will be up to 20°F above normal. Very hot, record-setting temperatures 100-110°F are expected in southeast Montana into the western Dakotas with relative humidity below 20%, and isolated to scattered mixed wet and dry thunderstorms will develop resulting in several new ignitions. Hot and dry conditions are expected in much of central and southern California, while isolated mixed wet and dry thunderstorms develop in central Nevada to southeast Idaho and northern Utah. Isolated wet monsoon thunderstorms are expected in the Southwest into the central Rockies. Farther east, breezy conditions and low relative humidity and hot temperatures will support elevated fire weather conditions across the southern High Plains. In Minnesota, breezy northwest wind are expected amid hot temperatures and relative humidity of 25-40%. Isolated to scattered showers and thunderstorms will develop in the Great Lakes and Southeast, with scattered thunderstorms in Florida capable of new ignitions due to the ongoing long-term drought.</p>
 </div>
-<h2 id="spc">SPC Day 1 Fire Weather Outlook</h2>
-<div class="alert spc-critical"><b>Critical fire weather area · Scattered dry thunderstorms forecast (valid 251700Z - 261200Z).</b></div>
-<div class="alert spc-critical" style="font-weight:700;">CRITICAL FIRE WEATHER AREA FOR SCATTERED DRY THUNDERSTORMS ACROSS CENTRAL/SOUTHERN MONTANA</div>
-<div class="alert spc-critical" style="font-weight:700;">CRITICAL FIRE WEATHER AREA FOR MUCH OF THE PACIFIC NORTHWEST INTO THE NORTHERN ROCKIES</div>
+<h3 id="spc">SPC Day 1 Fire Weather Outlook</h3>
+<div class="muted" style="font-size:13px;margin-bottom:10px;">Issued 1152 AM CDT Sat Jul 25 2026 &nbsp;·&nbsp; Valid 251700Z - 261200Z &nbsp;·&nbsp; Mirrored live from spc.noaa.gov</div>
+<div class="alert" style="background:rgba(40,0,105,0.06);border:1px solid #280069;border-left:5px solid #280069;"><div class="atitle" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:0;"><span style="background:#280069;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">SCATTERED DRY T-STORMS</span><span style="font-weight:600;font-size:14px;letter-spacing:0.4px;">CENTRAL/SOUTHERN MONTANA</span></div></div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:0;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">CRITICAL</span><span style="font-weight:600;font-size:14px;letter-spacing:0.4px;">MUCH OF THE PACIFIC NORTHWEST INTO THE NORTHERN ROCKIES</span></div></div>
 <div class="card wxtext">
 <p>Meteorological conditions amid numerous wildfires and 90-95th percentile ERCs across the northwestern U.S. will lead to another day of expansive, and potentially dangerous, fire concerns.</p>
 <p>A Scattered Dry Thunderstorm risk was introduced across central/southern Montana where a greater coverage of thunderstorms and lightning ignitions are possible atop receptive fuels. Forecast soundings depict a hot and well-mixed environment this afternoon with deep inverted-V profiles, ample MUCAPE, and 25-35 kt LCL-EL winds, indicating thunderstorms will be capable of severe wind-potential and less precipitation efficiency (See the Day 1 Convective outlook). The Isolated Dry Thunderstorm risk area was expanded into northwestern South Dakota and northeastern Wyoming based on the latest observations and forecast guidance. Lightning ignitions are also possible outside of the Isolated Dry Thunderstorm highlights, on the periphery of heavier precipitation cores where fuels are receptive.</p>
 <p>Despite moderate RH recoveries across portions of the Pacific Northwest, values are quickly declining and will approach critical thresholds (15% or less) by peak heating. Southwesterly to westerly sustained surface winds are expected to exceed 20 mph, perhaps approaching 25 mph in terrain-favored areas. Locally extremely critical conditions may be possible where these stronger sustained winds overlap critically low RH, in addition to wind gusts of 30-40 mph particularly in the Columbia Basin and western/central Montana. These conditions will further exacerbate the fire environment, impacting any new/ongoing wildfires and control efforts.</p>
 </div>
-<h2 id="nws">NWS Fire Weather Alerts</h2>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Northern Black Hills; Central Black Hills; Southern Black Hills; Fall River County Area; Northern Foot Hills; Eastern Foot Hills; Custer County Plains; Pine Ridge Area; Butte County Area; Perkins County; West Central Plains; Ziebach County; Haakon County Area; Badlands Area; Bennett County Area; Northern Campbell; Southern Campbell; Crook County Plains; Weston County Plains; Wyoming Black Hills</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 12:27PM MDT until July 26 at 12:00AM MDT by NWS Rapid City SD</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 12:27 to 2026-07-26 00:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Okanogan  Highlands &amp; Kettle Mountains; Selkirk Mountains of Northeast Washington; Methow Valley</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 10:56AM PDT until July 25 at 10:00PM PDT by NWS Spokane WA</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 11:00 to 2026-07-25 22:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Northern and Central Idaho Panhandle; Foothills of Northeast Washington; Eastern Columbia Basin / Palouse / Spokane Area; Lower Palouse / Snake River</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 10:56AM PDT until July 25 at 10:00PM PDT by NWS Spokane WA</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 11:00 to 2026-07-25 22:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Colville Reservation; Okanogan Valley; Central Washington Cascade Foothills; Waterville Plateau; Western Columbia Basin</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 10:56AM PDT until July 25 at 10:00PM PDT by NWS Spokane WA</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 11:00 to 2026-07-25 22:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Humboldt County - Quinn</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 10:19AM PDT until July 25 at 8:00PM PDT by NWS Elko NV</div>
-<div style="font-size:13px;"><b>Winds:</b> 30-33 mph gusts &nbsp;·&nbsp; <b>Valid:</b> 2026-07-25 11:00 to 2026-07-25 20:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Siskiyou County from the Cascade Mountains East and South to Mt Shasta; South Central Oregon Desert including the BLM Land in Eastern Lake and Western Harney Counties</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:46AM PDT until July 25 at 9:00PM PDT by NWS Medford OR</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 09:46 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Modoc County Except for the Surprise Valley; Klamath Basin and the Fremont-Winema National Forest</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:46AM PDT until July 25 at 9:00PM PDT by NWS Medford OR</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 09:46 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Modoc County Except for the Surprise Valley; Klamath Basin and the Fremont-Winema National Forest</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:46AM PDT until July 26 at 7:00PM PDT by NWS Medford OR</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-26 13:00 to 2026-07-26 19:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Surprise Valley California; Eastern Lassen County; Northern Washoe County</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:29AM PDT until July 25 at 9:00PM PDT by NWS Reno NV</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 09:29 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Northern Sierra Front - Carson City/Douglas/Storey/Southern Washoe/Eastern Lyon/Far Southern Lassen Counties</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:29AM PDT until July 25 at 9:00PM PDT by NWS Reno NV</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 09:29 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Surprise Valley California; Eastern Lassen County; Northern Washoe County</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:29AM PDT until July 26 at 9:00PM PDT by NWS Reno NV</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-26 13:00 to 2026-07-26 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Northern Sierra Front - Carson City/Douglas/Storey/Southern Washoe/Eastern Lyon/Far Southern Lassen Counties</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 9:29AM PDT until July 26 at 9:00PM PDT by NWS Reno NV</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-26 13:00 to 2026-07-26 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Upper Snake River Valley/Idaho Falls BLM; Caribou Range/Caribou NF; Goose Creek and Raft River Valley/Southern Sawtooth NF/Twin Falls BLM south of the Snake River</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 6:02AM MDT until July 25 at 9:00PM MDT by NWS Pocatello ID</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 13:00 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Northern Valley and Northern Phillips Counties; The Little Rockies; The Lower Missouri River Breaks including the Charles M Russell National Wildlife Refuge; Southern Petroleum and Southern Garfield Counties</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 4:31AM MDT until July 25 at 10:00PM MDT by NWS Glasgow MT</div>
-<div style="font-size:13px;"><b>Winds:</b> South southwest winds this afternoon and evening will &nbsp;·&nbsp; <b>Valid:</b> 2026-07-25 16:00 to 2026-07-25 22:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Southern Blue Mountains; Central Mountains of Oregon</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 3:03AM PDT until July 25 at 8:00PM PDT by NWS Pendleton OR</div>
-<div style="font-size:13px;"><b>Min RH:</b> As low as 11 percent. &nbsp;·&nbsp; <b>Valid:</b> 2026-07-25 03:03 to 2026-07-25 20:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Lower Columbia Basin of Oregon; Central Blue Mountains; Northern Deschutes National Forest; Kittitas Valley; Lower Columbia Basin</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 3:03AM PDT until July 25 at 8:00PM PDT by NWS Pendleton OR</div>
-<div style="font-size:13px;"><b>Min RH:</b> As low as 20 percent. &nbsp;·&nbsp; <b>Valid:</b> 2026-07-25 10:00 to 2026-07-25 20:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Gallatin National Forest; Wheatland County/Sweet Grass County; Stillwater County; Beartooth Ranger District Custer National Forest; Golden Valley County/Musselshell County; Yellowstone County; Crow Indian Reservation/Big Horn Canyon Rec Area; Northern Rosebud/Northern Treasure Counties; Northern Cheyenne Indian Reservation/Ashland Ranger District Custer Natl Forest; Custer County; Sioux Ranger District Custer National Forest; Sheridan County/Casper BLM; Bighorn National Forest</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 25 at 2:22AM MDT until July 26 at 12:00AM MDT by NWS Billings MT</div>
-<div style="font-size:13px;"><b>Valid:</b> 2026-07-25 12:00 to 2026-07-26 00:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Eastern Glacier/Toole/Central/Eastern Pondera/Liberty; Hill and Blaine Counties; Lewis and Clark National Forest Rocky Mountain District-Rocky Mountain Front; Chouteau and Fergus Counties; Central and Eastern Lewis and Clark National Forest Areas</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 24 at 11:16PM MDT until July 25 at 9:00PM MDT by NWS Great Falls MT</div>
-<div style="font-size:13px;"><b>Min RH:</b> As low as 10 percent. &nbsp;·&nbsp; <b>Valid:</b> 2026-07-24 23:16 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Western Payette National Forest; Eastern Payette National Forest; Owyhee Mountains; Burns BLM; Steens Mountain; Southern Grasslands; Central Canyonlands; Northwestern Vale BLM; Baker Valley</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 24 at 9:22PM MDT until July 25 at 9:00PM MDT by NWS Boise ID</div>
-<div style="font-size:13px;"><b>Min RH:</b> 6 to 16 percent. &nbsp;·&nbsp; <b>Valid:</b> 2026-07-24 21:22 to 2026-07-25 21:00</div></div>
-<div class="alert rfw"><div class="atitle">Red Flag Warning — Eastern Beaverhead National Forest</div>
-<div style="font-size:14px;margin-bottom:5px;">Red Flag Warning issued July 24 at 12:15PM MDT until July 25 at 9:00PM MDT by NWS Missoula MT</div>
-<div style="font-size:13px;"><b>Min RH:</b> Relative Humidity between 15 to 25 percent. &nbsp;·&nbsp; <b>Valid:</b> 2026-07-25 13:00 to 2026-07-25 21:00</div></div>
+<h3 id="nws">NWS Fire Weather Alerts</h3>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Eastern Glacier/Toole/Central/Eastern Pondera/Liberty; Hill and Blaine Counties; Lewis and Clark National Forest Rocky Mountain District-Rocky Mountain Front; Chouteau and Fergus Counties; Central and Eastern Lewis and Clark National Forest Areas</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 1:33 PM - Jul 25, 9:00 PM MDT &nbsp;·&nbsp; <b>Min RH:</b> As low as 13 percent. &nbsp;·&nbsp; <span class="muted">NWS Great Falls MT</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">* AFFECTED AREA...Eastern Glacier/Toole/Central/Eastern Pondera/Liberty, Hill and Blaine Counties, Lewis and Clark National Forest Rocky Mountain District-Rocky Mountain Front, Chouteau and Fergus Counties and Central and Eastern Lewis and Clark National Forest Areas.
+
+* WINDS...Southwest 10 to 20 mph with gusts up to 35 mph.
+
+* RELATIVE HUMIDITY...As low as 13 percent.
+
+* TEMPERATURES...Up to 102.
+
+* THUNDERSTORMS...Isolated to widely scattered showers and thunderstorms may cause localized strong, and erratic wind gusts and lightning, mostly over zones 115, 117 and 118 this afternoon.
+
+* IMPACTS...Containment of any ongoing or new fires may be very difficult.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now, or will shortly.  A combination of strong winds, low relative humidity, and warm temperatures can contribute to extreme fire behavior.
+
+Please advise the appropriate officials or fire crews in these areas of this Red Flag Warning.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Northern Black Hills; Central Black Hills; Southern Black Hills; Fall River County Area; Northern Foot Hills; Eastern Foot Hills; Custer County Plains; Pine Ridge Area; Butte County Area; Perkins County; West Central Plains; Ziebach County; Haakon County Area; Badlands Area; Bennett County Area; Northern Campbell; Southern Campbell; Crook County Plains; Weston County Plains; Wyoming Black Hills</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 12:27 PM - Jul 26, 12:00 AM MDT &nbsp;·&nbsp; <span class="muted">NWS Rapid City SD</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...RED FLAG WARNING REMAINS IN EFFECT UNTIL MIDNIGHT MDT TONIGHT DUE TO DRY LIGHTNING FOR NORTHERN BLACK HILLS, CENTRAL BLACK HILLS, SOUTHERN BLACK HILLS, FALL RIVER COUNTY AREA, NORTHERN FOOT HILLS, EASTERN FOOT HILLS, CUSTER COUNTY PLAINS, PINE RIDGE AREA, BUTTE COUNTY AREA, PERKINS COUNTY, WEST CENTRAL PLAINS, ZIEBACH COUNTY, HAAKON COUNTY AREA, BADLANDS AREA, BENNETT COUNTY AREA, NORTHERN CAMPBELL, SOUTHERN CAMPBELL, CROOK COUNTY PLAINS, WESTON COUNTY PLAINS, AND WYOMING BLACK HILLS...
+
+* AFFECTED AREA...Fire Weather Zones 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, and 333.
+
+* TIMING...Until midnight MDT tonight.
+
+* LIGHTNING...Frequent dry lightning is possible with thunderstorms.
+
+* OUTFLOW WINDS...Gusty and erratic winds are possible in and near any thunderstorms.
+
+* THUNDERSTORMS...Thunderstorms with little to no rain, gusty and erratic winds, and frequent lightning are possible.
+
+* IMPACTS...Any fires that develop will spread rapidly. Outdoor burning is not recommended.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning for dry lightning means that thunderstorms with frequent lighting and very little rainfall are possible. The combination of low relative humidity, critical fuels, and gusty/erratic winds could contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Okanogan  Highlands &amp; Kettle Mountains; Selkirk Mountains of Northeast Washington; Methow Valley</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 11:00 AM - Jul 25, 10:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Spokane WA</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...RED FLAG WARNING FOR STRONG WINDS AND LOW HUMIDITY SATURDAY FOR MUCH OF THE INLAND NORTHWEST...
+
+* Affected Area: Okanogan Highlands and Kettle Mountains (Zone 699), Selkirk Mountains of Northeast Washington (Zone 700) and Methow Valley (Zone 704).
+
+* Winds: Southwest winds 10 to 20 mph with gusts around 20 to 30 mph. Winds shifting northwesterly Saturday evening for the Methow Valley.
+
+* Relative Humidities: 15 to 24 percent.
+
+* Impacts: Gusty winds and low humidity Saturday may lead to rapid fire spread with any new or ongoing fires.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now....or will shortly. A combination of strong winds...low relative humidity...and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Northern and Central Idaho Panhandle; Foothills of Northeast Washington; Eastern Columbia Basin / Palouse / Spokane Area; Lower Palouse / Snake River</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 11:00 AM - Jul 25, 10:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Spokane WA</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...RED FLAG WARNING FOR STRONG WINDS AND LOW HUMIDITY SATURDAY FOR MUCH OF THE INLAND NORTHWEST...
+
+* Affected Area: Northern and Central Idaho Panhandle (Zone 101), Foothills of Northeast Washington (Zone 701), Eastern Columbia Basin  -Palouse  -Spokane Area (Zone 708) and Lower Palouse  -Snake River (Zone 709).
+
+* Winds: West/Southwest winds 10 to 25 mph with gusts up to 35 mph. Highest wind speeds on the West Plains, Eastern Columbia Basin, and foothills of the Blue Mountains.
+
+* Relative Humidities: 14 to 26 percent.
+
+* Impacts: Gusty winds and low humidity Saturday may lead to rapid fire spread with any new or ongoing fires.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now....or will shortly. A combination of strong winds...low relative humidity...and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Colville Reservation; Okanogan Valley; Central Washington Cascade Foothills; Waterville Plateau; Western Columbia Basin</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 11:00 AM - Jul 25, 10:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Spokane WA</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...RED FLAG WARNING FOR STRONG WINDS AND LOW HUMIDITY SATURDAY FOR MUCH OF THE INLAND NORTHWEST...
+
+* Affected Area: Colville Reservation (Zone 702), Okanogan Valley (Zone 703), Foothills of Central Washington Cascades (Zone 705), Waterville Plateau (Zone 706) and Western Columbia Basin (Zone 707).
+
+* Winds: West/Southwest winds 15 to 30 mph with gusts around 30 to 45 mph.
+
+* Relative Humidities: 14 to 23 percent.
+
+* Impacts: Gusty winds and low humidity Saturday may lead to rapid fire spread with any new or ongoing fires.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now....or will shortly. A combination of strong winds...low relative humidity...and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Humboldt County - Quinn</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 11:00 AM - Jul 25, 8:00 PM PDT &nbsp;·&nbsp; <b>Winds:</b> 30-33 mph gusts &nbsp;·&nbsp; <span class="muted">NWS Elko NV</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...HOT DRY WINDY CONDITIONS IN NW NEVADA TODAY...
+
+.Relative humidity in the single digits combined with afternoon westerly wind gusts of 30-33 mphs will create hazardous fire weather conditions.
+
+The National Weather Service in Elko has issued a Red Flag Warning, which is in effect until 8 PM PDT this evening.
+
+* AFFECTED AREA...Fire weather zone 437.
+
+* WIND...30-33 mph gusts
+
+* HUMIDITY...4-10%
+
+* THUNDERSTORMS...0% chance
+
+* IMPACTS...any fires that develop will likely spread rapidly. Outdoor burning is not recommended.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A red flag warning means that critical fire weather conditions are either occurring now, or will shortly. A combination of strong winds, low relative humidity, and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Siskiyou County from the Cascade Mountains East and South to Mt Shasta; South Central Oregon Desert including the BLM Land in Eastern Lake and Western Harney Counties</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 9:46 AM - Jul 25, 9:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Medford OR</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...Critical fire weather conditions continue through the weekend...
+
+.Hot, dry and windy conditions will peak this afternoon east of the Cascades. Humidities trend slightly higher today and will continue that slight trend higher into Sunday.
+
+* AFFECTED AREA...In northern California, fire weather zone 284, covering eastern Siskiyou County and areas east of Mount Shasta. In Oregon, fire weather zone 625, covering the south central Oregon desert and BLM land in eastern Lake and western Harney Counties.
+
+* WINDS...Southwest to west 10 to 20 mph with gusts up to 40 mph.
+
+* MINIMUM HUMIDITY...8 to 15 percent.
+
+* DURATION...3 to 6 hours this afternoon and evening.
+
+* DETAILED URL...View the hazard area in detail at https://weather.gov/wrh/hazards?wfo=mfr
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Follow all fire restrictions. You can find your county&#x27;s emergency sign up form as well as links to fire restrictions at weather.gov/medford/wildfire. One less spark, one less wildfire.
+
+Be sure you&#x27;re signed up for your county&#x27;s emergency alert system. Familiarize yourself with your emergency plan and make sure you listen to emergency services. Visit ready.gov/plan for more information.
+
+A Red Flag Warning is issued when we identify weather conditions that promote rapid spread of fire which may become life- threatening. This does not mean there is a fire. These conditions are either occurring now or will begin soon. It is important to have multiple ways to receive information from authorities.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Modoc County Except for the Surprise Valley; Klamath Basin and the Fremont-Winema National Forest</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 9:46 AM - Jul 25, 9:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Medford OR</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...Critical fire weather conditions continue through the weekend...
+
+.Hot, dry and windy conditions will peak this afternoon east of the Cascades. Humidities trend slightly higher today and will continue that slight trend higher into Sunday.
+
+...RED FLAG WARNING IN EFFECT FROM 1 PM TO 7 PM PDT SUNDAY FOR STRONG GUSTY WIND AND LOW RH FOR FIRE WEATHER ZONES 285 AND 624...
+
+* AFFECTED AREA...In Oregon, Fire weather zone 624 covering the Klamath Basin and Fremont-Winema National Forest. In California, fire weather zone 285 covering Modoc County except for Surprise Valley. The areas of concern shrink to southern portions of fwz 624 Sunday.
+
+* WINDS...Southwest to west 10 to 20 mph with gusts up to 40 mph Saturday and 35 mph Sunday.
+
+* MINIMUM HUMIDITY...8 to 15 percent. Humidities rise slightly on Sunday.
+
+* DURATION...3 to 6 hours Saturday and Sunday afternoon and evening.
+
+* DETAILED URL...View the hazard area in detail at https://weather.gov/wrh/hazards?wfo=mfr
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Follow all fire restrictions. You can find your county&#x27;s emergency sign up form as well as links to fire restrictions at weather.gov/medford/wildfire. One less spark, one less wildfire.
+
+Be sure you&#x27;re signed up for your county&#x27;s emergency alert system. Familiarize yourself with your emergency plan and make sure you listen to emergency services. Visit ready.gov/plan for more information.
+
+A Red Flag Warning is issued when we identify weather conditions that promote rapid spread of fire which may become life- threatening. This does not mean there is a fire. These conditions are either occurring now or will begin soon. It is important to have multiple ways to receive information from authorities.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Modoc County Except for the Surprise Valley; Klamath Basin and the Fremont-Winema National Forest</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 26, 1:00 PM - Jul 26, 7:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Medford OR</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...Critical fire weather conditions continue through the weekend...
+
+.Hot, dry and windy conditions will peak this afternoon east of the Cascades. Humidities trend slightly higher today and will continue that slight trend higher into Sunday.
+
+...RED FLAG WARNING IN EFFECT FROM 1 PM TO 7 PM PDT SUNDAY FOR STRONG GUSTY WIND AND LOW RH FOR FIRE WEATHER ZONES 285 AND 624...
+
+* AFFECTED AREA...In Oregon, Fire weather zone 624 covering the Klamath Basin and Fremont-Winema National Forest. In California, fire weather zone 285 covering Modoc County except for Surprise Valley. The areas of concern shrink to southern portions of fwz 624 Sunday.
+
+* WINDS...Southwest to west 10 to 20 mph with gusts up to 40 mph Saturday and 35 mph Sunday.
+
+* MINIMUM HUMIDITY...8 to 15 percent. Humidities rise slightly on Sunday.
+
+* DURATION...3 to 6 hours Saturday and Sunday afternoon and evening.
+
+* DETAILED URL...View the hazard area in detail at https://weather.gov/wrh/hazards?wfo=mfr
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Follow all fire restrictions. You can find your county&#x27;s emergency sign up form as well as links to fire restrictions at weather.gov/medford/wildfire. One less spark, one less wildfire.
+
+Be sure you&#x27;re signed up for your county&#x27;s emergency alert system. Familiarize yourself with your emergency plan and make sure you listen to emergency services. Visit ready.gov/plan for more information.
+
+A Red Flag Warning is issued when we identify weather conditions that promote rapid spread of fire which may become life- threatening. This does not mean there is a fire. These conditions are either occurring now or will begin soon. It is important to have multiple ways to receive information from authorities.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Surprise Valley California; Eastern Lassen County; Northern Washoe County</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 9:29 AM - Jul 25, 9:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Reno NV</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">The National Weather Service in Reno has issued a Red Flag Warning for gusty winds and low humidity, which is in effect from 1 PM to 9 PM PDT Sunday. The Fire Weather Watch is no longer in effect.
+
+* CHANGES...Increased wind speeds.
+
+* Affected Area...Fire Weather Zone 270 Surprise Valley California, Fire Weather Zone 278 Eastern Lassen County, Fire Weather Zone 458 Northern Washoe County.
+
+* Winds...Southwest 15 to 25 mph with gusts of 30 to 40 mph.
+
+* Humidity...Afternoon minimums 5 to 11 percent through Sunday. Overnight recoveries 25 to 45 percent each night through Monday morning.
+
+* Duration...3 to 7 hours Saturday afternoon. 3 to 6 hours Sunday afternoon.
+
+* Impacts...The combination of gusty winds and low humidity can cause fire to rapidly grow in size and intensity before first responders can contain them.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Avoid outdoor activities that can cause a spark near dry vegetation, such as yard work, target shooting, or campfires. Follow local fire restrictions. Check weather.gov/reno for updates and livingwithfire.info for preparedness tips.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Northern Sierra Front - Carson City/Douglas/Storey/Southern Washoe/Eastern Lyon/Far Southern Lassen Counties</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 9:29 AM - Jul 25, 9:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Reno NV</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">The National Weather Service in Reno has issued a Red Flag Warning for gusty winds and low humidity, which is in effect from 1 PM to 9 PM PDT Sunday. The Fire Weather Watch is no longer in effect.
+
+* CHANGES...Increased wind gusts.
+
+* Affected Area...Fire Weather Zone 420 Northern Sierra Front including Carson City, Douglas, Storey, Southern Washoe, Western Lyon, and Far Southern Lassen Counties.
+
+* Winds...Southwest 10 to 20 mph with gusts of 30 to 40 mph.
+
+* Humidity...Afternoon minimums of 7 to 14 percent through Sunday. Overnight recoveries 25 to 45 percent each night through Monday morning.
+
+* Duration...3 to 6 hours each afternoon through Sunday.
+
+* Impacts...The combination of gusty winds and low humidity can cause fire to rapidly grow in size and intensity before first responders can contain them.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Avoid outdoor activities that can cause a spark near dry vegetation, such as yard work, target shooting, or campfires. Follow local fire restrictions. Check weather.gov/reno for updates and livingwithfire.info for preparedness tips.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Surprise Valley California; Eastern Lassen County; Northern Washoe County</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 26, 1:00 PM - Jul 26, 9:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Reno NV</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">The National Weather Service in Reno has issued a Red Flag Warning for gusty winds and low humidity, which is in effect from 1 PM to 9 PM PDT Sunday. The Fire Weather Watch is no longer in effect.
+
+* CHANGES...Increased wind speeds.
+
+* Affected Area...Fire Weather Zone 270 Surprise Valley California, Fire Weather Zone 278 Eastern Lassen County, Fire Weather Zone 458 Northern Washoe County.
+
+* Winds...Southwest 15 to 25 mph with gusts of 30 to 40 mph.
+
+* Humidity...Afternoon minimums 5 to 11 percent through Sunday. Overnight recoveries 25 to 45 percent each night through Monday morning.
+
+* Duration...3 to 7 hours Saturday afternoon. 3 to 6 hours Sunday afternoon.
+
+* Impacts...The combination of gusty winds and low humidity can cause fire to rapidly grow in size and intensity before first responders can contain them.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Avoid outdoor activities that can cause a spark near dry vegetation, such as yard work, target shooting, or campfires. Follow local fire restrictions. Check weather.gov/reno for updates and livingwithfire.info for preparedness tips.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Northern Sierra Front - Carson City/Douglas/Storey/Southern Washoe/Eastern Lyon/Far Southern Lassen Counties</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 26, 1:00 PM - Jul 26, 9:00 PM PDT &nbsp;·&nbsp; <span class="muted">NWS Reno NV</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">The National Weather Service in Reno has issued a Red Flag Warning for gusty winds and low humidity, which is in effect from 1 PM to 9 PM PDT Sunday. The Fire Weather Watch is no longer in effect.
+
+* CHANGES...Increased wind gusts.
+
+* Affected Area...Fire Weather Zone 420 Northern Sierra Front including Carson City, Douglas, Storey, Southern Washoe, Western Lyon, and Far Southern Lassen Counties.
+
+* Winds...Southwest 10 to 20 mph with gusts of 30 to 40 mph.
+
+* Humidity...Afternoon minimums of 7 to 14 percent through Sunday. Overnight recoveries 25 to 45 percent each night through Monday morning.
+
+* Duration...3 to 6 hours each afternoon through Sunday.
+
+* Impacts...The combination of gusty winds and low humidity can cause fire to rapidly grow in size and intensity before first responders can contain them.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Avoid outdoor activities that can cause a spark near dry vegetation, such as yard work, target shooting, or campfires. Follow local fire restrictions. Check weather.gov/reno for updates and livingwithfire.info for preparedness tips.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Upper Snake River Valley/Idaho Falls BLM; Caribou Range/Caribou NF; Goose Creek and Raft River Valley/Southern Sawtooth NF/Twin Falls BLM south of the Snake River</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 1:00 PM - Jul 25, 9:00 PM MDT &nbsp;·&nbsp; <span class="muted">NWS Pocatello ID</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...RED FLAG WARNING IN EFFECT FROM 1 PM TO 9 PM MDT TODAY FOR SCATTERED THUNDERSTORMS FOR IDAHO FIRE WEATHER ZONES 410, 413, AND 427...
+
+* AFFECTED AREA...Fire Weather Zone 410 Upper Snake River Valley/Idaho Falls BLM, Fire Weather Zone 413 Caribou Range/Caribou NF and Fire Weather Zone 427 Goose Creek and Raft River Valley/Southern Sawtooth NF/Twin Falls BLM south of the Snake River.
+
+* IMPACTS...Scattered thunderstorms can produce frequent lightning that may in turn produce wildfire starts in receptive fuels.
+
+* THUNDERSTORMS...A mix of wet and dry storms.
+
+* OUTFLOW WINDS...Gusts over 35 mph with peak gusts nearing 45- 55 mph.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now, or will shortly based on these criteria for Southeastern Idaho:
+
+- Relative humidity at or below 15 percent and wind gusts of at least 25 mph in the mountains, or 30 mph in the Snake Plain.
+
+- Thunderstorm coverage of 25 percent, without specific rainfall criteria.
+
+- Other high impact events deemed critical by the National Weather Service and area fire management agencies.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Northern Valley and Northern Phillips Counties; The Little Rockies; The Lower Missouri River Breaks including the Charles M Russell National Wildlife Refuge; Southern Petroleum and Southern Garfield Counties</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 4:00 PM - Jul 25, 10:00 PM MDT &nbsp;·&nbsp; <b>Winds:</b> South southwest winds this afternoon and evening will &nbsp;·&nbsp; <span class="muted">NWS Glasgow MT</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">The National Weather Service in Glasgow has cancelled the Red Flag Warning.
+
+The National Weather Service in Glasgow has issued a Red Flag Warning, which is in effect from 4 PM to 10 PM MDT Saturday.
+
+* WIND...South southwest winds this afternoon and evening will range at 10 to 15 mph with gusts to 25 mph.
+
+* HUMIDITY...As low as 13 percent this afternoon.
+
+* IMPACTS...Any fires that develop will likely spread rapidly. Outdoor burning is not recommended.
+
+* ADDITIONAL DETAILS...Isolated thunderstorms are expected on Saturday, so lightning is the main concern for fire starts.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Please advise the appropriate officials or fire crews in these areas of this Red Flag Warning.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Southern Blue Mountains; Central Mountains of Oregon</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 3:03 AM - Jul 25, 8:00 PM PDT &nbsp;·&nbsp; <b>Min RH:</b> As low as 11 percent. &nbsp;·&nbsp; <span class="muted">NWS Pendleton OR</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...WINDY AND BREEZY WITH CRITICAL RELATIVE HUMIDITY TODAY...
+
+An upper level low will eject into the region bringing windy conditions to many of the Cascade Gaps as well as central OR. Humidities will be critical.
+
+* AFFECTED AREA...Fire Weather Zones 698 Southern Blue Mountains and 700 Central Mountains of Oregon.
+
+* TIMING...Until 8 PM PDT this evening.
+
+* WINDS...Southwest 10 to 20 mph with gusts up to 30 mph.
+
+* RELATIVE HUMIDITY...As low as 11 percent.
+
+* IMPACTS...Any fire that develops will catch and spread quickly. Outdoor burning is not recommended.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now, or will shortly. A combination of strong winds, low relative humidity, and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Lower Columbia Basin of Oregon; Central Blue Mountains; Northern Deschutes National Forest; Kittitas Valley; Lower Columbia Basin</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 10:00 AM - Jul 25, 8:00 PM PDT &nbsp;·&nbsp; <b>Min RH:</b> As low as 20 percent. &nbsp;·&nbsp; <span class="muted">NWS Pendleton OR</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...WINDY AND BREEZY WITH CRITICAL RELATIVE HUMIDITY TODAY...
+
+An upper level low will eject into the region bringing windy conditions to many of the Cascade Gaps as well as central OR. Humidities will be critical.
+
+* AFFECTED AREA...Fire Weather Zones 690 Kittitas Valley, 691 Lower Columbia Basin of Oregon, 691 Lower Columbia Basin of Washington, 697 Central Blue Mountains and 704 Northern Deschutes National Forest.
+
+* TIMING...From 10 AM this morning to 8 PM PDT this evening.
+
+* WINDS...West 15 to 25 mph with gusts up to 35 mph.
+
+* RELATIVE HUMIDITY...As low as 20 percent.
+
+* IMPACTS...Any fire that develops will catch and spread quickly. Outdoor burning is not recommended.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now, or will shortly. A combination of strong winds, low relative humidity, and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Gallatin National Forest; Wheatland County/Sweet Grass County; Stillwater County; Beartooth Ranger District Custer National Forest; Golden Valley County/Musselshell County; Yellowstone County; Crow Indian Reservation/Big Horn Canyon Rec Area; Northern Rosebud/Northern Treasure Counties; Northern Cheyenne Indian Reservation/Ashland Ranger District Custer Natl Forest; Custer County; Sioux Ranger District Custer National Forest; Sheridan County/Casper BLM; Bighorn National Forest</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 12:00 PM - Jul 26, 12:00 AM MDT &nbsp;·&nbsp; <span class="muted">NWS Billings MT</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">* IMPACTS: Low humidities, hot temperatures, and high-based thunderstorms with gusty and erratic outflow winds will create erratic fire behavior and potential for new fire starts.
+
+* AFFECTED AREA: In North Central WY Fire Zones...274...284. In South Central MT Fire Zones...123...124...125...126...127 128...129. In Southeast MT Fire Zones...130...131...132. In Southeast MT and Northwest SD Fire Zone...133.
+
+* COUNTIES AFFECTED: In Central MT...Golden Valley...Musselshell...Wheatland. In North Central WY...Big Horn...Johnson...Sheridan...Washakie. In Northwest SD...Harding. In South Central MT...Big Horn...Carbon...Park...Stillwater Sweet Grass...Yellowstone. In Southeast MT...Carter...Custer...Fallon...Powder River Rosebud...Treasure. In Southwest MT...Gallatin.
+
+* WIND: Southwest 10 to 15 mph with gusts to 25 mph.
+
+* THUNDERSTORMS: Isolated to scattered afternoon and evening thunderstorms will produce gusty and erratic winds, and spotty rainfall.
+
+* HUMIDITY: Minimums of 11 to 19 percent.
+
+* TEMPERATURES: Highs of 97 to 107 below 5000 feet, hottest in the east..
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now, or will shortly. A combination of strong winds, low relative humidity, and warm temperatures can contribute to extreme fire behavior.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Western Payette National Forest; Eastern Payette National Forest; Owyhee Mountains; Burns BLM; Steens Mountain; Southern Grasslands; Central Canyonlands; Northwestern Vale BLM; Baker Valley</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 24, 9:22 PM - Jul 25, 9:00 PM MDT &nbsp;·&nbsp; <b>Min RH:</b> 6 to 16 percent. &nbsp;·&nbsp; <span class="muted">NWS Boise ID</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...HOT, DRY, AND WINDY SATURDAY...
+
+.Saturday will see a continuation of hot, dry, and windy conditions across southeast Oregon and the higher terrain of southwest Idaho.
+
+* AFFECTED AREA...In Idaho, Fire Weather Zones 401 Western Payette National Forest, 402 Eastern Payette National Forest and 423 Owyhee Mountains. In Oregon, Fire Weather Zones 670 Burns BLM, 671 Steens Mountain, 672 Southern Grasslands, 673 Central Canyonlands, 674 Northwestern Vale BLM and 675 Baker Valley.
+
+* TIMING...Until 9 PM MDT /8 PM PDT/ Saturday.
+
+* WINDS...Southwest 10 to 20 mph with gusts up to 35 mph.
+
+* RELATIVE HUMIDITY...6 to 16 percent.
+
+* IMPACTS...Any fire that develops will catch and spread quickly. Outdoor burning is not recommended.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Red Flag Warning means that critical fire weather conditions are either occurring now, or will occur shortly.</div></details>
+</div>
+<div class="alert rfw"><div class="atitle" style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;"><span style="background:#5f0000;color:#f5efe6;font-weight:700;padding:2px 10px;border-radius:12px;font-size:12px;letter-spacing:0.6px;white-space:nowrap;font-family:&quot;Oswald&quot;,sans-serif;">RED FLAG WARNING</span><span style="font-weight:600;font-size:14px;flex:1;min-width:200px;">Eastern Beaverhead National Forest</span></div>
+<div style="font-size:13px;margin-top:4px;"><b>When:</b> Jul 25, 1:00 PM - Jul 25, 9:00 PM MDT &nbsp;·&nbsp; <b>Min RH:</b> Relative Humidity between 15 to 25 percent. &nbsp;·&nbsp; <span class="muted">NWS Missoula MT</span></div>
+<details style="margin-top:9px;"><summary style="cursor:pointer;color:#074259;font-size:13px;font-weight:600;">Full alert text</summary><div style="white-space:pre-wrap;font-size:13px;color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;padding-top:8px;">...RED FLAG WARNING IN EFFECT FROM 1 PM TO 9 PM MDT SATURDAY DUE TO LIGHTNING AND WIND, LOW RELATIVE HUMIDITY FOR EAST BEAVERHEAD...
+
+The National Weather Service in Missoula MT has issued a Red Flag Warning.
+
+* AFFECTED AREA...Fire Weather Zone 111.
+
+* TIMING...From 1 PM to 9 PM MDT Saturday.
+
+* WINDS...Southwest winds 15 to 25 mph with gusts up to 35 mph.
+
+* RELATIVE HUMIDITY...Relative Humidity between 15 to 25 percent.
+
+* THUNDERSTORMS...Isolated to scattered thunderstorms producing minimal precipitation.  Erratic outflow winds of 55 to 65 mph possible.
+
+* IMPACTS...Any fires that develop will spread rapidly. Outdoor burning is not recommended.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Please advise the appropriate officials or fire crews in the field of this Red Flag Warning.</div></details>
+</div>
 <h2 id="large-fires">Large Fires <span class="sub">— Grouped by GACC</span></h2>
 <div class="gacchead" id="gacc-NWCC" style="border-left:4px solid #5f0000;"><div class="top">Northwest Area <span class="muted" style="font-weight:400;">(NWCC)</span> <span style="background:#5f0000;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:12px;white-space:nowrap;">PL 5</span></div>
 <div class="meta">43 total incidents · 811,034 cumulative acres · 16 CIMTs committed</div><div class="mrow"><span>New fires: <b>19</b></span><span>New large: <b>15</b></span><span>Uncontained: <b>49</b></span></div></div>
-<div class="fire"><div class="fname">Rowe Creek Complex <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
+<div class="fire"><div class="fname"><a href="https://inciweb.wildfire.gov/incident-information/orprd-rowe-creek-complex" target="_blank">Rowe Creek Complex</a> <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
 <div class="narr">Rowe Creek Complex (2 fires), Prineville District, BLM. CIMT (NW Team 2). Ten miles south of Fossil, OR. Grass, timber and brush. Active fire behavior with wind-driven runs, group torching and spotting. Communication infrastructure threatened. Evacuations, area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">192,683</b> acres <span style="color:#d58317;">(+41,252)</span> &nbsp;·&nbsp; 31% contained &nbsp;·&nbsp; 1,144 personnel &nbsp;·&nbsp; <span style="color:#5f0000;">3 structures lost</span> &nbsp;·&nbsp; 5.7M to date</div></div>
-<div class="fire"><div class="fname">Hay Creek Complex <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
+<div class="fire"><div class="fname"><a href="https://inciweb.wildfire.gov/incident-information/orprd-hay-creek-complex" target="_blank">Hay Creek Complex</a> <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
 <div class="narr">Hay Creek Complex (5 fires), Prineville District, BLM. CIMT (NW Team 10). Five miles west of Condon, OR. Grass and brush. Active fire behavior with wind-driven runs, flanking and backing.</div>
 <div class="srow"><b style="color:#d58317;">156,848</b> acres <span style="color:#d58317;">(+7,176)</span> &nbsp;·&nbsp; 45% contained &nbsp;·&nbsp; 951 personnel &nbsp;·&nbsp; <span style="color:#5f0000;">11 structures lost</span> &nbsp;·&nbsp; 7.6M to date</div></div>
 <div class="fire"><div class="fname">Kaiser Canyon <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span></div>
@@ -268,6 +626,9 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire"><div class="fname">Little Giant <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span></div>
 <div class="narr">Little Giant, Okanogan-Wenatchee NF, USFS. CIMT (CA Team 2) mobilizing. Thirty miles northwest of Leavenworth, WA. Timber and brush. Extreme fire behavior with wind-driven runs, uphill runs and running. Structures threatened. Area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">10,328</b> acres <span style="color:#d58317;">(+2,770)</span> &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 37 personnel &nbsp;·&nbsp; 502K to date</div></div>
+<div class="fire new"><div class="fname">Stubble <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Stubble, Malheur NWR, FWS. Fifteen miles southwest of Lawen, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened.</div>
+<div class="srow"><b style="color:#d58317;">10,229</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
 <div class="fire"><div class="fname">Modrite <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span></div>
 <div class="narr">Modrite, Northeast Region, Washington DNR. CIMT (NR Team 3). Seventeen miles southwest of Inchelium, WA. Timber and hardwood litter. Active fire behavior with uphill runs, flanking and group torching. Evacuations, area and road closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">9,077</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 648 personnel &nbsp;·&nbsp; <span style="color:#5f0000;">15 structures lost</span> &nbsp;·&nbsp; 7.8M to date</div></div>
@@ -287,7 +648,7 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="narr">0579 Ten Mile, Prineville District, BLM. Nine miles northeast of Madras, OR. Grass, brush and timber. Active fire behavior with wind-driven runs, backing and smoldering. Residences threatened. Area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">4,774</b> acres <span style="color:#d58317;">(+2,274)</span> &nbsp;·&nbsp; 5% contained &nbsp;·&nbsp; 166 personnel &nbsp;·&nbsp; 1.1M to date</div></div>
 <div class="fire"><div class="fname">Egypt <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
-<div class="narr">Egypt, Malheur NF, USFS. CIMT (SA Team 2). CIMT is also managing the</div>
+<div class="narr">Egypt, Malheur NF, USFS. CIMT (SA Team 2). CIMT is also managing the Stone Creek, Dairy, Well, Crater, Stubble, Bald Mountain, Second Flat and Jackass Butte incidents. Twelve miles north of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. Area and road closures in effect. Reduction in acreage due to more accurate mapping.</div>
 <div class="srow"><b style="color:#d58317;">4,553</b> acres <span style="color:#8a8178;">(-41)</span> &nbsp;·&nbsp; 72% contained &nbsp;·&nbsp; 354 personnel &nbsp;·&nbsp; 4.7M to date</div></div>
 <div class="fire new"><div class="fname">Hat <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Hat, Vale District, BLM. Forty miles east of Burns, OR. Grass and brush. Extreme fire behavior with wind- driven runs, running and flanking. Structures threatened. Road closures in effect.</div>
@@ -328,6 +689,9 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire"><div class="fname">Paradise <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
 <div class="narr">Paradise, Umatilla NF, USFS. CIMT (NW Team 7). CIMT is also managing the Hagen and Horse Ridge incidents. Ten miles southeast of Walla Walla, OR. Timber, grass and brush. Moderate fire behavior with flanking, backing and creeping. Area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">707</b> acres <span style="color:#d58317;">(+32)</span> &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 206 personnel &nbsp;·&nbsp; 3.1M to date</div></div>
+<div class="fire new"><div class="fname">Crater <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Crater, Burns District, BLM. Thirty-five miles south of Burns, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened.</div>
+<div class="srow"><b style="color:#d58317;">700</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
 <div class="fire new"><div class="fname">Signal Peak <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Signal Peak, Yakama Agency, BIA. One mile south of White Swan, WA. Grass and brush. Extreme fire behavior with running, wind-driven runs and spotting. Evacuations, area and road closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">500</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 50 personnel &nbsp;·&nbsp; 50K to date</div></div>
@@ -341,7 +705,7 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="narr">Fox, Vale District, BLM. Twelve miles northeast of Huntington, OR. Grass. Extreme fire behavior with wind- driven runs, short-range spotting and uphill runs. Evacuations in effect.</div>
 <div class="srow"><b style="color:#d58317;">200</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 100K to date</div></div>
 <div class="fire new"><div class="fname">Bald Mountain <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
-<div class="narr">Bald Mountain, Second Flat and Jackass Butte incidents. Twelve miles north of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. Area and road closures in effect. Reduction in acreage due to more accurate mapping. Stone Creek, Malheur NF, USFS. Ten miles south of Suplee, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. Structures threatened. * Dairy, Malheur NF, USFS. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering. * Well, Burns District, BLM. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. * Crater, Burns District, BLM. Thirty-five miles south of Burns, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened. * Stubble, Malheur NWR, FWS. Fifteen miles southwest of Lawen, OR. Grass and brush. Active fire behavior with running, flanking and backing. Structures threatened. * Bald Mountain, Burns District, BLM. Fifty miles southeast of Burns, OR. Grass and brush. Active fire behavior. Numerous structures threatened.</div>
+<div class="narr">Bald Mountain, Burns District, BLM. Fifty miles southeast of Burns, OR. Grass and brush. Active fire behavior. Numerous structures threatened.</div>
 <div class="srow"><b style="color:#d58317;">150</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
 <div class="fire new"><div class="fname">Castle <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Castle, Umpqua NF, USFS. Twenty-three miles northeast of Tiller, OR. Timber and closed timber litter. Active fire behavior with isolated torching and spotting.</div>
@@ -349,35 +713,35 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire new"><div class="fname">Luna <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">WA</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
 <div class="narr">Luna, North Cascades National Park, NPS. Ten miles north of Newhalem, WA. Timber. Active fire behavior with group torching and backing. Structures threatened. Area and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">111</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 200K to date</div></div>
-<div class="fire new"><div class="fname">Stubble <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
-<div class="srow"><b style="color:#d58317;">10,229</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
-<div class="fire new"><div class="fname">Crater <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
-<div class="srow"><b style="color:#d58317;">700</b> acres &nbsp;·&nbsp; 0% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
 <div class="fire"><div class="fname">Stone Creek <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span></div>
+<div class="narr">Stone Creek, Malheur NF, USFS. Ten miles south of Suplee, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching. Structures threatened.</div>
 <div class="srow"><b style="color:#d58317;">91</b> acres &nbsp;·&nbsp; 84% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 558K to date</div></div>
 <div class="fire new"><div class="fname">Well <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Well, Burns District, BLM. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering, creeping and isolated torching.</div>
 <div class="srow"><b style="color:#d58317;">18</b> acres &nbsp;·&nbsp; 70% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
 <div class="fire new"><div class="fname">Dairy <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">OR</span> <span style="color:#280069;background:rgba(40,0,105,0.07);border:1px solid rgba(40,0,105,0.30);font-weight:700;padding:1px 8px;border-radius:10px;font-size:11px;letter-spacing:0.5px;">NEW</span></div>
+<div class="narr">Dairy, Malheur NF, USFS. Sixteen miles northwest of Riley, OR. Timber and brush. Minimal fire behavior with smoldering.</div>
 <div class="srow"><b style="color:#d58317;">8</b> acres &nbsp;·&nbsp; 70% contained &nbsp;·&nbsp; 0 personnel &nbsp;·&nbsp; 1K to date</div></div>
 <div class="gacchead" id="gacc-EACC" style="border-left:4px solid #5f0000;"><div class="top">Eastern Area Area <span class="muted" style="font-weight:400;">(EACC)</span> <span style="background:#e87f7f;color:#2f292b;font-weight:700;padding:2px 9px;border-radius:12px;font-size:12px;white-space:nowrap;">PL 4</span></div>
 <div class="meta">6 total incidents · 69,095 cumulative acres · 1 CIMTs committed</div><div class="mrow"><span>New fires: <b>5</b></span><span>New large: <b>0</b></span><span>Uncontained: <b>6</b></span></div></div>
 <div class="fire"><div class="fname">Bear Trap <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
-<div class="narr">Bear Trap, Chub and Thumb incidents. Five miles north of Winton, MN. Hardwood litter, closed timber litter and timber. Moderate fire behavior with flanking, backing and isolated torching. Communication infrastructure threatened. Evacuations, area, road and trail closures in effect. Sioux, Superior NF, USFS. Twenty miles northwest of Ely, MN. Closed timber litter, hardwood litter and timber. Moderate fire behavior with flanking and backing. Residences and communication infrastructure threatened. Evacuations, area, road and trail closures in effect. Precipitation occurred over the fire area yesterday. Bear Trap, Superior NF, USFS. Twenty miles north of Ely, MN. Closed timber litter, hardwood litter and timber. Moderate fire behavior with flanking, backing and isolated torching. Numerous structures threatened. Evacuations, area, road and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
+<div class="narr">Bear Trap, Superior NF, USFS. Twenty miles north of Ely, MN. Closed timber litter, hardwood litter and timber. Moderate fire behavior with flanking, backing and isolated torching. Numerous structures threatened. Evacuations, area, road and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
 <div class="srow"><b style="color:#d58317;">29,767</b> acres <span style="color:#d58317;">(+28)</span> &nbsp;·&nbsp; 38% contained &nbsp;·&nbsp; 422 personnel &nbsp;·&nbsp; 4.8M to date</div></div>
 <div class="fire"><div class="fname">Thumb <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
 <div class="narr">Thumb, Superior NF, USFS. Five miles south of Lac la Croix, MN. Closed timber litter, hardwood litter and timber. Moderate fire behavior with flanking, backing and isolated torching. Evacuations, area and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
 <div class="srow"><b style="color:#d58317;">16,890</b> acres <span style="color:#d58317;">(+37)</span> &nbsp;·&nbsp; 56% contained &nbsp;·&nbsp; 13 personnel &nbsp;·&nbsp; 792K to date</div></div>
+<div class="fire"><div class="fname">Sioux <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
+<div class="narr">Sioux, Superior NF, USFS. Twenty miles northwest of Ely, MN. Closed timber litter, hardwood litter and timber. Moderate fire behavior with flanking and backing. Residences and communication infrastructure threatened. Evacuations, area, road and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
+<div class="srow"><b style="color:#d58317;">12,668</b> acres <span style="color:#d58317;">(+179)</span> &nbsp;·&nbsp; 27% contained &nbsp;·&nbsp; 236 personnel &nbsp;·&nbsp; <span style="color:#5f0000;">3 structures lost</span> &nbsp;·&nbsp; 3.8M to date</div></div>
 <div class="fire"><div class="fname">Little Knife <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
 <div class="narr">Little Knife, Superior NF, USFS. NIMO Team 3. NIMO Team 1 mobilizing. Forty-five miles northeast of Grand Marais, MN. Timber and closed timber litter. Minimal fire behavior with backing, creeping and smoldering. Structures threatened. Area and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
 <div class="srow"><b style="color:#d58317;">4,958</b> acres &nbsp;·&nbsp; 21% contained &nbsp;·&nbsp; 85 personnel &nbsp;·&nbsp; 389K to date</div></div>
 <div class="fire"><div class="fname">Camp <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
-<div class="narr">Camp, Superior NF, USFS. CIMT (SA Team 1). CIMT is also managing the</div>
+<div class="narr">Camp, Superior NF, USFS. CIMT (SA Team 1). CIMT is also managing the Sioux, Bear Trap, Chub and Thumb incidents. Five miles north of Winton, MN. Hardwood litter, closed timber litter and timber. Moderate fire behavior with flanking, backing and isolated torching. Communication infrastructure threatened. Evacuations, area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">4,403</b> acres &nbsp;·&nbsp; 23% contained &nbsp;·&nbsp; 258 personnel &nbsp;·&nbsp; 3.6M to date</div></div>
 <div class="fire"><div class="fname">Chub <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
 <div class="narr">Chub, Superior NF, USFS. Fourteen miles north of Orr, MN. Timber, dormant brush and grass. Minimal fire behavior with smoldering. Numerous structures and communication infrastructure threatened. Area, road and trail closures in effect. Precipitation occurred over the fire area yesterday.</div>
 <div class="srow"><b style="color:#d58317;">409</b> acres &nbsp;·&nbsp; 95% contained &nbsp;·&nbsp; 219 personnel &nbsp;·&nbsp; 5.4M to date</div></div>
-<div class="fire"><div class="fname">Sioux <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">MN</span></div>
-<div class="srow"><b style="color:#d58317;">12,668</b> acres <span style="color:#d58317;">(+179)</span> &nbsp;·&nbsp; 27% contained &nbsp;·&nbsp; 236 personnel &nbsp;·&nbsp; <span style="color:#5f0000;">3 structures lost</span> &nbsp;·&nbsp; 3.8M to date</div></div>
 <div class="gacchead" id="gacc-GBCC" style="border-left:4px solid #d58317;"><div class="top">Great Basin Area <span class="muted" style="font-weight:400;">(GBCC)</span> <span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:12px;white-space:nowrap;">PL 3</span></div>
 <div class="meta">10 total incidents · 260,386 cumulative acres · 2 CIMTs committed</div><div class="mrow"><span>New fires: <b>29</b></span><span>New large: <b>2</b></span><span>Uncontained: <b>7</b></span></div></div>
 <div class="fire"><div class="fname">Babylon <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">UT</span></div>
@@ -386,10 +750,10 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire"><div class="fname">Cottonwood <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">UT</span></div>
 <div class="narr">Cottonwood, Fishlake NF, USFS. Five miles east of Beaver, UT. Timber, brush and light slash. Minimal fire behavior with creeping and smoldering. Evacuations, area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">97,464</b> acres &nbsp;·&nbsp; 90% contained &nbsp;·&nbsp; 102 personnel &nbsp;·&nbsp; <span style="color:#5f0000;">185 structures lost</span> &nbsp;·&nbsp; 60.5M to date</div></div>
-<div class="fire"><div class="fname">Duncan <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">ID</span></div>
+<div class="fire"><div class="fname"><a href="https://inciweb.wildfire.gov/incident-information/idbod-duncan" target="_blank">Duncan</a> <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">ID</span></div>
 <div class="narr">Duncan, Boise District, BLM. Fifty miles southwest of Mountain Home, ID. Grass and brush. Moderate fire behavior with running.</div>
 <div class="srow"><b style="color:#d58317;">16,070</b> acres <span style="color:#d58317;">(+13,570)</span> &nbsp;·&nbsp; 10% contained &nbsp;·&nbsp; 26 personnel &nbsp;·&nbsp; 3K to date</div></div>
-<div class="fire"><div class="fname">Stookey <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">UT</span></div>
+<div class="fire"><div class="fname"><a href="https://inciweb.wildfire.gov/incident-information/utwdd-stookey" target="_blank">Stookey</a> <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">UT</span></div>
 <div class="narr">Stookey, West Desert District, BLM. Seven miles west of Vernon, UT. Chaparral. Minimal fire behavior with creeping and smoldering.</div>
 <div class="srow"><b style="color:#d58317;">11,881</b> acres &nbsp;·&nbsp; 90% contained &nbsp;·&nbsp; 125 personnel &nbsp;·&nbsp; 6.2M to date</div></div>
 <div class="fire"><div class="fname">Claremont <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">ID</span></div>
@@ -432,10 +796,10 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="srow"><b style="color:#d58317;">309</b> acres &nbsp;·&nbsp; 97% contained &nbsp;·&nbsp; 175 personnel &nbsp;·&nbsp; 9.7M to date</div></div>
 <div class="gacchead" id="gacc-ONCC" style="border-left:4px solid #d58317;"><div class="top">Northern California Area <span class="muted" style="font-weight:400;">(ONCC)</span> <span style="background:#d58317;color:#fff;font-weight:700;padding:2px 9px;border-radius:12px;font-size:12px;white-space:nowrap;">PL 3</span></div>
 <div class="meta">9 total incidents · 86,479 cumulative acres · 1 CIMTs committed</div><div class="mrow"><span>New fires: <b>14</b></span><span>New large: <b>0</b></span><span>Uncontained: <b>5</b></span></div></div>
-<div class="fire"><div class="fname">Biscar <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">CA</span></div>
+<div class="fire"><div class="fname"><a href="https://inciweb.wildfire.gov/incident-information/canod-biscar" target="_blank">Biscar</a> <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">CA</span></div>
 <div class="narr">Biscar, Northern California District, BLM. CIMT (CA Team 3). Forty miles northeast of Susanville, CA. Brush and grass. Minimal fire behavior with creeping, smoldering and uphill runs. Structures threatened. Evacuations, area, road and trail closures in effect.</div>
 <div class="srow"><b style="color:#d58317;">69,344</b> acres &nbsp;·&nbsp; 68% contained &nbsp;·&nbsp; 541 personnel &nbsp;·&nbsp; 6.2M to date</div></div>
-<div class="fire"><div class="fname">Elephant <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">CA</span></div>
+<div class="fire"><div class="fname"><a href="https://inciweb.wildfire.gov/incident-information/catnf-elephant" target="_blank">Elephant</a> <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">CA</span></div>
 <div class="narr">Elephant, Tahoe NF, USFS. Two miles northeast of Loyalton, CA. Grass, brush and timber. Minimal fire behavior with backing, creeping and smoldering. Energy infrastructure threatened.</div>
 <div class="srow"><b style="color:#d58317;">13,930</b> acres &nbsp;·&nbsp; 98% contained &nbsp;·&nbsp; 130 personnel &nbsp;·&nbsp; 9.5M to date</div></div>
 <div class="fire"><div class="fname">Little <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">CA</span></div>
@@ -486,7 +850,7 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 <div class="fire"><div class="fname">Mailbox <span style="background:#eae4d8;color:#5c5244;padding:1px 7px;border-radius:6px;font-size:12px;font-weight:600;">FL</span></div>
 <div class="narr">Mailbox, National Forests in Florida, USFS. Seven miles south of Taylor, FL. Southern rough. No new information. Bee Haven Bay 24-06, Florida Forest Service. Seventy-seven miles east of Tallahassee, FL. Hardwood litter. No new information. Last narrative report unless new information is received.</div>
 <div class="srow"><b style="color:#d58317;">409</b> acres &nbsp;·&nbsp; 50% contained &nbsp;·&nbsp; 69 personnel &nbsp;·&nbsp; 330K to date</div></div>
-<div class="footer"><b>Wildfire Aware Situation Report</b> · Generated July 25, 2026 18:32<br>Sources: <a href="https://www.nifc.gov/nicc/predictive-services/intelligence">NIFC Incident Management Sit Report</a><a href="https://www.weather.gov/fire/">NWS Fire Weather</a><a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html">SPC Fire Weather Outlook</a></div>
+<div class="footer"><b>Wildfire Aware Situation Report</b> · Generated July 25, 2026 19:48<br>Sources: <a href="https://www.nifc.gov/nicc/predictive-services/intelligence">NIFC Incident Management Sit Report</a><a href="https://www.weather.gov/fire/">NWS Fire Weather</a><a href="https://www.spc.noaa.gov/products/fire_wx/fwdy1.html">SPC Fire Weather Outlook</a></div>
 </div>
 <script>
 document.addEventListener('click', function (e) {
