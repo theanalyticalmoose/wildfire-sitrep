@@ -265,7 +265,14 @@ def attach_narratives(fires, full, data):
         hits.sort()
         for idx, (start, f) in enumerate(hits):
             end = hits[idx + 1][0] if idx + 1 < len(hits) else len(narr_block)
-            f["narr"] = re.sub(r"^\*\s*", "", collapse(narr_block[start:end]))
+            txt = re.sub(r"^\*\s*", "", collapse(narr_block[start:end]))
+            # Fires without narratives appear in comma-separated name lists in
+            # the PDF; slicing those yields junk like "Well," or "Dairy, and
+            # other incidents." Real narratives always carry unit, location,
+            # and behavior, so discard fragments barely longer than the name.
+            if len(txt) < len(f["name"]) + 30:
+                txt = ""
+            f["narr"] = txt
 
 
 def parse_weather(full):
@@ -324,13 +331,28 @@ def fetch_spc():
     issued = re.search(r"\d{3,4}\s+[AP]M\s+[A-Z]{2,4}\s+\w{3}\s+\w{3}\s+\d{2}\s+\d{4}", txt)
     no_risk = "No Risk Areas Forecast" in txt
 
+    # Identify the highest risk level SPC has delineated today. Prefer the
+    # page's risk table cells; fall back to scanning the product text.
+    risk_level = None
+    if not no_risk:
+        cells = [c.lower() for c in
+                 re.findall(r">\s*(Extremely\s+Critical|Critical|Elevated)\s*<",
+                            txt, re.IGNORECASE)]
+        low = " ".join(cells) if cells else txt.lower()
+        if "extremely critical" in re.sub(r"\s+", " ", low):
+            risk_level = "EXTREMELY CRITICAL"
+        elif "critical" in low:
+            risk_level = "CRITICAL"
+        elif "elevated" in low:
+            risk_level = "ELEVATED"
+
     body = ""
     mb = re.search(r"\.\.\.Synopsis\.\.\.(.+?)(?:\.\.[A-Z][a-z]+\.\.|\n\.\.\.Please see)",
                    txt, re.DOTALL)
     if mb:
         body = collapse(mb.group(1))
 
-    return {"available": True, "no_risk": no_risk,
+    return {"available": True, "no_risk": no_risk, "risk_level": risk_level,
             "valid": collapse(valid.group(1)) if valid else "",
             "issued": collapse(issued.group(0)) if issued else "",
             "body": body}
@@ -468,8 +490,12 @@ def render(data, nws, spc):
         H.append('<a class="stat-a" href="#spc"><div class="stat wx-ok">'
                  '<div class="n">NO RISK</div><div class="l">SPC Day 1 Outlook</div></div></a>')
     else:
-        H.append('<a class="stat-a" href="#spc"><div class="stat wx-rfw">'
-                 '<div class="n">RISK</div><div class="l">SPC Day 1 Outlook</div></div></a>')
+        level = spc.get("risk_level") or "RISK"
+        lcls = "wx-fww" if level == "ELEVATED" else "wx-rfw"
+        lsize = ' style="font-size:24px;line-height:38px;"' if len(level) > 8 else ''
+        H.append(f'<a class="stat-a" href="#spc"><div class="stat {lcls}">'
+                 f'<div class="n"{lsize}>{level}</div>'
+                 f'<div class="l">SPC Day 1 Outlook</div></div></a>')
     H.append(f'<a class="stat-a" href="#nws"><div class="stat {"wx-rfw" if rfw_ct else "wx-ok"}">'
              f'<div class="n">{rfw_ct}</div><div class="l">Red Flag Warnings</div></div></a>')
     H.append(f'<a class="stat-a" href="#nws"><div class="stat {"wx-fww" if fww_ct else "wx-ok"}">'
@@ -483,7 +509,8 @@ def render(data, nws, spc):
              if new_contained_ct else '')
     H.append(f'<h2 id="new-fires">New Large Fires <span class="sub">— {len(new_active)} '
              f'active new incidents in {", ".join(new_states) or "—"}{extra}</span></h2>')
-    for f in sorted(new_active, key=lambda x: acnum(x["acres"]), reverse=True):
+    # Fires with narratives first (by size); no-narrative fires at the end.
+    for f in sorted(new_active, key=lambda x: (not x["narr"], -acnum(x["acres"]))):
         H.append(f'<div class="fire new"><div class="fname">{esc(f["name"])} '
                  f'{state_tag(f["state"])} {new_badge()}</div>')
         if f["narr"]:
@@ -527,7 +554,9 @@ def render(data, nws, spc):
                      f'{esc(spc["body"])}</div>')
     else:
         vt = f' (valid {esc(spc["valid"])})' if spc.get("valid") else ""
-        H.append(f'<div class="alert spc-critical"><b>Risk areas forecast{vt}.</b> '
+        lvl = spc.get("risk_level")
+        head = f'{lvl.title()} risk areas forecast' if lvl else 'Risk areas forecast'
+        H.append(f'<div class="alert spc-critical"><b>{head}{vt}.</b> '
                  f'See discussion below.</div>')
         if spc.get("body"):
             H.append(f'<div class="alert spc-elevated" style="font-size:14px;">'
@@ -574,7 +603,7 @@ def render(data, nws, spc):
                  f'<div class="mrow"><span>New fires: <b>{sec["new_fires"]}</b></span>'
                  f'<span>New large: <b>{sec["new_large"]}</b></span>'
                  f'<span>Uncontained: <b>{sec["uncontained"]}</b></span></div></div>')
-        for f in sorted(gfires, key=lambda x: acnum(x["acres"]), reverse=True):
+        for f in sorted(gfires, key=lambda x: (not x["narr"], -acnum(x["acres"]))):
             ncls = " new" if f["new"] else ""
             nb = " " + new_badge() if f["new"] else ""
             H.append(f'<div class="fire{ncls}"><div class="fname">{esc(f["name"])} '
