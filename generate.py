@@ -51,6 +51,8 @@ GACC_NAMES = {
 }
 GACC_CELL_ORDER = ["AICC", "NWCC", "ONCC", "OSCC", "NRCC",
                    "GBCC", "SWCC", "RMCC", "EACC", "SACC"]
+# Short display names so grid cards keep their shape.
+GACC_SHORT = dict(GACC_NAMES, ONCC="N. California", OSCC="S. California")
 SECTION_TITLE_TO_CODE = {
     "Alaska": "AICC", "Northwest": "NWCC", "Northern California": "ONCC",
     "Southern California": "OSCC", "Northern Rockies": "NRCC",
@@ -96,6 +98,14 @@ def collapse(s):
     return re.sub(r"\s+", " ", (s or "").strip())
 
 
+def reflow(text):
+    """Unwrap hard line-wraps within paragraphs (NWS/SPC products wrap at
+    ~68 chars mid-sentence); keep true blank-line paragraph breaks."""
+    paras = re.split(r"\n\s*\n", text or "")
+    return "\n\n".join(" ".join(l.strip() for l in p.split("\n"))
+                       for p in paras if p.strip())
+
+
 def parse_pdf(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
         full = ""
@@ -112,6 +122,7 @@ def parse_pdf(pdf_path):
 
     data = {"full_text": full}
     parse_header(full, data)
+    parse_ytd(full, data)
     parse_gacc_summary(full, data)
     parse_sections(full, data)
     data["fires"] = build_fires(fire_rows, full, data)
@@ -150,6 +161,24 @@ def parse_header(full, data):
         "uncontained": grab("Uncontained large fires"),
         "cimts": grab("CIMTs committed"),
     }
+
+
+def parse_ytd(full, data):
+    """Year-to-date national totals (last number on the TOTAL FIRES/ACRES
+    rows) and NIFC's own % of the ten-year average."""
+    ytd = {}
+    for key, label in (("fires", "TOTAL FIRES"), ("acres", "TOTAL ACRES")):
+        m = re.search(label + r":?\s*([^\n]+)", full)
+        if m:
+            nums = re.findall(r"[\d,]+", m.group(1))
+            if nums:
+                ytd[key] = nums[-1]
+    for key, label in (("fires_pct", "Fires"), ("acres_pct", "Acres")):
+        m = re.search(label + r"\s*\(20\d\d\s*[-–—]\s*20\d\d as of today\)"
+                      r"\s*[\d,]+\s*(\d+)\s*%", full)
+        if m:
+            ytd[key] = int(m.group(1))
+    data["ytd"] = ytd if "fires" in ytd and "acres" in ytd else None
 
 
 def parse_gacc_summary(full, data):
@@ -224,7 +253,7 @@ def build_fires(fire_rows, full, data):
         if m is None:
             # Fallback (long/wrapped names, complexes): locate the fire by its
             # narrative line instead of its table row.
-            m = re.search(narrative_name_re(name), full)
+            m = find_narr_entry(name, full)
         if m:
             fire["pos"] = m.start()
             for start, code in sec_bounds:
@@ -245,6 +274,44 @@ def narrative_name_re(name):
             r"(?:\s*\([^)]{0,30}\))?\s*,")
 
 
+# What follows a fire's name in a true narrative entry: its unit and agency,
+# e.g. "Burns District, BLM." / "Malheur NF, USFS." / "Medford Unit, Oregon
+# DOF." Incidental mentions inside other narratives ("...managing the Bald
+# Mountain, Second Flat and Jackass Butte incidents") don't have this shape.
+NARR_UNIT_RE = re.compile(
+    r"\s*[A-Z][^.\n]{0,60}?"
+    r"(?:BLM|USFS|USFWS|FWS|NPS|BIA|DNR|DOF|OSFM|Cal\s?Fire|CAL\s?FIRE|"
+    r"NF|NWR|District|Unit|Agency|Region|Forest|Park|County|Tribe|Nation)\b"
+    r"[^.\n]{0,30}\.")
+
+
+def find_narr_entry(name, text, require_entry=False):
+    """Best match for a fire's narrative entry in text. A fire's name can
+    also appear inside ANOTHER fire's narrative (cross-references like
+    '...is also managing the Bald Mountain, Second Flat and Jackass Butte
+    incidents'), and taking the first occurrence merges every fire in
+    between under one card. Score each occurrence instead: +3 if followed
+    by unit-and-agency text, +1 at line start, +1 more with a '*' bullet;
+    highest score wins, earliest position breaks ties. With require_entry,
+    return None unless some occurrence scores > 0 (i.e. looks like a real
+    entry, not just a passing mention)."""
+    best, best_score = None, -1
+    for m in re.finditer(narrative_name_re(name), text):
+        score = 0
+        if NARR_UNIT_RE.match(text[m.end():m.end() + 100]):
+            score += 3
+        pre = text[:m.start()]
+        if m.start() == 0 or pre.rstrip(" ").endswith("\n"):
+            score += 1
+            if text[m.start()] == "*":
+                score += 1
+        if score > best_score:
+            best, best_score = m, score
+    if require_entry and best_score <= 0:
+        return None
+    return best
+
+
 def attach_narratives(fires, full, data):
     """Attach each fire's narrative paragraph (best-effort; optional)."""
     by_section = {}
@@ -259,7 +326,7 @@ def attach_narratives(fires, full, data):
 
         hits = []
         for f in by_section.get(code, []):
-            m = re.search(narrative_name_re(f["name"]), narr_block)
+            m = find_narr_entry(f["name"], narr_block, require_entry=True)
             if m:
                 hits.append((m.start(), f))
         hits.sort()
@@ -306,17 +373,50 @@ def fetch_nws():
     for f in feats:
         p = f.get("properties", {})
         desc = p.get("description", "") or ""
+        instr = p.get("instruction", "") or ""
         wind = re.search(r"WIND[.\s]*\.\.\.\s*([^\n]*)", desc)
         rh = re.search(r"RELATIVE HUMIDITY[.\s]*\.\.\.\s*([^\n]*)", desc)
+        full_txt = desc
+        if instr:
+            full_txt += "\n\nPRECAUTIONARY/PREPAREDNESS ACTIONS...\n\n" + instr
         out.append({
             "event": p.get("event", ""), "area": p.get("areaDesc", ""),
             "headline": p.get("headline", ""),
+            "office": p.get("senderName", "") or "",
             "onset": (p.get("onset") or "")[:16].replace("T", " "),
             "ends": (p.get("ends") or "")[:16].replace("T", " "),
             "wind": collapse(wind.group(1)) if wind else "",
             "rh": collapse(rh.group(1)) if rh else "",
+            "full": reflow(full_txt),
         })
     return out
+
+
+def fetch_inciweb_slugs():
+    """Slugs of every incident page currently listed on InciWeb, so fire
+    names can link only to pages that actually exist."""
+    try:
+        txt = http_get("https://inciweb.wildfire.gov/accessible-view")
+    except Exception as e:  # noqa: BLE001
+        print(f"  InciWeb fetch failed: {e}", file=sys.stderr)
+        return set()
+    return set(re.findall(r"/incident-information/([a-z0-9-]+)", txt))
+
+
+def inciweb_url(f, slugs):
+    """URL for a fire's InciWeb page (unitcode-name slug), or None."""
+    if not slugs:
+        return None
+    name_slug = re.sub(r"-+", "-",
+                       re.sub(r"[^a-z0-9]+", "-", f["name"].lower())).strip("-")
+    unit_slug = re.sub(r"[^a-z0-9]", "", f["unit"].lower())
+    exact = f"{unit_slug}-{name_slug}"
+    if exact in slugs:
+        return f"https://inciweb.wildfire.gov/incident-information/{exact}"
+    cands = [s for s in slugs if s.endswith("-" + name_slug)]
+    if len(cands) == 1:
+        return f"https://inciweb.wildfire.gov/incident-information/{cands[0]}"
+    return None
 
 
 def fetch_spc():
@@ -444,6 +544,68 @@ def acnum(v):
         return 0
 
 
+def chip(label, bg, fg):
+    return (f'<span style="background:{bg};color:{fg};font-weight:700;'
+            f'padding:2px 10px;border-radius:12px;font-size:12px;'
+            f'letter-spacing:0.6px;white-space:nowrap;'
+            f'font-family:&quot;Oswald&quot;,sans-serif;">{esc(label)}</span>')
+
+
+def ramp(pct):
+    """Color for % of the ten-year average: greens below ~80, warming near
+    100, reds darkening as the percentage climbs."""
+    if pct is None:
+        return "#8a8178"
+    for lim, c in ((50, "#2e5339"), (65, "#4b6b34"), (80, "#6c733d"),
+                   (90, "#bb8c4d"), (100, "#d58317"), (110, "#c1440e"),
+                   (125, "#8f1d0e"), (150, "#5f0000")):
+        if pct < lim:
+            return c
+    return "#3d0000"
+
+
+def tint(c, a):
+    return f"rgba({int(c[1:3], 16)},{int(c[3:5], 16)},{int(c[5:7], 16)},{a})"
+
+
+def fmt_when(a):
+    """Compact 'Jul 25, 11:00 AM - Jul 25, 10:00 PM PDT' from onset/ends."""
+    def one(s):
+        try:
+            dt = datetime.datetime.strptime(s, "%Y-%m-%d %H:%M")
+        except (ValueError, TypeError):
+            return s or ""
+        return f'{dt.strftime("%b")} {dt.day}, {dt.strftime("%I:%M %p").lstrip("0")}'
+    parts = [one(a["onset"]), one(a["ends"])]
+    when = " - ".join(p for p in parts if p)
+    tz = re.search(r"\b([A-Z]{2,3}T)\b", a.get("headline", ""))
+    return when + (f' {tz.group(1)}' if tz and when else "")
+
+
+def spc_rows(spc):
+    """(chip label, chip bg, chip fg, box class/style, area text) per headline."""
+    rows = []
+    for hl in spc.get("headlines", []):
+        h = collapse(hl)
+        m = re.match(r"(EXTREMELY CRITICAL|CRITICAL|ELEVATED)\s+"
+                     r"FIRE WEATHER AREA\s+(?:FOR\s+)?(.*)", h)
+        rest = m.group(2) if m else h
+        level = m.group(1) if m else (spc.get("risk_level") or "RISK")
+        dm = re.match(r"(SCATTERED|ISOLATED)?\s*DRY THUNDERSTORMS?\s*"
+                      r"(?:ACROSS|FOR|OVER)?\s*(.*)", rest)
+        if dm and "DRY THUNDERSTORM" in rest:
+            qual = ((dm.group(1) + " ") if dm.group(1) else "") + "DRY T-STORMS"
+            area = dm.group(2).strip() or rest
+            rows.append((qual, "#280069", "#f5efe6", "tstm", area))
+        elif level == "ELEVATED":
+            rows.append((level, "#bb8c4d", "#2f292b", "fww", rest))
+        elif level == "EXTREMELY CRITICAL":
+            rows.append((level, "#3d0000", "#f5efe6", "rfw", rest))
+        else:
+            rows.append((level, "#5f0000", "#f5efe6", "rfw", rest))
+    return rows
+
+
 def chg_html(chg):
     if chg in ("---", "0", "", None):
         return ""
@@ -461,8 +623,9 @@ def stat_row(f):
     return " &nbsp;·&nbsp; ".join(parts)
 
 
-def render(data, nws, spc):
+def render(data, nws, spc, inciweb=None):
     d = data
+    inciweb = inciweb or set()
     fires = d["fires"]
     contained = [f for f in fires if f["pct"] == "100"]
     active = [f for f in fires if f["pct"] != "100"]
@@ -499,34 +662,11 @@ def render(data, nws, spc):
              f'across the country.</div></div>')
     H.append('<!--/PLB-->')
 
-    cards = [("Uncontained Large Fires", d["national"]["uncontained"], "#large-fires"),
-             ("New Large Fires", d["national"]["new_large"], "#new-fires"),
-             ("Large Fires Contained", d["national"]["contained"], "#contained-fires"),
-             ("CIMTs Committed", d["national"]["cimts"], "#large-fires"),
-             ("Total Active Acres", d["total_acres"], "#gacc-levels")]
-    H.append('<div class="stats">')
-    for label, n, href in cards:
-        H.append(f'<a class="stat-a" href="{href}"><div class="stat">'
-                 f'<div class="n">{esc(n)}</div>'
-                 f'<div class="l">{esc(label)}</div></div></a>')
-    H.append('</div>')
-
-    H.append('<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">')
-    for code in GACC_CELL_ORDER:
-        pl = d["gacc_summary"].get(code, {}).get("pl", 1)
-        cell = (f'<div class="gcell"><div><div class="code">{code}</div>'
-                f'<div class="full">{esc(GACC_NAMES[code])}</div></div>{pl_badge(pl)}</div>')
-        if code in linked_codes:
-            cell = (f'<a class="gcell-a" href="#gacc-{code}" '
-                    f'title="Jump to {code} large fires">{cell}</a>')
-        H.append(cell)
-    H.append('</div>')
-
     # Fire weather at a glance: SPC verdict + alert counts, linking down
     rfw_ct = sum(1 for a in nws if a["event"] == "Red Flag Warning")
     fww_ct = sum(1 for a in nws if a["event"] == "Fire Weather Watch")
     other_ct = len(nws) - rfw_ct - fww_ct
-    H.append('<h2 id="wx-glance">Fire Weather at a Glance</h2><div class="wxcards">')
+    H.append('<div class="wxcards" id="wx-glance">')
     if not spc.get("available"):
         H.append('<a class="stat-a" href="#spc"><div class="stat"><div class="n">N/A</div>'
                  '<div class="l">SPC Day 1 Outlook</div></div></a>')
@@ -555,6 +695,55 @@ def render(data, nws, spc):
                  f'<div class="n">{other_ct}</div><div class="l">Other Fire Alerts</div></div></a>')
     H.append('</div>')
 
+    cards = [("Uncontained Large Fires", d["national"]["uncontained"], "#large-fires"),
+             ("New Large Fires", d["national"]["new_large"], "#new-fires"),
+             ("Large Fires Contained", d["national"]["contained"], "#contained-fires"),
+             ("CIMTs Committed", d["national"]["cimts"], "#large-fires"),
+             ("Total Active Acres", d["total_acres"], "#gacc-levels")]
+    H.append('<div class="stats">')
+    for label, n, href in cards:
+        H.append(f'<a class="stat-a" href="{href}"><div class="stat">'
+                 f'<div class="n">{esc(n)}</div>'
+                 f'<div class="l">{esc(label)}</div></div></a>')
+    H.append('</div>')
+
+    # Year-to-date totals vs the ten-year average, on a severity color ramp
+    if d.get("ytd"):
+        y = d["ytd"]
+        H.append('<div class="stats" style="grid-template-columns:'
+                 'repeat(auto-fit,minmax(240px,1fr));margin-bottom:6px;">')
+        for key, pkey, label in (("fires", "fires_pct", "Fires Year to Date"),
+                                 ("acres", "acres_pct", "Acres Year to Date")):
+            pct = y.get(pkey)
+            col = ramp(pct)
+            card = (f'<div class="stat" style="background:{tint(col, 0.08)};'
+                    f'border-color:{col};"><div class="n" style="color:{col};">'
+                    f'{esc(y[key])}</div><div class="l">{label}</div>')
+            if pct is not None:
+                card += (f'<div style="margin-top:6px;font-size:13px;">'
+                         f'<span style="color:{col};font-weight:700;">{pct}%</span> '
+                         f'<span class="muted">of the 10-year average</span></div>')
+            card += '</div>'
+            H.append(f'<a class="stat-a" href="#gacc-levels">{card}</a>')
+        H.append('</div>')
+
+    H.append('<h2 id="gacc-levels">GACC Preparedness Levels</h2><div class="gaccgrid">')
+    for code in GACC_CELL_ORDER:
+        summ = d["gacc_summary"].get(code, {})
+        pl = summ.get("pl", 1)
+        cell = (f'<div class="gcell"><div><div class="code">{code}</div>'
+                f'<div class="full">{esc(GACC_SHORT[code])}</div>'
+                f'<div style="font-size:12px;color:#8a8178;margin-top:4px;">'
+                f'<b style="color:#d58317;">{summ.get("incidents", 0)}</b> fires</div>'
+                f'<div style="font-size:12px;color:#8a8178;">'
+                f'<b style="color:#d58317;">{esc(summ.get("acres", "0"))}</b> acres</div>'
+                f'</div>{pl_badge(pl)}</div>')
+        if code in linked_codes:
+            cell = (f'<a class="gcell-a" href="#gacc-{code}" '
+                    f'title="Jump to {code} large fires">{cell}</a>')
+        H.append(cell)
+    H.append('</div>')
+
     extra = (f' (plus {new_contained_ct} reported new, already contained)'
              if new_contained_ct else '')
     H.append(f'<h2 id="new-fires">New Large Fires <span class="sub">— {len(new_active)} '
@@ -581,64 +770,86 @@ def render(data, nws, spc):
                  f'100% contained &nbsp;·&nbsp; {esc(f["gacc"] or "")} &nbsp;·&nbsp; '
                  f'{esc(f["cost"])} to date</div></div>')
 
-    H.append('<h2 id="weather">Predictive Services Discussion</h2><div class="card wxtext">')
+    H.append('<h2 id="fire-weather">Fire Weather</h2>')
+
+    H.append('<h3 id="weather">Predictive Services Discussion</h3><div class="card wxtext">')
     for para in (d["weather"] or "N/A").split("\n\n"):
         H.append(f'<p>{esc(para)}</p>')
     H.append('</div>')
 
-    H.append('<h2 id="spc">SPC Day 1 Fire Weather Outlook</h2>')
+    H.append('<h3 id="spc">SPC Day 1 Fire Weather Outlook</h3>')
     if not spc.get("available"):
         H.append('<div class="alert spc-elevated">Live SPC product was unavailable at '
                  'generation time.</div>')
-    elif spc.get("no_risk"):
-        vt = f' (valid {esc(spc["valid"])}' + (f', issued {esc(spc["issued"])}'
-                                               if spc.get("issued") else "") + ')'
-        H.append(f'<div class="banner-ok"><b>No Risk Areas Forecast.</b> The SPC Day 1 Fire '
-                 f'Weather Outlook{vt} delineates no Critical or Elevated risk areas. '
-                 f'Pulled live from spc.noaa.gov.</div>')
-        if spc.get("body"):
-            H.append('<div class="muted" style="margin:6px 0 10px;font-size:14px;">'
-                     'Forecaster discussion (localized concerns kept below formal highlight '
-                     'criteria):</div>')
-            H.append(f'<div class="alert spc-elevated" style="font-size:14px;">'
-                     f'{esc(spc["body"])}</div>')
     else:
-        vt = f' (valid {esc(spc["valid"])})' if spc.get("valid") else ""
-        bits = []
-        if spc.get("risk_level"):
-            bits.append(f'{spc["risk_level"].title()} fire weather area')
-        if spc.get("dry_tstm"):
-            dt = spc["dry_tstm"]
-            bits.append(f'{dt.title()} dry thunderstorms' if dt != "DRY TSTM"
-                        else 'Dry thunderstorms')
-        head = " · ".join(bits) if bits else "Risk areas"
-        H.append(f'<div class="alert spc-critical"><b>{esc(head)} forecast{vt}.</b></div>')
-        for hl in spc.get("headlines", []):
-            hcls = "spc-elevated" if "ELEVATED" in hl else "spc-critical"
-            H.append(f'<div class="alert {hcls}" style="font-weight:700;">{esc(hl)}</div>')
+        meta = []
+        if spc.get("issued"):
+            meta.append(f'Issued {esc(spc["issued"])}')
+        if spc.get("valid"):
+            meta.append(f'Valid {esc(spc["valid"])}')
+        meta.append('Mirrored live from spc.noaa.gov')
+        H.append(f'<div class="muted" style="font-size:13px;margin-bottom:10px;">'
+                 f'{" &nbsp;·&nbsp; ".join(meta)}</div>')
+        if spc.get("no_risk"):
+            H.append('<div class="banner-ok"><b>No Risk Areas Forecast.</b> '
+                     'The outlook delineates no Critical or Elevated risk areas.</div>')
+        else:
+            rows = spc_rows(spc)
+            if not rows:
+                bits = []
+                if spc.get("risk_level"):
+                    bits.append(f'{spc["risk_level"].title()} fire weather area')
+                if spc.get("dry_tstm"):
+                    bits.append('Dry thunderstorms')
+                H.append(f'<div class="alert spc-critical"><b>'
+                         f'{esc(" · ".join(bits) or "Risk areas")} forecast.</b></div>')
+            for label, bg, fg, kind, area in rows:
+                box = ('<div class="alert" style="background:rgba(40,0,105,0.06);'
+                       'border:1px solid #280069;border-left:5px solid #280069;">'
+                       if kind == "tstm" else f'<div class="alert {kind}">')
+                H.append(box + '<div class="atitle" style="display:flex;'
+                         'align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:0;">'
+                         + chip(label, bg, fg)
+                         + f'<span style="font-weight:600;font-size:14px;'
+                         f'letter-spacing:0.4px;">{esc(area)}</span></div></div>')
         if spc.get("body"):
             H.append('<div class="card wxtext">')
             for para in spc["body"].split("\n\n"):
                 H.append(f'<p>{esc(para)}</p>')
             H.append('</div>')
 
-    H.append('<h2 id="nws">NWS Fire Weather Alerts</h2>')
+    H.append('<h3 id="nws">NWS Fire Weather Alerts</h3>')
     if not nws:
         H.append('<div class="banner-ok">No active Red Flag Warnings or Fire Weather Watches.</div>')
     for a in nws:
-        cls = "rfw" if a["event"] == "Red Flag Warning" else "fww"
-        H.append(f'<div class="alert {cls}"><div class="atitle">{esc(a["event"])} — '
-                 f'{esc(a["area"])}</div>')
-        if a["headline"]:
-            H.append(f'<div style="font-size:14px;margin-bottom:5px;">{esc(a["headline"])}</div>')
+        if a["event"] == "Fire Weather Watch":
+            cls, cbg, cfg = "fww", "#bb8c4d", "#2f292b"
+        else:
+            cls, cbg, cfg = "rfw", "#5f0000", "#f5efe6"
+        H.append(f'<div class="alert {cls}">'
+                 f'<div class="atitle" style="display:flex;align-items:flex-start;'
+                 f'gap:10px;flex-wrap:wrap;">{chip(a["event"].upper(), cbg, cfg)}'
+                 f'<span style="font-weight:600;font-size:14px;flex:1;'
+                 f'min-width:200px;">{esc(a["area"])}</span></div>')
         det = []
+        when = fmt_when(a)
+        if when:
+            det.append(f'<b>When:</b> {esc(when)}')
         if a["wind"]:
             det.append(f'<b>Winds:</b> {esc(a["wind"])}')
         if a["rh"]:
             det.append(f'<b>Min RH:</b> {esc(a["rh"])}')
-        if a["onset"] or a["ends"]:
-            det.append(f'<b>Valid:</b> {esc(a["onset"])} to {esc(a["ends"])}')
-        H.append(f'<div style="font-size:13px;">{" &nbsp;·&nbsp; ".join(det)}</div></div>')
+        if a.get("office"):
+            det.append(f'<span class="muted">{esc(a["office"])}</span>')
+        H.append(f'<div style="font-size:13px;margin-top:4px;">'
+                 f'{" &nbsp;·&nbsp; ".join(det)}</div>')
+        if a.get("full"):
+            H.append('<details style="margin-top:9px;"><summary style="cursor:pointer;'
+                     'color:#074259;font-size:13px;font-weight:600;">Full alert text'
+                     f'</summary><div style="white-space:pre-wrap;font-size:13px;'
+                     f'color:#4a443f;margin-top:8px;border-top:1px solid #e8e1d4;'
+                     f'padding-top:8px;">{esc(a["full"])}</div></details>')
+        H.append('</div>')
 
     H.append('<h2 id="large-fires">Large Fires <span class="sub">— Grouped by GACC</span></h2>')
     active_codes = sorted(linked_codes,
@@ -666,7 +877,10 @@ def render(data, nws, spc):
         for f in sorted(gfires, key=lambda x: (not x["narr"], -acnum(x["acres"]))):
             ncls = " new" if f["new"] else ""
             nb = " " + new_badge() if f["new"] else ""
-            H.append(f'<div class="fire{ncls}"><div class="fname">{esc(f["name"])} '
+            url = inciweb_url(f, inciweb)
+            name_html = (f'<a href="{url}" target="_blank">{esc(f["name"])}</a>'
+                         if url else esc(f["name"]))
+            H.append(f'<div class="fire{ncls}"><div class="fname">{name_html} '
                      f'{state_tag(f["state"])}{nb}</div>')
             if f["narr"]:
                 H.append(f'<div class="narr">{esc(f["narr"])}</div>')
@@ -717,6 +931,7 @@ h1,h2,.stat .n,.plbanner .big,.gcell .code{font-family:"Oswald","Arial Narrow",s
 .stat-a:hover .stat{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
 h2{font-size:21px;font-weight:600;letter-spacing:0.4px;margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid #5f0000;color:#2f292b;scroll-margin-top:12px}
 h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",serif;letter-spacing:0}
+h3{font-family:"Oswald","Arial Narrow",sans-serif;font-size:17px;font-weight:600;letter-spacing:0.4px;margin:26px 0 12px;padding-bottom:6px;border-bottom:1px solid #d5cdbf;color:#5f0000;scroll-margin-top:12px}
 .wxcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
 .wx-ok{background:rgba(108,115,61,0.10);border-color:#6c733d}
 .wx-ok .n{color:#535c2b}
@@ -730,7 +945,7 @@ h2 .sub{font-size:13px;font-weight:400;color:#8a8178;font-family:"David Libre",s
 .gcell-a .gcell{transition:border-color 0.15s, box-shadow 0.15s}
 .gcell-a:hover .gcell{border-color:#5f0000;box-shadow:0 1px 6px rgba(95,0,0,0.18)}
 .gaccgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.gcell{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gcell{background:#fff;border:1px solid #ddd5c7;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;min-height:118px;height:100%}
 .gcell .code{font-weight:600;font-size:16px;letter-spacing:0.5px}
 .gcell .full{font-size:11px;color:#8a8178}
 .card{background:#fff;border:1px solid #ddd5c7;border-radius:12px;padding:16px 18px;margin-bottom:14px}
@@ -844,8 +1059,11 @@ def main():
     print("Fetching SPC Day 1 outlook...")
     spc = fetch_spc()
     print(f"  SPC available={spc.get('available')} no_risk={spc.get('no_risk')}")
+    print("Fetching InciWeb incident list...")
+    inciweb = fetch_inciweb_slugs()
+    print(f"  {len(inciweb)} InciWeb incident pages")
 
-    html_out = render(data, nws, spc)
+    html_out = render(data, nws, spc, inciweb)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as fh:
         fh.write(html_out)
     print(f"Wrote {len(html_out)} bytes -> {OUTPUT_PATH}")
