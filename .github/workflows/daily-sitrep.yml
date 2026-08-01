@@ -49,6 +49,9 @@ jobs:
           else
             git add wildfire-sitrep.html
             git commit -m "Daily wildfire situation report - $(date -u +'%Y-%m-%d')"
+            # If a commit landed on main while this run was working, replay
+            # ours on top instead of failing the push (non-fast-forward).
+            git pull --rebase origin main
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
