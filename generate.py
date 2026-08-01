@@ -125,6 +125,11 @@ def parse_pdf(pdf_path):
     parse_ytd(full, data)
     parse_gacc_summary(full, data)
     parse_sections(full, data)
+    # The section headers ("Northwest Area (PL 5)") are authoritative for PL;
+    # keep the grid cards consistent even if a summary row fails to parse.
+    for code, sec in data["sections"].items():
+        if code in data["gacc_summary"]:
+            data["gacc_summary"][code]["pl"] = sec["pl"]
     data["fires"] = build_fires(fire_rows, full, data)
     data["weather"] = parse_weather(full)
     return data
@@ -184,23 +189,28 @@ def parse_ytd(full, data):
 
 
 def parse_gacc_summary(full, data):
-    """Parse the Active Incident Resource Summary table (from text rows)."""
+    """Parse the Active Incident Resource Summary table (from text rows).
+
+    Every numeric column may carry thousands separators once a GACC is busy
+    enough (e.g. NWCC at PL 5 with 1,120 engines), so allow commas in all of
+    them and strip when converting."""
     summary = {}
+    num = r"([\d,]+)"
     for code in GACC_NAMES:
         m = re.search(
-            rf"^{code}\s+(\d)\s+(\d+)\s+([\d,]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d,]+)\s+(-?\d+)",
+            rf"^{code}\s+(\d)\s+{num}\s+{num}\s+{num}\s+{num}\s+{num}\s+{num}\s+(-?[\d,]+)",
             full, re.MULTILINE)
         if m:
             summary[code] = {
-                "pl": int(m.group(1)), "incidents": int(m.group(2)),
-                "acres": m.group(3), "crews": int(m.group(4)),
-                "engines": int(m.group(5)), "helicopters": int(m.group(6)),
+                "pl": int(m.group(1)), "incidents": acnum(m.group(2)),
+                "acres": m.group(3), "crews": acnum(m.group(4)),
+                "engines": acnum(m.group(5)), "helicopters": acnum(m.group(6)),
                 "personnel": m.group(7),
             }
         else:
             summary[code] = {"pl": 1, "incidents": 0, "acres": "0", "crews": 0,
                              "engines": 0, "helicopters": 0, "personnel": "0"}
-    m = re.search(r"^Total\s+-*\s+\d+\s+([\d,]+)", full, re.MULTILINE)
+    m = re.search(r"^Total\s+-*\s+[\d,]+\s+([\d,]+)", full, re.MULTILINE)
     data["gacc_summary"] = summary
     data["total_acres"] = m.group(1) if m else "0"
 
