@@ -4,7 +4,12 @@ name: Daily Wildfire Sitrep
 # Run a little after that with buffer; also allow manual runs.
 on:
   schedule:
-    - cron: "30 12 * * *"   # 13:30 UTC daily (~07:30 MDT | 06:30 PDT)
+    - cron: "30 13 * * *"   # 13:30 UTC daily = 6:30am PDT / 7:30am MDT.
+                             # NOTE: GitHub's own scheduler for this repo has
+                             # repeatedly fired hours late or not at all — see
+                             # the external daily dispatch this cron is backed
+                             # up by. Don't "fix" lateness by shifting this
+                             # value; it's correct as written.
   workflow_dispatch: {}
 
 # Let the workflow's built-in GITHUB_TOKEN commit the regenerated HTML.
@@ -12,8 +17,10 @@ on:
 permissions:
   contents: write
 
+# Manual/dispatch runs get their own concurrency lane so they no longer queue
+# behind (and delay) the daily scheduled run.
 concurrency:
-  group: wildfire-sitrep
+  group: wildfire-sitrep-${{ github.event_name == 'workflow_dispatch' && github.run_id || 'scheduled' }}
   cancel-in-progress: false
 
 jobs:
@@ -36,6 +43,10 @@ jobs:
         env:
           OUTPUT_PATH: wildfire-sitrep.html
           CONTACT_EMAIL: rachael.brady@theanalyticalmoose.com
+          # NIFC doesn't always post by 0730 MDT; keep polling for several
+          # hours instead of giving up (and silently failing) after the
+          # 60-minute default.
+          MAX_WAIT_MINUTES: "240"
         run: python generate.py
 
       - name: Commit if changed
