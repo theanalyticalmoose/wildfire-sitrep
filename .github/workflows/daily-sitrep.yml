@@ -2,7 +2,7 @@ name: Daily Wildfire Sitrep
 
 # Runs only when dispatched. GitHub's own scheduler fired this workflow hours
 # late (10am-2pm Pacific), so the schedule was removed. A Claude scheduled task
-# starts it via workflow_dispatch at 6:43am Pacific daily; the generator then
+# starts it via workflow_dispatch at 6:30am Pacific daily; the generator then
 # waits for NIFC's daily PDF (posted around 0730 MDT).
 on:
   workflow_dispatch: {}

@@ -59,7 +59,7 @@ Your report will then be live at
 
 The workflow has no GitHub `schedule:` trigger, because GitHub's scheduler
 fired it hours late (10am–2pm Pacific). Instead, a Claude scheduled task starts
-it with `workflow_dispatch` at **6:43am Pacific** every day, ahead of NIFC's
+it with `workflow_dispatch` at **6:30am Pacific** every day, ahead of NIFC's
 typical posting time of ~07:30 MDT; the freshness wait below bridges the gap
 until the day's edition appears. You can also trigger a run manually from the
 **Actions** tab. If a run fails, GitHub emails the repo owner by default.
