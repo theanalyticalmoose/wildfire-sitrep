@@ -1,15 +1,10 @@
 name: Daily Wildfire Sitrep
 
-# NIFC posts the Incident Management Situation Report around 0730 MDT (1330 UTC).
-# Run a little after that with buffer; also allow manual runs.
+# Runs only when dispatched. GitHub's own scheduler fired this workflow hours
+# late (10am-2pm Pacific), so the schedule was removed. A Claude scheduled task
+# starts it via workflow_dispatch at 6:43am Pacific daily; the generator then
+# waits for NIFC's daily PDF (posted around 0730 MDT).
 on:
-  schedule:
-    - cron: "30 13 * * *"   # 13:30 UTC daily = 6:30am PDT / 7:30am MDT.
-                             # NOTE: GitHub's own scheduler for this repo has
-                             # repeatedly fired hours late or not at all — see
-                             # the external daily dispatch this cron is backed
-                             # up by. Don't "fix" lateness by shifting this
-                             # value; it's correct as written.
   workflow_dispatch: {}
 
 # Let the workflow's built-in GITHUB_TOKEN commit the regenerated HTML.

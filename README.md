@@ -35,7 +35,7 @@ emails each day's report (see "Email delivery" below).
 
 - `generate.py` — the whole generator: fetch, parse, render.
 - `requirements.txt` — one dependency, `pdfplumber`.
-- `.github/workflows/daily-sitrep.yml` — daily schedule + commit-if-changed.
+- `.github/workflows/daily-sitrep.yml` — dispatch-triggered run + commit-if-changed.
 - `wildfire-sitrep.html` — the latest generated report (committed by the
   workflow, served by GitHub Pages).
 
@@ -57,12 +57,12 @@ Your report will then be live at
 
 ## Schedule
 
-Runs daily at **12:45 UTC** (~06:45 MDT), ahead of NIFC's typical posting time
-of ~07:30 MDT; the freshness wait below bridges the gap until the day's
-edition appears. Adjust the `cron:` line in the workflow for a different time.
-You can also trigger a run manually from the **Actions** tab
-(`workflow_dispatch`). If a run fails, GitHub emails the repo owner by
-default.
+The workflow has no GitHub `schedule:` trigger, because GitHub's scheduler
+fired it hours late (10am–2pm Pacific). Instead, a Claude scheduled task starts
+it with `workflow_dispatch` at **6:43am Pacific** every day, ahead of NIFC's
+typical posting time of ~07:30 MDT; the freshness wait below bridges the gap
+until the day's edition appears. You can also trigger a run manually from the
+**Actions** tab. If a run fails, GitHub emails the repo owner by default.
 
 ## Waiting for the day's report
 
@@ -83,7 +83,7 @@ previous day's report rather than republishing stale data.
 fire season; in the off-season it comes out less often (or not at all). On
 days with no new edition the run will fail after `MAX_WAIT_MINUTES` and email
 you. If that gets noisy, disable the workflow for the winter (**Actions →
-Daily Wildfire Sitrep → ⋯ → Disable workflow**) or stretch the cron to weekly,
+Daily Wildfire Sitrep → ⋯ → Disable workflow**) or pause the Claude scheduled task,
 and re-enable it in spring.
 
 ## Email delivery (optional)
